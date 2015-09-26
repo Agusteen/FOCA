@@ -33,12 +33,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="domicilio">Domicilio</label>
-                    <input type="text" class="form-control" id="Text1" name="txtDomicilio" placeholder="Domicilio" runat="server" />
-                </div>
-
-
                 <button type="submit" class="btn btn-default">Enviar</button>
             </div>
 
