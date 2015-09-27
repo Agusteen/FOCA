@@ -438,6 +438,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FOCA_Entidades\FOCA_Entidades.csproj">
+      <Project>{216d4d6e-3f6b-40d5-9565-c6aa75f59be4}</Project>
+      <Name>FOCA_Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FOCA_Negocio\FOCA_Negocio.csproj">
+      <Project>{d8b3f8f1-b828-44aa-93b0-ec2ee8d51796}</Project>
+      <Name>FOCA_Negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

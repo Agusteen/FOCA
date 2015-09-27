@@ -25,12 +25,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="localidad">Localidad</label>
-                    <div class="form-group">
-                        <select class="form-control" id="Localidad" name="Localidad" runat="server">
-                            <option value="white">White</option>
-                        </select>
-                    </div>
+                    <label for="localidad">Localidad</label>                   
+                        <asp:DropDownList ID="ddlLocalidades" class="form-control" runat="server"></asp:DropDownList>                    
                 </div>
 
                 <button type="submit" class="btn btn-default">Enviar</button>
