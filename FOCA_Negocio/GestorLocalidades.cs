@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FOCA_Entidades;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Configuration;
 namespace FOCA_Negocio
 {
     public class GestorLocalidades
@@ -15,7 +15,8 @@ namespace FOCA_Negocio
         {
             List<Localidad> localidades = new List<Localidad>();
 
-            string conexionCadena = "workstation id=FOCAgadgets.mssql.somee.com;packet size=4096;user id=focagadgets_SQLLogin_1;pwd=xby9rtbboe;data source=FOCAgadgets.mssql.somee.com;persist security info=False;initial catalog=FOCAgadgets";
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+
             SqlConnection connection = new SqlConnection();            
             try
             {

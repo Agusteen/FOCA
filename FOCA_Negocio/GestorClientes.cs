@@ -7,6 +7,7 @@ using FOCA_Entidades;
 using System.Data.SqlClient;
 using System.Data;
 
+
 namespace FOCA_Negocio
 {
     public class GestorClientes
@@ -15,7 +16,7 @@ namespace FOCA_Negocio
         {
             //TODO1: Crear bd y poner en el webconfig
 
-            string conexionCadena = "Data Source=maquis;Initial Catalog=Pymes;User ID=avisuales2;Password=avisuales2";
+            string conexionCadena = "TROLOLO";
             SqlConnection connection = new SqlConnection();
             SqlTransaction transaction = null;
             try

@@ -34,6 +34,12 @@ namespace FOCA_gadgets_V1
 
         }
 
+        protected void rangeValidator_Init(object sender, EventArgs e)
+        {
+            ((RangeValidator)sender).MaximumValue =DateTime.Now.Date.AddYears(-18).ToString("dd/MM/yyyy");
+            ((RangeValidator)sender).MinimumValue = DateTime.Now.Date.AddYears(-120).ToString("dd/MM/yyyy");
+
+        }
         
     }
 }
