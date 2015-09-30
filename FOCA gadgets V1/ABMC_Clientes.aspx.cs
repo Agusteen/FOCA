@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using FOCA_Entidades;
 using FOCA_Negocio;
 
+
 namespace FOCA_gadgets_V1
 {
     public partial class ABMC_Clientes : System.Web.UI.Page
@@ -23,5 +24,16 @@ namespace FOCA_gadgets_V1
             ddlLocalidades.DataTextField = "Nombre";
             ddlLocalidades.DataBind();
         }
+
+        protected void enviar(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {                    
+                
+            }
+
+        }
+
+        
     }
 }
