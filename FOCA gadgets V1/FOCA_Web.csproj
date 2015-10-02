@@ -166,6 +166,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\bootstrap.css" />
+    <Content Include="css\datepicker.css" />
     <Content Include="css\etalage.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -235,6 +236,7 @@
     <Content Include="images\start-rate.png" />
     <Content Include="images\to-top1.png" />
     <Content Include="Inicio.aspx" />
+    <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\easing.js" />
     <Content Include="js\jquery.etalage.min.js" />
     <Content Include="js\jquery.min.js" />
