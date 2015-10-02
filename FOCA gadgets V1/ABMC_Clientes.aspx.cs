@@ -28,8 +28,25 @@ namespace FOCA_gadgets_V1
         protected void enviar(object sender, EventArgs e)
         {
             if (Page.IsValid)
-            {                    
-                
+            {
+                try
+                {
+                    Cliente cli = new Cliente()
+                    {
+                        nombre = txtNombre.Text,
+                        apellido = txtApellido.Text,
+                        domicilio = txtDomicilio.Text,
+                        dni = int.Parse(txtDni.Text),
+                        telefono = int.Parse(txtTelefono.Text)
+
+                    };
+                    GestorClientes.Insertar(cli);  
+                }
+                catch
+                {
+
+                }
+                              
             }
 
         }

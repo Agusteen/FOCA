@@ -27,5 +27,6 @@ namespace FOCA_Entidades
         }
         public DateTime fechaNac { get; set; }
         public int localidad { get; set; }
+        
     }
 }

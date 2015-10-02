@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FOCA_Entidades;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 
 namespace FOCA_Negocio
@@ -14,9 +15,7 @@ namespace FOCA_Negocio
     {
         public static void Insertar(Cliente cliente)
         {
-            //TODO1: Crear bd y poner en el webconfig
-
-            string conexionCadena = "TROLOLO";
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
             SqlTransaction transaction = null;
             try
