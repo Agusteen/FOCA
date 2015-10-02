@@ -4,12 +4,12 @@
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery-birthday-picker.min.js"></script>    
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
-    <script>
+    <%--<script>
         $(function () {
             $('.datepicker').datepicker();
         });
-    </script>
-    <script>    
+    </script>--%>
+    <%--<script>    
         $("#default-settings").birthdayPicker();
         $("#default-birthday").birthdayPicker({ "defaultDate": "01-03-1980" });
         $("#max-year-birthday").birthdayPicker({
@@ -29,8 +29,25 @@
             "maxAge": 65,
             "monthFormat": "long",
             "sizeClass": "span3"
-        });
+        });
+    </script>--%>
+    <script> 
+        $(function () {
+            $("#long-month-birthday").birthdayPicker({
+
+                "defaultDate": false,
+
+                "minAge": 0,
+                "maxAge": 120,
+                "monthFormat": "long",
+                "dateFormat": "littleEndian",
+                "sizeClass": "span3"
+            });
+         
+        });
     </script>
+
+
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-xs-5">
@@ -68,12 +85,17 @@
                 </div>
 
                 <div class="form-group">
-                    <div id="long-month-birthday">
+                   
                         <%--En teoria aca deberia salir solo--%>
-                        <%--<label for="fechaNacimiento">Fecha de nacimiento</label>
-                        <asp:TextBox ID="txtFechaNacimiento" class="birthdayPicker" placeholder="Fecha de Nacimiento" runat="server" onkeypress="event.returnValue = false;"></asp:TextBox>
-                        <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" />--%>
-                    </div>
+                        <label for="fechaNacimiento">Fecha de nacimiento</label>
+                       <%-- <asp:TextBox ID="txtFechaNacimiento" class="birthdayPicker" placeholder="Fecha de Nacimiento" runat="server" onkeypress="event.returnValue = false;"></asp:TextBox>
+                        <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" />
+                   --%>
+                         <div id="long-month-birthday"> </div>
+                         <asp:TextBox ID="nacimiento" class="form-control" placeholder="" runat="server"></asp:TextBox>
+            
+             
+
                 </div>
                                            
                 
