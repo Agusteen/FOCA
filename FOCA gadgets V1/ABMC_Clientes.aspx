@@ -1,12 +1,35 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FOCAMasterPage.Master" AutoEventWireup="true" CodeBehind="ABMC_Clientes.aspx.cs" Inherits="FOCA_gadgets_V1.ABMC_Clientes" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="css/datepicker.css" rel="stylesheet" />
-    <script src="js/bootstrap-datepicker.js"></script>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">      
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery-birthday-picker.min.js"></script>    
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
     <script>
         $(function () {
             $('.datepicker').datepicker();
         });
+    </script>
+    <script>    
+        $("#default-settings").birthdayPicker();
+        $("#default-birthday").birthdayPicker({ "defaultDate": "01-03-1980" });
+        $("#max-year-birthday").birthdayPicker({
+            "defaultDate": "01-03-1980",
+            "maxYear": "2020",
+            "maxAge": 65
+        });
+        $("#short-month-birthday").birthdayPicker({
+            "defaultDate": "01-03-1980",
+            "maxYear": "2020",
+            "maxAge": 65,
+            "monthFormat": "short"
+        });
+        $("#long-month-birthday").birthdayPicker({
+            "defaultDate": "01-03-1980",
+            "maxYear": "2020",
+            "maxAge": 65,
+            "monthFormat": "long",
+            "sizeClass": "span3"
+        });
     </script>
     <div class="panel panel-default">
         <div class="panel-body">
@@ -45,11 +68,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="fechaNacimiento">Fecha de nacimiento</label>
-                    <asp:TextBox ID="txtFechaNacimiento" class="datepicker form-control" placeholder="Fecha de Nacimiento" runat="server" onkeypress="event.returnValue = false;"></asp:TextBox>
-                    <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" />
-
+                    <div id="long-month-birthday">
+                        <%--En teoria aca deberia salir solo--%>
+                        <%--<label for="fechaNacimiento">Fecha de nacimiento</label>
+                        <asp:TextBox ID="txtFechaNacimiento" class="birthdayPicker" placeholder="Fecha de Nacimiento" runat="server" onkeypress="event.returnValue = false;"></asp:TextBox>
+                        <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" />--%>
+                    </div>
                 </div>
+                                           
+                
+
 
                 <div class="form-group">
 

@@ -239,6 +239,8 @@
     <Content Include="Inicio.aspx" />
     <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\easing.js" />
+    <Content Include="js\jquery-1.11.3.min.js" />
+    <Content Include="js\jquery-birthday-picker.min.js" />
     <Content Include="js\jquery.etalage.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jquery.responsiveTabs.js" />
