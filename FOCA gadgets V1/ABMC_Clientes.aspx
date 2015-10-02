@@ -18,36 +18,36 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="col-xs-5">
+            <div class="col-xs-4">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <asp:TextBox ID="txtNombre" class="form-control" placeholder="Nombre" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtNombre" class="form-control" placeholder="Ingrese aquí su nombre" runat="server" Font-Size="Large"></asp:TextBox>
                 </div>
 
                 <div class="form-group">
                     <label for="apellido">Apellido</label>
-                    <asp:TextBox class="form-control" ID="txtApellido" placeholder="Apellido" runat="server"></asp:TextBox>
+                    <asp:TextBox class="form-control" ID="txtApellido" placeholder="Ingrese aquí su apellido" runat="server" Font-Size="Large"></asp:TextBox>
                 </div>
 
                 <div class="form-group">
                     <label for="dni">Número de documento</label>
-                    <asp:TextBox class="form-control" ID="txtDni" name="txtDni" placeholder="Número de documento" runat="server" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" />
+                    <asp:TextBox class="form-control" ID="txtDni" name="txtDni" placeholder="Ingrese solo números, sin puntos" runat="server" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" Font-Size="Large" />
                     <asp:RegularExpressionValidator ControlToValidate="txtDni" ValidationExpression="[0-9]{8}|[0-9]{7}" runat="server" ErrorMessage="* Debe tener como máximo 8 dígitos y como mínimo 7 dígitos" Font-Size="X-Small" ForeColor="Red"></asp:RegularExpressionValidator>
                 </div>
 
                 <div class="form-group">
                     <label for="domicilio">Domicilio</label>
-                    <asp:TextBox class="form-control" ID="txtDomicilio" placeholder="Domicilio" runat="server"></asp:TextBox>
+                    <asp:TextBox class="form-control" ID="txtDomicilio" placeholder="Calle Numero Piso" runat="server" Font-Size="Large"></asp:TextBox>
                 </div>
 
                 <div class="form-group">
                     <label for="localidad">Localidad</label>
-                    <asp:DropDownList ID="ddlLocalidades" class="form-control" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlLocalidades" class="form-control" runat="server" Font-Size="Large"></asp:DropDownList>
                 </div>
 
                 <div class="form-group">
                     <label for="telefono">Telefono</label>
-                    <asp:TextBox ID="txtTelefono" class="form-control" placeholder="Núnmero de telefono" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtTelefono" class="form-control" placeholder="Ingrese solo números, sin signos" runat="server" Font-Size="Large"></asp:TextBox>
                     
                 </div>
 
