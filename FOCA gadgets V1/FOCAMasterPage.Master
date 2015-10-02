@@ -84,7 +84,8 @@
 			 <nav class="top-nav main-menu">
 					<ul class="top-nav">
                         <li><a href="Inicio.aspx">INICIO </a><span> </span></li>
-						<li><a href="products.html">PRODUCTOS </a><span> </span></li>						
+						<li><a href="ABMC_Articulos.aspx">ARTICULOS </a><span> </span></li>
+                        <li><a href="ABMC_Clientes.aspx">CLIENTES </a><span> </span></li>							
 						<li><a href="products.html">SERVICIOS</a><span> </span></li>						
 						<li><a href="products.html">SOBRE FOCA gadgets</a></li>
 						<div class="clearfix"> </div>

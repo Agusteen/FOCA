@@ -146,6 +146,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ABMC_Articulos.aspx" />
     <Content Include="ABMC_Clientes.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />
@@ -291,6 +292,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABMC_Articulos.aspx.cs">
+      <DependentUpon>ABMC_Articulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ABMC_Articulos.aspx.designer.cs">
+      <DependentUpon>ABMC_Articulos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ABMC_Clientes.aspx.cs">
       <DependentUpon>ABMC_Clientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
