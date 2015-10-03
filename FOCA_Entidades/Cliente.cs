@@ -8,8 +8,8 @@ namespace FOCA_Entidades
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string domicilio { get; set; }
-        public int dni { get; set; }
-        public int telefono { get; set; }
+        public long dni { get; set; }
+        public long telefono { get; set; }
         public Boolean preferencial { get; set; }
         public int intPreferencial
         {
@@ -25,7 +25,7 @@ namespace FOCA_Entidades
                 else preferencial = false;
             }
         }
-        public DateTime fechaNac { get; set; }
+        public string fechaNac { get; set; }
         public int localidad { get; set; }
         
     }

@@ -31,18 +31,18 @@ namespace FOCA_gadgets_V1
             {
                 try
                 {
-                    Cliente cli = new Cliente()
-                    {
-                        nombre = txtNombre.Text,                        
-                        apellido = txtApellido.Text,
-                        domicilio = txtDomicilio.Text,
-                        dni = int.Parse(txtDni.Text),
-                        telefono = int.Parse(txtTelefono.Text),
-                        localidad = ddlLocalidades.SelectedIndex,
-                        fechaNac = DateTime.Parse(txtFechaNacimiento.Text),
-                        preferencial = chboxPreferencial.Checked
+                    Cliente cli = new Cliente();
+                    
+                        cli.nombre = txtNombre.Text;                        
+                        cli.apellido = txtApellido.Text;
+                        cli.domicilio = txtDomicilio.Text;
+                        cli.dni = long.Parse(txtDni.Text);
+                        cli.telefono = long.Parse(txtTelefono.Text);
+                        cli.localidad = ddlLocalidades.SelectedIndex;
+                        cli.fechaNac = txtFechaNacimiento.Text;
+                        cli.preferencial = chboxPreferencial.Checked;
 
-                    };
+                    
                     GestorClientes.Insertar(cli);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
                 }
