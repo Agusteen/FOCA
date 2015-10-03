@@ -9,7 +9,7 @@
                 "defaultDate": false,
                 "minAge": 0,
                 "maxAge": 120,
-                "monthFormat": "long",
+                "monthFormat": ">long",
                 "dateFormat": "littleEndian",
                 "sizeClass": "span3"              
             });         
