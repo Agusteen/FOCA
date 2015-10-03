@@ -6,7 +6,7 @@
             <div class="col-xs-5">
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>                    
-                    <asp:TextBox ID="txtdescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server"></asp:TextBox>
                 </div>
               
                 <div class="form-group">
@@ -21,9 +21,11 @@
 
                 <div class="form-group">
                     <label for="disponible">Disponible para venta</label>
-                    <br />
-                    <asp:CheckBox ID="chboxDisponible" Text="Esta disponible para venta?" runat="server"></asp:CheckBox>
                 </div>
+                <div>
+                 <asp:checkbox ID="ckbDisponible" Text="Esta disponible para venta?" runat="server"></asp:checkbox>
+                </div>
+
 
                   <div class="form-group">
                     <label for="tipo">Tipo de articulo</label>                   
@@ -31,11 +33,13 @@
                 </div>
 
                 <div>
-                    <asp:Button class="btn btn-default" Text="Guardar" runat="server"></asp:Button>
+                    <asp:Button class="btn btn-default" Text="Guardar" runat="server" OnClick="guardarArticulo"></asp:Button>
                 </div>
 
 
                 </div>
+            <asp:GridView ID="GridView1" runat="server">
+            </asp:GridView>
             </div>
          </div>
 

@@ -13,13 +13,13 @@ namespace FOCA_gadgets_V1 {
     public partial class ABMC_Articulos {
         
         /// <summary>
-        /// Control txtdescripcion.
+        /// Control txtDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         
         /// <summary>
         /// Control txtPrecio.
@@ -40,13 +40,13 @@ namespace FOCA_gadgets_V1 {
         protected global::System.Web.UI.WebControls.TextBox txtStock;
         
         /// <summary>
-        /// Control chboxDisponible.
+        /// Control ckbDisponible.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chboxDisponible;
+        protected global::System.Web.UI.WebControls.CheckBox ckbDisponible;
         
         /// <summary>
         /// Control ddlTipoArticulo.
@@ -56,5 +56,14 @@ namespace FOCA_gadgets_V1 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoArticulo;
+        
+        /// <summary>
+        /// Control GridView1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
     }
 }

@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace FOCA_Entidades
 {
-    class Articulo
+   public class Articulo
     {
         public int? indexBD { get; set; }
+        public int? idArticulo { get; set; }
         public string descripcion { get; set; }
-        public float precio { get; set; }
+        public float precio{ get; set; }
         public int stock { get; set; }
-        private Boolean _disponible;
-        public int disponible
+        public Boolean disponible { get; set; }
+        public int intDisponible
         {
             get
             {
-                if (_disponible == true) return 1;
+                if (disponible == true) return 1;
                 else
                     return 0;
             }
             set
             {
-                if (value == 1) _disponible = true;
-                else _disponible = false;
+                if (value == 1) disponible = true;
+                else disponible = false;
             }
         }
         public int tipoArticulo { get; set; }

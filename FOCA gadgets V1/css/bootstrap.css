@@ -795,7 +795,9 @@ pre code {
   width: 50%;
 }
 .col-xs-5 {
-  width: 41.66666667%;
+  width: 39%;
+    top: 0px;
+    left: 0px;
 }
 .col-xs-4 {
   width: 33.33333333%;
@@ -4764,6 +4766,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel-body {
   padding: 15px;
+    height: 483px;
 }
 .panel-heading {
   padding: 10px 15px;
