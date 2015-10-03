@@ -33,18 +33,22 @@ namespace FOCA_gadgets_V1
                 {
                     Cliente cli = new Cliente()
                     {
-                        nombre = txtNombre.Text,
+                        nombre = txtNombre.Text,                        
                         apellido = txtApellido.Text,
                         domicilio = txtDomicilio.Text,
                         dni = int.Parse(txtDni.Text),
-                        telefono = int.Parse(txtTelefono.Text)
+                        telefono = int.Parse(txtTelefono.Text),
+                        localidad = ddlLocalidades.SelectedIndex,
+                        fechaNac = DateTime.Parse(txtFechaNacimiento.Text),
+                        preferencial = chboxPreferencial.Checked
 
                     };
-                    GestorClientes.Insertar(cli);  
+                    GestorClientes.Insertar(cli);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
                 }
                 catch
                 {
-
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
                 }
                               
             }

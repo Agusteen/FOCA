@@ -10,19 +10,19 @@ namespace FOCA_Entidades
         public string domicilio { get; set; }
         public int dni { get; set; }
         public int telefono { get; set; }
-        private Boolean _preferencial;
-        public int preferencial
+        public Boolean preferencial { get; set; }
+        public int intPreferencial
         {
             get
             {
-                if (_preferencial == true) return 1;
+                if (preferencial == true) return 1;
                 else
                     return 0;
             }
             set
             {
-                if (value == 1) _preferencial = true;
-                else _preferencial = false;
+                if (value == 1) preferencial = true;
+                else preferencial = false;
             }
         }
         public DateTime fechaNac { get; set; }

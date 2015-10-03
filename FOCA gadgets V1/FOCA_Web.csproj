@@ -237,6 +237,7 @@
     <Content Include="images\start-rate.png" />
     <Content Include="images\to-top1.png" />
     <Content Include="Inicio.aspx" />
+    <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\easing.js" />
     <Content Include="js\jquery-1.11.3.min.js" />
     <Content Include="js\jquery-birthday-picker.min.js" />

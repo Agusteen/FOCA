@@ -35,7 +35,7 @@ namespace FOCA_Negocio
                 comand.Parameters.AddWithValue("@Localidad", cliente.localidad);
                 comand.Parameters.AddWithValue("@Telefono", cliente.telefono);
                 comand.Parameters.AddWithValue("@FechaNacimiento", cliente.fechaNac);
-                comand.Parameters.AddWithValue("@Preferencial", cliente.preferencial);
+                comand.Parameters.AddWithValue("@Preferencial", cliente.intPreferencial);
 
                 //cmd.ExecuteNonQuery();
                 int idCliente = Convert.ToInt32(comand.ExecuteScalar());
@@ -49,7 +49,7 @@ namespace FOCA_Negocio
                 comand2.ExecuteNonQuery();
 
                 transaction.Commit(); //confirmo los cambios
-
+                
                 cliente.indexBD = idCliente;
             }
             catch (SqlException ex)
