@@ -15,7 +15,7 @@
         <div class="col-xs-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Clientes</h3>
+                    <h3 class="panel-title">Datos de clientes</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
@@ -68,13 +68,14 @@
         <div class="col-xs-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Clientes</h3>
+                    <h3 class="panel-title">Tabla de clientes</h3>
                 </div>
                 <div class="panel-body">
-                    Aca va la grilla
+                    <asp:GridView ID="grdClientes" class="form-control" CssClass="footable" runat="server" AutoGenerateColumns="false">      
+                    </asp:GridView>
                 </div>
-            </div>
         </div>
+    </div>
 
     </div>
 

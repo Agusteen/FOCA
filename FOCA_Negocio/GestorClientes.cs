@@ -23,7 +23,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
-                string sql = "INSERT INTO CLIENTES (nombre, apellido, dni, domicilio, localidad, telefono, fechaNacimiento, preferencial)  values ('@Nombre', '@Apellido', @Dni, '@Domicilio', @Localidad, @Telefono, @FechaNacimiento, @Preferencial); SELECT @@Identity as ID";
+                string sql = "INSERT INTO CLIENTES (nombre, apellido, dni, domicilio, localidad, telefono, fechaNacimiento, preferencial)  values (@Nombre, @Apellido, @Dni, @Domicilio, @Localidad, @Telefono, @FechaNacimiento, @Preferencial); SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
@@ -40,7 +40,7 @@ namespace FOCA_Negocio
                 //cmd.ExecuteNonQuery();
                 int idCliente = Convert.ToInt32(comand.ExecuteScalar());
 
-                sql = "Insert into AUDITORIA (fecha, descripcion) values (GETDATE(),'@descripcion')";
+                sql = "Insert into AUDITORIA (fecha, descripcion) values (GETDATE(),@descripcion)";
                 SqlCommand comand2 = new SqlCommand();
                 comand2.CommandText = sql;
                 comand2.Connection = connection;
