@@ -74,7 +74,7 @@ namespace FOCA_Negocio
                 while (dr.Read())
                 {
                     Articulo art = new Articulo();
-                    art.idArticulo = int.Parse(dr["idArticulo"].ToString());
+                    
                     art.descripcion = dr["descripcion"].ToString();
                     if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["precio"].ToString());
                     if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["stock"].ToString());
@@ -164,12 +164,12 @@ namespace FOCA_Negocio
 
                 try
                 {
-                    string sqlsearchforart = "SELECT idArticulo from TipoArticulo where idArticulo = @IdArticulo";
+                    string sqlsearchforart = "SELECT id_articulo from TipoArticulo where idArticulo = @IdArticulo";
                     SqlCommand comand0 = new SqlCommand();
                     comand0.CommandText = sqlsearchforart;
                     comand0.Connection = connection;
                     comand0.Transaction = transaction;
-                    comand0.Parameters.AddWithValue("@IdArticulo", articulo.descripcion);
+                    comand0.Parameters.AddWithValue("@IdArticulo", articulo.indexBD);
                     idArticulo = Convert.ToInt32(comand0.ExecuteScalar());
 
                 }
@@ -183,12 +183,12 @@ namespace FOCA_Negocio
 
                 }
 
-                string sqlupdate = "Update ARTICULOS set descripcion=@Descripcion, precio=@Precio, stock=@Stock, disponible=@Disponible, tipoArticulo=@tipoArticulo where idArticulo = @IdArticulo; SELECT @@Identity as ID";
+                string sqlupdate = "Update ARTICULOS set descripcion=@Descripcion, precio=@Precio, stock=@Stock, disponible=@Disponible, tipoArticulo=@tipoArticulo where idArticulo = @indexBD; SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sqlupdate;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
-                comand.Parameters.AddWithValue("@IdArticulo", articulo.idArticulo);
+                comand.Parameters.AddWithValue("@indexBD", articulo.indexBD);
                 comand.Parameters.AddWithValue("@Descripcion", articulo.descripcion);
                 comand.Parameters.AddWithValue("@Precio", articulo.precio);
                 comand.Parameters.AddWithValue("@Stock", articulo.stock);
@@ -236,32 +236,51 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
-                string sql = "INSERT INTO ARTICULOS descripcion, precio, stock, disponible, tipoArticulo values @Descripcion, @Precio, @Stock, @Disponible, @tipoArticulo; SELECT @@Identity as ID";
+                int? idArticulo = null;
+
+                try
+                {
+                    string sqlsearchforart = "SELECT id_articulo from TipoArticulo where id_articulo = @IdArticulo";
+                    SqlCommand comand0 = new SqlCommand();
+                    comand0.CommandText = sqlsearchforart;
+                    comand0.Connection = connection;
+                    comand0.Transaction = transaction;
+                    comand0.Parameters.AddWithValue("@IdArticulo", articulo.indexBD);
+                    idArticulo = Convert.ToInt32(comand0.ExecuteScalar());
+
+                }
+                catch
+                {
+                    if (idArticulo == null)
+                    {
+                        throw new ApplicationException("Error en la busqueda para actualizacion del Articulo.");
+                    }
+
+
+                }
+
+                string sqldelete = "DELETE FROM TipoArticulo WHERE id_articulo = @indexBD; SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
-                comand.CommandText = sql;
+                comand.CommandText = sqldelete;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
-                comand.Parameters.AddWithValue("@Descripcion", articulo.descripcion);
-                comand.Parameters.AddWithValue("@Precio", articulo.precio);
-                comand.Parameters.AddWithValue("@Stock", articulo.stock);
-                comand.Parameters.AddWithValue("@Disponible", articulo.intDisponible);
-                comand.Parameters.AddWithValue("@tipoArticulo", articulo.tipoArticulo);
+                comand.Parameters.AddWithValue("@indexBD", articulo.indexBD);
 
 
                 //cmd.ExecuteNonQuery();
-                int idArticulo = Convert.ToInt32(comand.ExecuteScalar());
+                idArticulo = Convert.ToInt32(comand.ExecuteScalar());
 
-                sql = "Insert into AUDITORIA (Fecha, descripcion) values (getdate(),@descripcion)";
+                string sqlinsertauditoria = "Insert into AUDITORIA (Fecha, descripcion) values (getdate(),@descripcion)";
                 SqlCommand comand2 = new SqlCommand();
-                comand2.CommandText = sql;
+                comand2.CommandText = sqlinsertauditoria;
                 comand2.Connection = connection;
                 comand2.Transaction = transaction;
-                comand2.Parameters.AddWithValue("@descripcion", "Se grabó el Articulo ID:" + idArticulo.ToString());
+                comand2.Parameters.AddWithValue("@descripcion", "Se elimino el Articulo ID:" + idArticulo.ToString());
                 comand2.ExecuteNonQuery();
 
                 transaction.Commit(); //confirmo los cambios
 
-                articulo.indexBD = idArticulo;
+
             }
             catch (SqlException ex)
             {
@@ -274,7 +293,6 @@ namespace FOCA_Negocio
                 if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
-
         }
 
 

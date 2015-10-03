@@ -7,23 +7,30 @@
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>                    
                     <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server"></asp:TextBox>
-                </div>
+               <asp:RequiredFieldValidator ControlToValidate="txtDescripcion" Display="Dynamic" runat="server" ErrorMessage="No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>   
+                     </div>
               
                 <div class="form-group">
                     <label for="precio">Precio unitario</label>
                     <asp:TextBox class="form-control" id="txtPrecio" placeholder="Ingrese el precio del articulo" runat="server"></asp:TextBox>
+                      <asp:RequiredFieldValidator ControlToValidate="txtPrecio" Display="Dynamic" runat="server" ErrorMessage=" * No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>   
+                      <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtPrecio" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" runat="server" Type="Double" />
                 </div>
 
                 <div class="form-group">
                     <label for="stock">Stock</label>
-                    <asp:TextBox class="form-control" id="txtStock" placeholder="Ingrese la cantidad de unidades a cargar" runat="server"></asp:TextBox>
+                    <asp:TextBox class="form-control" ID="txtStock" placeholder="Ingrese la cantidad de unidades a cargar" runat="server"></asp:TextBox>
+                  <%--  <asp:RequiredFieldValidator ControlToValidate="txtStock" Display="Dynamic" runat="server" ErrorMessage=" * No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtStock" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" runat="server" Type="Integer"></asp:CompareValidator>
+                    <%--<asp:RangeValidator ErrorMessage=" * Ingrese un valor mayor que 0 o menor que 1000" MinimumValue="0" MaximumValue="1000" ControlToValidate="txtStock" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" runat="server"></asp:RangeValidator>--%>
+
                 </div>
 
                 <div class="form-group">
                     <label for="disponible">Disponible para venta</label>
                 </div>
                 <div>
-                 <asp:checkbox ID="ckbDisponible" Text="Esta disponible para venta?" runat="server"></asp:checkbox>
+                 <asp:checkbox ID="ckbDisponible" Text="Esta disponible para venta?" Checked="true" runat="server"></asp:checkbox>
                 </div>
 
 
@@ -38,8 +45,6 @@
 
 
                 </div>
-            <asp:GridView ID="GridView1" runat="server">
-            </asp:GridView>
             </div>
          </div>
 
