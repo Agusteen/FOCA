@@ -71,7 +71,7 @@
                     <h3 class="panel-title">Tabla de clientes</h3>
                 </div>
                 <div class="panel-body">
-                    <asp:GridView ID="grdClientes" class="form-control" CssClass="footable" runat="server" AutoGenerateColumns="false">      
+                    <asp:GridView ID="grdClientes" class="form-control" CssClass="footable" runat="server" AutoGenerateColumns="true">      
                     </asp:GridView>
                 </div>
         </div>

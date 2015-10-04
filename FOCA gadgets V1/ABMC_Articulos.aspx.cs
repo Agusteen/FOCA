@@ -12,42 +12,59 @@ namespace FOCA_gadgets_V1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarComboTipoArticulos();
+            
+            if(!Page.IsPostBack)
+            {
+                cargarComboTipoArticulos();
+                CargarGrilla();
+            }
         }
+        private void CargarGrilla()
+        {
+             gvArticulos.DataSource = GestorArticulos.obtenerArticulos();
+            gvArticulos.DataBind();
+        }
+
+
         private void cargarComboTipoArticulos()
         {
             ddlTipoArticulo.DataSource = GestorArticulos.obtenerTiposArticulos();
             ddlTipoArticulo.DataTextField = "descripcion";
+            ddlTipoArticulo.DataValueField = "indexBD";
             ddlTipoArticulo.DataBind();
         }
 
         protected void guardarArticulo(object sender, EventArgs e)
         {
-            if(Page.IsValid)
-            {
+           
                 if (Page.IsValid)
                 {
                     try
                     {
-                        Articulo art = new Articulo()
-                        {
-                            descripcion = txtDescripcion.Text,
-                            precio = float.Parse(txtPrecio.Text),
-                            stock = int.Parse(txtStock.Text),
-                            disponible = ckbDisponible.Checked,
-                            tipoArticulo = ddlTipoArticulo.SelectedIndex
+
+                    String s =ddlTipoArticulo.SelectedValue;
+                    Articulo art = new Articulo()
+                    {
+                        descripcion = txtDescripcion.Text,
+                        precio = float.Parse(txtPrecio.Text),
+                        stock = int.Parse(txtStock.Text),
+                        disponible = ckbDisponible.Checked,
+                        tipoArticulo = int.Parse( ddlTipoArticulo.SelectedValue)
 
                         };
                         GestorArticulos.insertarArticulo(art);
-                    }
-                    catch
-                    {
-
-                    }
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
 
                 }
-               
+                catch
+                    {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+
+                }
+
             }
+               
+            
         }
     }
 }

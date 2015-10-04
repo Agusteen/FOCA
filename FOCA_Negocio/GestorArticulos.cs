@@ -54,9 +54,10 @@ namespace FOCA_Negocio
             return tiposArticulos;
         }
 
-        public static List<Articulo> obtenerArticulos()
+        public static DataTable obtenerArticulos()
         {
-            List<Articulo> listaArticulos = new List<Articulo>();
+            //List<Articulo> listaArticulos = new List<Articulo>();
+            DataTable tablaarticulos = new DataTable();
             String conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
 
@@ -66,23 +67,27 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "SELECT idArticulo, descripcion, precio, stock, disponible, tipoArticulo from TipoArticulo";
+                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
-                SqlDataReader dr = comand.ExecuteReader();
-                while (dr.Read())
-                {
-                    Articulo art = new Articulo();
-                    
-                    art.descripcion = dr["descripcion"].ToString();
-                    if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["precio"].ToString());
-                    if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["stock"].ToString());
-                    art.intDisponible = int.Parse(dr["disponible"].ToString()); //interfaz selecciona una opcion por defecto
-                    art.tipoArticulo = int.Parse(dr["disponible"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
+                //Llenando un datatable con el resultado de la consulta
+                tablaarticulos.Load(comand.ExecuteReader());
 
-                    listaArticulos.Add(art);
-                }
+                //En caso de llenar una lista con los articulos;
+                //SqlDataReader dr = comand.ExecuteReader();
+                //while (dr.Read())
+                //{
+                //    Articulo art = new Articulo();
+                //    art.indexBD = int.Parse(dr["ID Articulo"].ToString());
+                //    art.descripcion = dr["Descripcion"].ToString();
+                //    if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["Precio"].ToString());
+                //    if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["Stock"].ToString());
+                //    art.disponible = Boolean.Parse(dr["Disponible"].ToString()); //interfaz selecciona una opcion por defecto
+                //    art.tipoArticulo = int.Parse(dr["TipoID"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
+                //    art.tipoArticuloString = dr["Tipo"].ToString();
+                //    listaArticulos.Add(art);
+                //}
 
 
 
@@ -97,8 +102,12 @@ namespace FOCA_Negocio
                     connection.Close();
 
             }
-            return listaArticulos;
+            //Caso de manejar una lista de articulos
+            //return listaArticulos;
+            return tablaarticulos;
         }
+
+
         public static void insertarArticulo(Articulo articulo)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
@@ -109,7 +118,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
-                string sql = "INSERT INTO ARTICULOS descripcion, precio, stock, disponible, tipoArticulo values @Descripcion, @Precio, @Stock, @Disponible, @tipoArticulo; SELECT @@Identity as ID";
+                string sql = "INSERT INTO ARTICULOS (descripcion, precio, stock, disponible, tipo) values (@Descripcion, @Precio, @Stock, @Disponible, @tipoArticulo); SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;

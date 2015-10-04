@@ -8,8 +8,7 @@ namespace FOCA_Entidades
 {
    public class Articulo
     {
-        public int? indexBD { get; set; }
-     
+        public int indexBD { get; set; }
         public string descripcion { get; set; }
         public float precio{ get; set; }
         public int stock { get; set; }
@@ -29,6 +28,7 @@ namespace FOCA_Entidades
             }
         }
         public int tipoArticulo { get; set; }
+        public String tipoArticuloString { get; set; }
 
     }
 }
