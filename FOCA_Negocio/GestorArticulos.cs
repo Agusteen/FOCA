@@ -67,7 +67,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)";
+                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'Tipo ID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;

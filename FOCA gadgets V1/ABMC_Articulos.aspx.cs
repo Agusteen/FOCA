@@ -21,8 +21,9 @@ namespace FOCA_gadgets_V1
         }
         private void CargarGrilla()
         {
-             gvArticulos.DataSource = GestorArticulos.obtenerArticulos();
-            gvArticulos.DataBind();
+             dgvArticulos.DataSource = GestorArticulos.obtenerArticulos();
+            dgvArticulos.DataBind();
+           
         }
 
 
