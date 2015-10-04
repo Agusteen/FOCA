@@ -52,10 +52,12 @@
                         <h3 class="panel-title">Tabla de Articulos</h3>
                     </div>
                     <div class="panel-body">
-                        <asp:GridView ID="dgvArticulos" class="form-control" CssClass="footable" runat="server" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged">
+                        <asp:GridView ID="dgvArticulos" class="form-control" CssClass="footable" runat="server" OnRowCommand="dgvArticulos_RowCommand">
                             <Columns>
-                                <asp:CommandField ButtonType="Button" SelectText="Modificar" ShowSelectButton="True" />
-                                <asp:CommandField ButtonType="Button" SelectText="Eliminar" ShowSelectButton="True" />
+                                <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
+
+                                <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button"/>
+                               
                             </Columns>
                         </asp:GridView>
                     </div>

@@ -12,8 +12,8 @@ namespace FOCA_gadgets_V1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            if(!Page.IsPostBack)
+
+            if (!Page.IsPostBack)
             {
                 cargarComboTipoArticulos();
                 CargarGrilla();
@@ -21,9 +21,9 @@ namespace FOCA_gadgets_V1
         }
         private void CargarGrilla()
         {
-             dgvArticulos.DataSource = GestorArticulos.obtenerArticulos();
+            dgvArticulos.DataSource = GestorArticulos.obtenerArticulos();
             dgvArticulos.DataBind();
-           
+
         }
 
 
@@ -37,28 +37,28 @@ namespace FOCA_gadgets_V1
 
         protected void guardarArticulo(object sender, EventArgs e)
         {
-           
-                if (Page.IsValid)
-                {
-                    try
-                    {
 
-                    String s =ddlTipoArticulo.SelectedValue;
+            if (Page.IsValid)
+            {
+                try
+                {
+
+                    String s = ddlTipoArticulo.SelectedValue;
                     Articulo art = new Articulo()
                     {
                         descripcion = txtDescripcion.Text.ToUpper(),
                         precio = float.Parse(txtPrecio.Text),
                         stock = int.Parse(txtStock.Text),
                         disponible = ckbDisponible.Checked,
-                        tipoArticulo = int.Parse( ddlTipoArticulo.SelectedValue)
+                        tipoArticulo = int.Parse(ddlTipoArticulo.SelectedValue)
 
-                        };
-                        GestorArticulos.insertarArticulo(art);
+                    };
+                    GestorArticulos.insertarArticulo(art);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
 
                 }
                 catch
-                    {
+                {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
 
                 }
@@ -68,30 +68,46 @@ namespace FOCA_gadgets_V1
                 }
 
             }
-               
-            
+
+
         }
 
-        protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+       
+        protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            try
+
             {
-                int indexBD =int.Parse(dgvArticulos.SelectedRow.Cells[2].Text);
-                GestorArticulos.eliminarArticulo(indexBD);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                   String commandName = e.CommandName.ToUpper();
+                int index = Convert.ToInt32(e.CommandArgument);
+               
+                if (commandName.Equals("MODIFICAR"))
+                    {
 
+                    }
+
+                    if (commandName.Equals("ELIMINAR"))
+                    {
+                    try
+                    {
+                      
+                            GridViewRow row = dgvArticulos.Rows[index];
+                            int indexBD = int.Parse(row.Cells[2].Text);
+                        
+                        GestorArticulos.eliminarArticulo(indexBD);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                   
+                        }
+                        catch
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+
+                        }
+                        finally
+                        {
+                            CargarGrilla();
+                        }
+                    }
+                }
             }
-            catch
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
-
-            }
-            finally
-            {
-                CargarGrilla();
-            }
-
-
         }
     }
-}
