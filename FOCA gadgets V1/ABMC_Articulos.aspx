@@ -52,7 +52,7 @@
                         <h3 class="panel-title">Tabla de Articulos</h3>
                     </div>
                     <div class="panel-body">
-                        <asp:GridView ID="dgvArticulos" class="form-control" CssClass="footable" runat="server">
+                        <asp:GridView ID="dgvArticulos" class="form-control" CssClass="footable" runat="server" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged">
                             <Columns>
                                 <asp:CommandField ButtonType="Button" SelectText="Modificar" ShowSelectButton="True" />
                                 <asp:CommandField ButtonType="Button" SelectText="Eliminar" ShowSelectButton="True" />

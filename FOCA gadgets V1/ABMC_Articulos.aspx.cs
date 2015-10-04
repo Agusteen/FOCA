@@ -46,7 +46,7 @@ namespace FOCA_gadgets_V1
                     String s =ddlTipoArticulo.SelectedValue;
                     Articulo art = new Articulo()
                     {
-                        descripcion = txtDescripcion.Text,
+                        descripcion = txtDescripcion.Text.ToUpper(),
                         precio = float.Parse(txtPrecio.Text),
                         stock = int.Parse(txtStock.Text),
                         disponible = ckbDisponible.Checked,
@@ -63,10 +63,36 @@ namespace FOCA_gadgets_V1
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
 
                 }
+                finally
+                {
+                    CargarGrilla();
+                }
 
             }
                
             
+        }
+
+        protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int indexBD =int.Parse(dgvArticulos.SelectedRow.Cells[2].Text);
+                GestorArticulos.eliminarArticulo(indexBD);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+
+            }
+            catch
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+
+            }
+            finally
+            {
+                CargarGrilla();
+            }
+
+
         }
     }
 }

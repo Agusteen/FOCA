@@ -235,7 +235,7 @@ namespace FOCA_Negocio
         }
 
 
-        public static void eliminarArticulo(Articulo articulo)
+        public static void eliminarArticulo(int indice)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
@@ -249,12 +249,12 @@ namespace FOCA_Negocio
 
                 try
                 {
-                    string sqlsearchforart = "SELECT id_articulo from TipoArticulo where id_articulo = @IdArticulo";
+                    string sqlsearchforart = "SELECT id_articulo from ARTICULOS where id_articulo = @IdArticulo";
                     SqlCommand comand0 = new SqlCommand();
                     comand0.CommandText = sqlsearchforart;
                     comand0.Connection = connection;
                     comand0.Transaction = transaction;
-                    comand0.Parameters.AddWithValue("@IdArticulo", articulo.indexBD);
+                    comand0.Parameters.AddWithValue("@IdArticulo", indice);
                     idArticulo = Convert.ToInt32(comand0.ExecuteScalar());
 
                 }
@@ -268,16 +268,16 @@ namespace FOCA_Negocio
 
                 }
 
-                string sqldelete = "DELETE FROM TipoArticulo WHERE id_articulo = @indexBD; SELECT @@Identity as ID";
+                string sqldelete = "DELETE FROM ARTICULOS WHERE id_articulo = @indexBD; SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sqldelete;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
-                comand.Parameters.AddWithValue("@indexBD", articulo.indexBD);
+                comand.Parameters.AddWithValue("@indexBD", idArticulo);//indice tambien puede ser.
 
 
-                //cmd.ExecuteNonQuery();
-                idArticulo = Convert.ToInt32(comand.ExecuteScalar());
+                comand.ExecuteNonQuery();
+                //idArticulo = Convert.ToInt32(comand.ExecuteScalar());
 
                 string sqlinsertauditoria = "Insert into AUDITORIA (Fecha, descripcion) values (getdate(),@descripcion)";
                 SqlCommand comand2 = new SqlCommand();
