@@ -49,21 +49,14 @@
             <div class="col-xs-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Tabla de clientes</h3>
+                        <h3 class="panel-title">Tabla de Articulos</h3>
                     </div>
                     <div class="panel-body">
-                        <asp:GridView ID="gvArticulos" class="form-control" CssClass="footable" runat="server" AutoGenerateColumns="True">
-                            <%--<Columns>
-                                <asp:CommandField SelectText="Eliminar" ShowSelectButton="True" />
-                                <asp:CommandField SelectText="Modificar" ShowSelectButton="True" />
-                                <asp:BoundField HeaderText="ID Articulo" ReadOnly="True" Visible="False" />
-                                <asp:BoundField HeaderText="Descripcion" ReadOnly="True" />
-                                <asp:BoundField HeaderText="Precio" ReadOnly="True" />
-                                <asp:BoundField HeaderText="Stock" ReadOnly="True" />
-                                <asp:BoundField HeaderText="Esta Disponible" ReadOnly="True" />
-                                <asp:BoundField HeaderText="TipoID" ReadOnly="True" Visible="False" />
-                                <asp:BoundField HeaderText="Tipo" ReadOnly="True" />
-                            </Columns>--%>
+                        <asp:GridView ID="dgvArticulos" class="form-control" CssClass="footable" runat="server">
+                            <Columns>
+                                <asp:CommandField ButtonType="Button" SelectText="Modificar" ShowSelectButton="True" />
+                                <asp:CommandField ButtonType="Button" SelectText="Eliminar" ShowSelectButton="True" />
+                            </Columns>
                         </asp:GridView>
                     </div>
                 </div>
