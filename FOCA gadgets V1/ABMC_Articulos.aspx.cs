@@ -54,6 +54,7 @@ namespace FOCA_gadgets_V1
 
                         };
                         GestorArticulos.insertarArticulo(art);
+                        CargarGrilla();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
 
                 }

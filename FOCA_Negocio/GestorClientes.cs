@@ -115,5 +115,99 @@ namespace FOCA_Negocio
             }
         }
 
+        public static void actualizarCliente(Cliente cliente)
+        {
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            SqlConnection connection = new SqlConnection();
+            SqlTransaction transaction = null;
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                transaction = connection.BeginTransaction();                
+                string sql = "UPDATE CLIENTES SET nombre=@Nombre, apellido=@Apellido, dni=@Dni, domicilio=@Domicilio, localidad=@Localidad, telefono=@Telefono, fechaNacimiento=@FechaNacimiento, preferencial=@Preferencial WHERE id_cliente=@indexBD; SELECT @@Identity as ID";
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                comand.Transaction = transaction;
+                comand.Parameters.AddWithValue("@indexBD", cliente.indexBD);
+                comand.Parameters.AddWithValue("@Nombre", cliente.nombre);
+                comand.Parameters.AddWithValue("@Apellido", cliente.apellido);
+                comand.Parameters.AddWithValue("@Dni", cliente.dni);
+                comand.Parameters.AddWithValue("@Domicilio", cliente.domicilio);
+                comand.Parameters.AddWithValue("@Localidad", cliente.localidad);
+                comand.Parameters.AddWithValue("@Telefono", cliente.telefono);
+                comand.Parameters.AddWithValue("@FechaNacimiento", cliente.fechaNac);
+                comand.Parameters.AddWithValue("@Preferencial", cliente.intPreferencial);
+                                
+                int idCliente = Convert.ToInt32(comand.ExecuteScalar());
+
+                sql = "Insert into AUDITORIA (fecha, descripcion) values (GETDATE(),@descripcion)";
+                SqlCommand comand2 = new SqlCommand();
+                comand2.CommandText = sql;
+                comand2.Connection = connection;
+                comand2.Transaction = transaction;
+                comand2.Parameters.AddWithValue("@descripcion", "Se actualizo el cliente ID:" + idCliente.ToString());
+                comand2.ExecuteNonQuery();
+
+                transaction.Commit(); //confirmo los cambios                
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    transaction.Rollback(); //Vuelvo atras los cambios
+                throw new ApplicationException("Error al actualizar el cliente.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
+
+        public static void eliminarCliente(Cliente cliente)
+        {
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            SqlConnection connection = new SqlConnection();
+            SqlTransaction transaction = null;
+            int? idCliente = null;
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                transaction = connection.BeginTransaction();
+                
+                string sql = "DELETE FROM CLIENTES WHERE id_cliente = @indexBD; SELECT @@Identity as ID";
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                comand.Transaction = transaction;
+                comand.Parameters.AddWithValue("@indexBD", cliente.indexBD);
+
+                comand.ExecuteNonQuery();
+
+                string sqlinsertauditoria = "Insert into AUDITORIA (Fecha, descripcion) values (getdate(),@descripcion)";
+                SqlCommand comand2 = new SqlCommand();
+                comand2.CommandText = sqlinsertauditoria;
+                comand2.Connection = connection;
+                comand2.Transaction = transaction;
+                comand2.Parameters.AddWithValue("@descripcion", "Se elimino el cliente ID:" + idCliente.ToString());
+                comand2.ExecuteNonQuery();
+                
+                transaction.Commit(); //confirmo los cambios
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    transaction.Rollback(); //Vuelvo atras los cambios
+                throw new ApplicationException("Error al eliminar el cliente.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
+
     }
 }
