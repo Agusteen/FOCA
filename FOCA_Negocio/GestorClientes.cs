@@ -13,6 +13,56 @@ namespace FOCA_Negocio
 {
     public class GestorClientes
     {
+        public static DataTable ObtenerTodos()
+        {
+            //List<Cliente> clientes = new List<Cliente>();
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            DataTable tablaClientes = new DataTable();
+            SqlConnection connection = new SqlConnection();
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                //string sql = "SELECT id_cliente, nombre, apellido, dni, domicilio, localidad, telefono, fechaNacimiento, preferencial FROM CLIENTES order by apellido";
+                string sql = "SELECT (c.apellido + ' ' + c.nombre) AS 'Nombre', c.dni AS 'DNI', c.domicilio AS 'Domicilio', l.descripcion AS 'Localidad', c.telefono AS 'Telefono', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN LOCALIDADES AS l ON (c.localidad = l.id_localidad)";
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                tablaClientes.Load(comand.ExecuteReader());
+                //SqlDataReader dr = comand.ExecuteReader();
+                //while (dr.Read())
+                //{
+                //    clientes.Add(
+                //        new Cliente()
+                //        {
+                //            indexBD = (int)dr["id_cliente"], 
+                //            nombre = dr["nombre"].ToString(),
+                //             apellido = dr["apellido"].ToString(),
+                //             dni =(long)dr["dni"],
+                //             domicilio = dr["domicilio"].ToString(),
+                //             localidad = (int)dr["localidad"],
+                //             telefono = (long)dr["telefono"],
+                             
+                            
+                //            fechaNac = dr["fechaNacimiento"].ToString(),
+                //            //intPreferencial = 1
+
+                //        });
+                //}
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    throw new ApplicationException("Error al cargar clientes");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+            return tablaClientes;
+        }
+        
         public static void Insertar(Cliente cliente)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;

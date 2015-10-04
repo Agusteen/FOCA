@@ -16,6 +16,13 @@ namespace FOCA_gadgets_V1
         {
             if (!IsPostBack)
                 cargarComboLocalidades();
+            cargarGrillaClientes();
+        }
+
+        private void cargarGrillaClientes()
+        {
+            grdClientes.DataSource = GestorClientes.ObtenerTodos();
+            grdClientes.DataBind();
         }
 
         private void cargarComboLocalidades()
