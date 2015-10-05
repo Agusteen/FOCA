@@ -21,22 +21,27 @@
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <asp:TextBox ID="txtNombre" class="form-control" placeholder="Ingrese aquí su nombre" runat="server" Font-Size="Large"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtNombre" runat="server" Font-Size="X-Small" ForeColor="Red"/>
                     </div>
 
                     <div class="form-group">
                         <label for="apellido">Apellido</label>
                         <asp:TextBox class="form-control" ID="txtApellido" placeholder="Ingrese aquí su apellido" runat="server" Font-Size="Large"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="*Este campo es requerido" ControlToValidate="txtApellido" runat="server" Font-Size="X-Small" ForeColor="Red"/>
+                        
                     </div>
 
                     <div class="form-group">
                         <label for="dni">Número de documento</label>
                         <asp:TextBox class="form-control" ID="txtDni" name="txtDni" placeholder="Ingrese solo números, sin puntos" runat="server" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" Font-Size="Large" />
                         <asp:RegularExpressionValidator ControlToValidate="txtDni" ValidationExpression="[0-9]{8}|[0-9]{7}" runat="server" ErrorMessage="* Debe tener como máximo 8 dígitos y como mínimo 7 dígitos" Font-Size="X-Small" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtDni" runat="server" Font-Size="X-Small" ForeColor="Red"/>
                     </div>
 
                     <div class="form-group">
                         <label for="domicilio">Domicilio</label>
                         <asp:TextBox class="form-control" ID="txtDomicilio" placeholder="Calle Numero Piso" runat="server" Font-Size="Large"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtDomicilio" runat="server" Font-Size="X-Small" ForeColor="Red"/>
                     </div>
 
                     <div class="form-group">
@@ -47,13 +52,14 @@
                     <div class="form-group">
                         <label for="telefono">Telefono</label>
                         <asp:TextBox ID="txtTelefono" class="form-control" placeholder="Ingrese solo números, sin signos" runat="server" Font-Size="Large"></asp:TextBox>
-
+                        <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtTelefono" runat="server" Font-Size="X-Small" ForeColor="Red"/>
                     </div>
 
                     <div class="form-group">
                         <label for="fechaNacimiento">Fecha de nacimiento</label>
                         <asp:TextBox ID="txtFechaNacimiento" class="datepicker form-control" placeholder="Fecha de Nacimiento" runat="server" onkeypress="event.returnValue = false;"></asp:TextBox>
                         <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" />
+                        <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red"/>
                     </div>
 
                     <asp:CheckBox type="checkbox-info" ID="chboxPreferencial" Text=" Preferencial" runat="server"></asp:CheckBox>
