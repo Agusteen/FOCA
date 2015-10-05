@@ -88,7 +88,7 @@
                         <li><a href="ABMC_Clientes.aspx">CLIENTES </a><span> </span></li>							
 						<li><a href="products.html">SERVICIOS</a><span> </span></li>						
 						<li><a href="products.html">SOBRE FOCA gadgets</a></li>
-						<div class="clearfix"> </div>
+						
 					</ul>
 					<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
 

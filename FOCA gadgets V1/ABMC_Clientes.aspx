@@ -71,9 +71,15 @@
                     <h3 class="panel-title">Tabla de clientes</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
-                    <asp:GridView ID="grdClientes" class="form-control" CssClass="footable" runat="server" AutoGenerateColumns="true">      
-                    </asp:GridView></table>
+                    <asp:Panel runat="server" ID="panelGrid" Width="100%" ScrollBars="Both" ShowFooter="True" CssClass="panelCss">
+                    <asp:GridView ID="grdClientes" style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="true" CellPadding="7" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged" >   
+                           
+                    <Columns>
+                                <asp:CommandField ButtonType="Image" SelectImageUrl="images/editar.png" ShowSelectButton="True" />
+                                <asp:CommandField ButtonType="Image" SelectImageUrl="images/eliminar.png" ShowSelectButton="True" />
+                            </Columns>
+                    </asp:GridView>
+                    </asp:Panel>
                 </div>
         </div>
     </div>

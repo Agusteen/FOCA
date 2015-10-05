@@ -29,6 +29,7 @@ namespace FOCA_gadgets_V1
         {
             ddlLocalidades.DataSource = GestorLocalidades.ObtenerTodas();
             ddlLocalidades.DataTextField = "Nombre";
+            ddlLocalidades.DataValueField = "idLocalidad";
             ddlLocalidades.DataBind();
         }
 
@@ -66,6 +67,11 @@ namespace FOCA_gadgets_V1
         {
             ((RangeValidator)sender).MaximumValue =DateTime.Now.Date.AddYears(-18).ToString("dd/MM/yyyy");
             ((RangeValidator)sender).MinimumValue = DateTime.Now.Date.AddYears(-120).ToString("dd/MM/yyyy");
+
+        }
+
+        protected void grdClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
         
