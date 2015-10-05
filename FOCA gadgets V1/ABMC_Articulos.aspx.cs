@@ -17,7 +17,9 @@ namespace FOCA_gadgets_V1
             {
                 cargarComboTipoArticulos();
                 CargarGrilla();
+                ViewState["esmodificacion"] = false;
             }
+           
         }
         private void CargarGrilla()
         {
@@ -40,39 +42,49 @@ namespace FOCA_gadgets_V1
 
             if (Page.IsValid)
             {
-                try
+                if (ViewState["esModificacion"] != null)
                 {
-
-                    String s = ddlTipoArticulo.SelectedValue;
-                    Articulo art = new Articulo()
+                    
+                    if (((Boolean)ViewState["esModificacion"]) == false)
                     {
-                        descripcion = txtDescripcion.Text.ToUpper(),
-                        precio = float.Parse(txtPrecio.Text),
-                        stock = int.Parse(txtStock.Text),
-                        disponible = ckbDisponible.Checked,
-                        tipoArticulo = int.Parse(ddlTipoArticulo.SelectedValue)
+                        try
+                        {
+
+                            String s = ddlTipoArticulo.SelectedValue;
+                            Articulo art = new Articulo()
+                            {
+                                descripcion = txtDescripcion.Text.ToUpper(),
+                                precio = float.Parse(txtPrecio.Text),
+                                stock = int.Parse(txtStock.Text),
+                                disponible = ckbDisponible.Checked,
+                                tipoArticulo = int.Parse(ddlTipoArticulo.SelectedValue)
 
 
-                   
-                        };
-                        GestorArticulos.insertarArticulo(art);
-                        CargarGrilla();
 
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                            };
+                            GestorArticulos.insertarArticulo(art);
+                            CargarGrilla();
 
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+
+                        }
+                        catch
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+
+                        }
+                        finally
+                        {
+                            CargarGrilla();
+                        }
+
+                    }
+                    else
+                    {
+                        //hacer modificacion de valor en BD
+                    }
                 }
-                catch
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
-
-                }
-                finally
-                {
-                    CargarGrilla();
-                }
-
             }
-
 
         }
 
@@ -86,10 +98,26 @@ namespace FOCA_gadgets_V1
                
                 if (commandName.Equals("MODIFICAR"))
                     {
+                    GridViewRow row = dgvArticulos.Rows[index];
+                    Articulo art = new Articulo();
+                    art.indexBD = int.Parse(row.Cells[2].Text);
+                    art.descripcion = row.Cells[3].Text;
+                    art.precio = float.Parse(row.Cells[4].Text);
+                    art.stock = int.Parse(row.Cells[5].Text);
+                    object o = row.Cells[6].;
+                    art.disponible = Boolean.Parse(row.Cells[6].Text);
+                    art.tipoArticulo = int.Parse(row.Cells[7].Text);
+                    art.tipoArticuloString = row.Cells[8].Text;
 
-                    }
+                    txtDescripcion.Text = art.descripcion.ToString();
+                    txtPrecio.Text = art.precio.ToString();
+                    txtStock.Text = art.stock.ToString();
+                    ckbDisponible.Checked = art.disponible;
+                    ddlTipoArticulo.SelectedValue = art.tipoArticulo.ToString();
 
-                    if (commandName.Equals("ELIMINAR"))
+                }
+
+                if (commandName.Equals("ELIMINAR"))
                     {
                     try
                     {
