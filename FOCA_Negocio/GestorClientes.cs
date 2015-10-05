@@ -204,7 +204,7 @@ namespace FOCA_Negocio
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
-                comand.Parameters.AddWithValue("@indexBD", cliente.indexBD);
+                comand.Parameters.AddWithValue("@indexBD", idCliente);
 
                 comand.ExecuteNonQuery();
 

@@ -74,6 +74,43 @@ namespace FOCA_gadgets_V1
         {
 
         }
+
+        protected void grdClientes_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            {
+                String commandName = e.CommandName.ToUpper();
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                if (commandName.Equals("MODIFICAR"))
+                {
+
+                }
+
+                if (commandName.Equals("ELIMINAR"))
+                {
+                    try
+                    {
+
+                        GridViewRow row = grdClientes.Rows[index];
+                        int indexBD = int.Parse(row.Cells[2].Text);
+
+                        GestorClientes.eliminarCliente(indexBD);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+
+                    }
+                    catch
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+
+                    }
+                    finally
+                    {
+                        cargarGrillaClientes();
+                    }
+                }
+            }
+        }       
+
         
     }
 }

@@ -78,7 +78,7 @@
                     </div>
                     <div class="panel-body">
                         <asp:Panel runat="server" ID="panelGrid" Width="100%" ScrollBars="Both" ShowFooter="True" CssClass="panelCss">
-                            <asp:GridView ID="grdClientes" Style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="true" CellPadding="7" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged">
+                            <asp:GridView ID="grdClientes" Style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="true" CellPadding="7" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged" >
 
                                 <Columns>
                                     <asp:CommandField ButtonType="Image" SelectImageUrl="images/editar.png" ShowSelectButton="True" />
