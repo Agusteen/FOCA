@@ -52,14 +52,12 @@ namespace FOCA_gadgets_V1
                         disponible = ckbDisponible.Checked,
                         tipoArticulo = int.Parse(ddlTipoArticulo.SelectedValue)
 
-<<<<<<< HEAD
-                    };
-                    GestorArticulos.insertarArticulo(art);
-=======
+
+                   
                         };
                         GestorArticulos.insertarArticulo(art);
                         CargarGrilla();
->>>>>>> origin/master
+
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
 
                 }
