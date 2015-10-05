@@ -165,17 +165,39 @@ namespace FOCA_Negocio
             }
         }
 
-        public static void eliminarCliente(Cliente cliente)
+        public static void eliminarCliente(int indice)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
             SqlTransaction transaction = null;
-            int? idCliente = null;
+            
             try
             {
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
+                int? idCliente = null;
+
+                try
+                {
+                    string sqlBuscaCliente = "SELECT id_cliente FROM CLIENTES WHERE id_cliente = @IdCliente";
+                    SqlCommand comand0 = new SqlCommand();
+                    comand0.CommandText = sqlBuscaCliente;
+                    comand0.Connection = connection;
+                    comand0.Transaction = transaction;
+                    comand0.Parameters.AddWithValue("@IdCliente", indice);
+                    idCliente = Convert.ToInt32(comand0.ExecuteScalar());
+
+                }
+                catch
+                {
+                    if (idCliente == null)
+                    {
+                        throw new ApplicationException("Error en la busqueda para eliminar un Cliente");
+                    }
+
+
+                }
                 
                 string sql = "DELETE FROM CLIENTES WHERE id_cliente = @indexBD; SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
