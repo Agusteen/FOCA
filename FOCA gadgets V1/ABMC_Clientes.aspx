@@ -82,7 +82,8 @@
 
                                 <Columns>
                                     <asp:CommandField ButtonType="Image" SelectImageUrl="images/editar.png" ShowSelectButton="True" />
-                                    <asp:CommandField ButtonType="Image" SelectImageUrl="images/eliminar.png" ShowSelectButton="True" />
+                                    <%--<asp:CommandField ButtonType="Image" SelectImageUrl="images/eliminar.png" ShowSelectButton="True" />--%>
+                                    <asp:ButtonField CommandName="Eliminar" ButtonType="Image" ImageUrl="images/eliminar.png"/>
                                 </Columns>
                             </asp:GridView>
                         </asp:Panel>
