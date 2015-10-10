@@ -13,6 +13,16 @@ namespace FOCA_Entidades
         public float precio{ get; set; }
         public int stock { get; set; }
         public Boolean disponible { get; set; }
+        public String stringDisponible
+        {
+            get
+            {
+                if (disponible == true) return "Si";
+                else
+                    return "No";
+            }
+           
+        }
         public int intDisponible
         {
             get

@@ -54,10 +54,10 @@ namespace FOCA_Negocio
             return tiposArticulos;
         }
 
-        public static DataTable obtenerArticulos()
+        public static List<Articulo> obtenerArticulos()
         {
-            //List<Articulo> listaArticulos = new List<Articulo>();
-            DataTable tablaarticulos = new DataTable();
+            List<Articulo> listaArticulos = new List<Articulo>();
+           
             String conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
 
@@ -67,27 +67,27 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'Tipo ID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)";
+                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 //Llenando un datatable con el resultado de la consulta
-                tablaarticulos.Load(comand.ExecuteReader());
+                //tablaarticulos.Load(comand.ExecuteReader());
 
                 //En caso de llenar una lista con los articulos;
-                //SqlDataReader dr = comand.ExecuteReader();
-                //while (dr.Read())
-                //{
-                //    Articulo art = new Articulo();
-                //    art.indexBD = int.Parse(dr["ID Articulo"].ToString());
-                //    art.descripcion = dr["Descripcion"].ToString();
-                //    if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["Precio"].ToString());
-                //    if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["Stock"].ToString());
-                //    art.disponible = Boolean.Parse(dr["Disponible"].ToString()); //interfaz selecciona una opcion por defecto
-                //    art.tipoArticulo = int.Parse(dr["TipoID"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
-                //    art.tipoArticuloString = dr["Tipo"].ToString();
-                //    listaArticulos.Add(art);
-                //}
+                SqlDataReader dr = comand.ExecuteReader();
+                while (dr.Read())
+                {
+                    Articulo art = new Articulo();
+                    art.indexBD = int.Parse(dr["ID Articulo"].ToString());
+                    art.descripcion = dr["Descripcion"].ToString();
+                    if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["Precio"].ToString());
+                    if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["Stock"].ToString());
+                    art.disponible = Boolean.Parse(dr["Disponible"].ToString()); //interfaz selecciona una opcion por defecto
+                    art.tipoArticulo = int.Parse(dr["TipoID"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
+                    art.tipoArticuloString = dr["Tipo"].ToString();
+                    listaArticulos.Add(art);
+                }
 
 
 
@@ -103,9 +103,58 @@ namespace FOCA_Negocio
 
             }
             //Caso de manejar una lista de articulos
-            //return listaArticulos;
-            return tablaarticulos;
+            return listaArticulos;
+            //return tablaarticulos;
         }
+
+        public static Articulo obtenerArticulo(int indexBD)
+        {
+            Articulo art = new Articulo();
+            String conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            SqlConnection connection = new SqlConnection();
+
+
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+
+                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo) WHERE a.id_articulo = @indexBD";
+                SqlCommand comand = new SqlCommand();
+              
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                comand.Parameters.AddWithValue("@indexBD", indexBD);
+
+                SqlDataReader dr = comand.ExecuteReader();
+                while (dr.Read())
+                {
+                    art.indexBD = int.Parse(dr["ID Articulo"].ToString());
+                    art.descripcion = dr["Descripcion"].ToString();
+                    if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["Precio"].ToString());
+                    if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["Stock"].ToString());
+                    art.disponible = Boolean.Parse(dr["Disponible"].ToString()); //interfaz selecciona una opcion por defecto
+                    art.tipoArticulo = int.Parse(dr["TipoID"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
+                    art.tipoArticuloString = dr["Tipo"].ToString();
+                    
+                }
+                
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al obtener el Articulos.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+
+            }
+             
+
+            return art;
+        }
+
 
 
         public static void insertarArticulo(Articulo articulo)
@@ -118,7 +167,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
-                string sql = "INSERT INTO ARTICULOS (descripcion, precio, stock, disponible, tipo) values (@Descripcion, @Precio, @Stock, @Disponible, @tipoArticulo); SELECT @@Identity as ID";
+                string sql = "INSERT INTO ARTICULOS (descripcion, precio, stock, disponible, tipo) values (@Descripcion, @Precio, @Stock, @Disponible, @tipoArticulo); SELECT @@Identity as ID;";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
@@ -173,13 +222,14 @@ namespace FOCA_Negocio
 
                 try
                 {
-                    string sqlsearchforart = "SELECT id_articulo from TipoArticulo where idArticulo = @IdArticulo";
+                    string sqlsearchforart = "SELECT id_articulo from ARTICULOS where descripcion = @descripcion";
                     SqlCommand comand0 = new SqlCommand();
                     comand0.CommandText = sqlsearchforart;
                     comand0.Connection = connection;
                     comand0.Transaction = transaction;
-                    comand0.Parameters.AddWithValue("@IdArticulo", articulo.indexBD);
+                    comand0.Parameters.AddWithValue("@descripcion", articulo.descripcion);
                     idArticulo = Convert.ToInt32(comand0.ExecuteScalar());
+                    articulo.indexBD =(int)idArticulo;
 
                 }
                 catch
@@ -192,7 +242,7 @@ namespace FOCA_Negocio
 
                 }
 
-                string sqlupdate = "Update ARTICULOS set descripcion=@Descripcion, precio=@Precio, stock=@Stock, disponible=@Disponible, tipoArticulo=@tipoArticulo where idArticulo = @indexBD; SELECT @@Identity as ID";
+                string sqlupdate = "Update ARTICULOS set descripcion=@Descripcion, precio=@Precio, stock=@Stock, disponible=@Disponible, tipo=@tipoArticulo where id_articulo = @indexBD";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sqlupdate;
                 comand.Connection = connection;
@@ -205,15 +255,15 @@ namespace FOCA_Negocio
                 comand.Parameters.AddWithValue("@tipoArticulo", articulo.tipoArticulo);
 
 
-                //cmd.ExecuteNonQuery();
-                idArticulo = Convert.ToInt32(comand.ExecuteScalar());
+                comand.ExecuteNonQuery();
+                //idArticulo = Convert.ToInt32(comand.ExecuteScalar());
 
                 string sqlinsertauditoria = "Insert into AUDITORIA (Fecha, descripcion) values (getdate(),@descripcion)";
                 SqlCommand comand2 = new SqlCommand();
                 comand2.CommandText = sqlinsertauditoria;
                 comand2.Connection = connection;
                 comand2.Transaction = transaction;
-                comand2.Parameters.AddWithValue("@descripcion", "Se actualizó el Articulo ID:" + idArticulo.ToString());
+                comand2.Parameters.AddWithValue("@descripcion", "Se actualizó el Articulo ID:" + articulo.indexBD.ToString());
                 comand2.ExecuteNonQuery();
 
                 transaction.Commit(); //confirmo los cambios

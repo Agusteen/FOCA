@@ -6,7 +6,7 @@
             <div class="col-xs-5">
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>                    
-                    <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server" EnableTheming="True"></asp:TextBox>
                <asp:RequiredFieldValidator ControlToValidate="txtDescripcion" Display="Dynamic" runat="server" ErrorMessage="No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>   
                      </div>
               
@@ -52,11 +52,18 @@
                         <h3 class="panel-title">Tabla de Articulos</h3>
                     </div>
                     <div class="panel-body">
-                        <asp:GridView ID="dgvArticulos" class="form-control" CssClass="footable" runat="server" OnRowCommand="dgvArticulos_RowCommand">
+
+                        <asp:GridView ID="dgvArticulos" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False" CellPadding="7" ForeColor="#333333" GridLines="None" OnRowCommand="dgvArticulos_RowCommand">
+                       
                             <Columns>
                                 <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
-
                                 <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button"/>
+                                <asp:BoundField DataField="descripcion" HeaderText="Descripcion" />
+                                <asp:BoundField DataField="precio" HeaderText="Precio" />
+                                <asp:BoundField DataField="stock" HeaderText="Stock" />
+                                <asp:BoundField DataField="stringDisponible" HeaderText="Disponible para venta" />
+                                <asp:BoundField DataField="tipoArticuloString" HeaderText="Familia" />
+                              
                                
                             </Columns>
                         </asp:GridView>
