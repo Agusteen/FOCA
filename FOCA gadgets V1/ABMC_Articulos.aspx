@@ -52,25 +52,36 @@
                         <h3 class="panel-title">Tabla de Articulos</h3>
                     </div>
                     <div class="panel-body">
+                        <label for="filtro">Filtro descripcion</label>
+                        <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripcion o parte de la descripcion" runat="server"></asp:TextBox>
+                        <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
 
-                        <asp:GridView ID="dgvArticulos" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False" CellPadding="7" ForeColor="#333333" GridLines="None" OnRowCommand="dgvArticulos_RowCommand">
-                       
+
+                        <asp:GridView ID="dgvArticulos" PageSize="6" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center"
+                            AllowPaging="true" AllowSorting="true"
+                            class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
+                            CellPadding="7" ForeColor="#333333" GridLines="None" OnRowCommand="dgvArticulos_RowCommand"
+                            OnPageIndexChanging="dgvArticulos_PageIndexChanging" OnSorting="dgvArticulos_Sorting">
+
                             <Columns>
                                 <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
-                                <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button"/>
+                                <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button" />
                                 <asp:BoundField DataField="descripcion" HeaderText="Descripcion" />
                                 <asp:BoundField DataField="precio" HeaderText="Precio" />
                                 <asp:BoundField DataField="stock" HeaderText="Stock" />
                                 <asp:BoundField DataField="stringDisponible" HeaderText="Disponible para venta" />
                                 <asp:BoundField DataField="tipoArticuloString" HeaderText="Familia" />
-                              
-                               
+
+
                             </Columns>
                         </asp:GridView>
                     </div>
                 </div>
             </div>
 
+           
+
+           
             </div>
          </div>
 

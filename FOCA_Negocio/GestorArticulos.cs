@@ -54,7 +54,7 @@ namespace FOCA_Negocio
             return tiposArticulos;
         }
 
-        public static List<Articulo> obtenerArticulos()
+        public static List<Articulo> obtenerArticulos(string contiene, string orden)
         {
             List<Articulo> listaArticulos = new List<Articulo>();
            
@@ -67,8 +67,13 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)";
+                string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock',";
+                sql += " a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Familia' from ARTICULOS as a";
+                sql += " JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo) WHERE a.descripcion like @Contiene ORDER BY " + orden;
                 SqlCommand comand = new SqlCommand();
+             //   comand.Parameters.AddWithValue("@Orden", orden); //why
+              comand.Parameters.AddWithValue("@Contiene", contiene);
+
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 //Llenando un datatable con el resultado de la consulta
@@ -85,7 +90,7 @@ namespace FOCA_Negocio
                     if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["Stock"].ToString());
                     art.disponible = Boolean.Parse(dr["Disponible"].ToString()); //interfaz selecciona una opcion por defecto
                     art.tipoArticulo = int.Parse(dr["TipoID"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
-                    art.tipoArticuloString = dr["Tipo"].ToString();
+                    art.tipoArticuloString = dr["Familia"].ToString();
                     listaArticulos.Add(art);
                 }
 

@@ -15,15 +15,23 @@ namespace FOCA_gadgets_V1
 
             if (!Page.IsPostBack)
             {
+                ViewState["esmodificacion"] = false;
+                ViewState["ordenGvArticulos"] = "Descripcion";
                 cargarComboTipoArticulos();
                 CargarGrilla();
-                ViewState["esmodificacion"] = false;
+               
             }
            
         }
         private void CargarGrilla()
         {
-            dgvArticulos.DataSource = GestorArticulos.obtenerArticulos();
+            string contieneDescripcion = "%" + txtFiltroDescripcion.Text + "%";
+                string orden = "Descripcion";
+            if (ViewState["ordenGvArticulos"] != null)
+            {
+                orden = ViewState["ordenGvArticulos"].ToString();
+            }
+            dgvArticulos.DataSource = GestorArticulos.obtenerArticulos( contieneDescripcion, orden);
             dgvArticulos.DataBind();
 
         }
@@ -178,5 +186,22 @@ namespace FOCA_gadgets_V1
             ckbDisponible.Checked = true;
             ddlTipoArticulo.SelectedIndex =1 ;
         }
+
+        protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvArticulos.PageIndex = e.NewPageIndex;
+            CargarGrilla();
         }
+
+        protected void dgvArticulos_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            ViewState["OrdenGvArticulos"] = e.SortExpression;
+            CargarGrilla();
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            CargarGrilla();
+        }
+    }
     }
