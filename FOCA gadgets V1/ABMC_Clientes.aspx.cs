@@ -15,14 +15,26 @@ namespace FOCA_gadgets_V1
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
                 cargarComboLocalidades();
-            cargarGrillaClientes();
+                cargarComboRoles();
+                cargarGrillaClientes();
+            }
+            
         }
 
         private void cargarGrillaClientes()
         {
             grdClientes.DataSource = GestorClientes.ObtenerTodos();
             grdClientes.DataBind();
+        }
+
+        private void cargarComboRoles()
+        {
+            ddlRoles.DataSource = GestorRoles.ObtenerTodas();
+            ddlRoles.DataTextField = "descripcionRol";
+            ddlRoles.DataValueField = "idRol";
+            ddlRoles.DataBind();
         }
 
         private void cargarComboLocalidades()
@@ -42,12 +54,12 @@ namespace FOCA_gadgets_V1
                     Cliente cli = new Cliente();
                     
                         cli.nombre = txtNombre.Text;                        
-                        cli.apellido = txtApellido.Text;
-                        cli.domicilio = txtDomicilio.Text;
-                        cli.dni = long.Parse(txtDni.Text);
-                        cli.telefono = long.Parse(txtTelefono.Text);
+                        cli.apellido = txtApellido.Text;                    
                         cli.localidad = ddlLocalidades.SelectedIndex;
                         cli.fechaNac = txtFechaNacimiento.Text;
+                        cli.mail = txtMail.Text;
+                        cli.password = txtPassword.Text;
+                        cli.rol = ddlRoles.SelectedIndex;
                         cli.preferencial = chboxPreferencial.Checked;
 
                     
@@ -57,6 +69,10 @@ namespace FOCA_gadgets_V1
                 catch
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                }
+                finally
+                {
+                    cargarGrillaClientes();
                 }
                               
             }

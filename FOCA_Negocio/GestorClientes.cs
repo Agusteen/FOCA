@@ -23,8 +23,8 @@ namespace FOCA_Negocio
             {
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
-                //string sql = "SELECT id_cliente, nombre, apellido, dni, domicilio, localidad, telefono, fechaNacimiento, preferencial FROM CLIENTES order by apellido";
-                string sql = "SELECT (c.apellido + ' ' + c.nombre) AS 'Nombre', c.dni AS 'DNI', c.domicilio AS 'Domicilio', l.descripcion AS 'Localidad', c.telefono AS 'Telefono', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN LOCALIDADES AS l ON (c.localidad = l.id_localidad)";
+                //string sql = "SELECT id_cliente, nombre, apellido, localidad, fechaNacimiento, mail, password, rol, preferencial FROM CLIENTES order by apellido";
+                string sql = "SELECT (c.apellido + ' ' + c.nombre) AS 'Nombre', c.mail AS 'Mail', r.descripcion AS 'Rol', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN ROLES_USUARIO AS r ON (c.rol = r.id_rol)";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
@@ -73,18 +73,18 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
-                string sql = "INSERT INTO CLIENTES (nombre, apellido, dni, domicilio, localidad, telefono, fechaNacimiento, preferencial)  values (@Nombre, @Apellido, @Dni, @Domicilio, @Localidad, @Telefono, @FechaNacimiento, @Preferencial); SELECT @@Identity as ID";
+                string sql = "INSERT INTO CLIENTES (nombre, apellido, localidad, fechaNacimiento, mail, password, rol, preferencial)  values (@Nombre, @Apellido, @Localidad, @FechaNacimiento, @Mail, @Pass, @Rol, @Preferencial); SELECT @@Identity as ID";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
                 comand.Parameters.AddWithValue("@Nombre", cliente.nombre);
                 comand.Parameters.AddWithValue("@Apellido", cliente.apellido);
-                comand.Parameters.AddWithValue("@Dni", cliente.dni);
-                comand.Parameters.AddWithValue("@Domicilio", cliente.domicilio);
-                comand.Parameters.AddWithValue("@Localidad", cliente.localidad);
-                comand.Parameters.AddWithValue("@Telefono", cliente.telefono);
+                comand.Parameters.AddWithValue("@Localidad", cliente.localidad);                
                 comand.Parameters.AddWithValue("@FechaNacimiento", cliente.fechaNac);
+                comand.Parameters.AddWithValue("@Mail", cliente.mail);
+                comand.Parameters.AddWithValue("@Pass", cliente.password);
+                comand.Parameters.AddWithValue("@Rol", cliente.rol);
                 comand.Parameters.AddWithValue("@Preferencial", cliente.intPreferencial);
 
                 //cmd.ExecuteNonQuery();
@@ -133,10 +133,10 @@ namespace FOCA_Negocio
                 comand.Parameters.AddWithValue("@indexBD", cliente.indexBD);
                 comand.Parameters.AddWithValue("@Nombre", cliente.nombre);
                 comand.Parameters.AddWithValue("@Apellido", cliente.apellido);
-                comand.Parameters.AddWithValue("@Dni", cliente.dni);
-                comand.Parameters.AddWithValue("@Domicilio", cliente.domicilio);
+                
+                
                 comand.Parameters.AddWithValue("@Localidad", cliente.localidad);
-                comand.Parameters.AddWithValue("@Telefono", cliente.telefono);
+                
                 comand.Parameters.AddWithValue("@FechaNacimiento", cliente.fechaNac);
                 comand.Parameters.AddWithValue("@Preferencial", cliente.intPreferencial);
                                 
