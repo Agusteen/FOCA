@@ -84,12 +84,15 @@
                     </div>
                     <div class="panel-body">
                         <asp:Panel runat="server" ID="panelGrid" Width="100%" ScrollBars="Both" ShowFooter="True" CssClass="panelCss">
-                            <asp:GridView ID="grdClientes" Style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="true" CellPadding="7" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged" >
+                            <asp:GridView ID="grdClientes" Style="margin-left: 0px" HorizontalAlign="Center" class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="false" CellPadding="7" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged" >
 
                                 <Columns>
-                                    <asp:CommandField ButtonType="Image" SelectImageUrl="images/editar.png" ShowSelectButton="True" />
-                                    <%--<asp:CommandField ButtonType="Image" SelectImageUrl="images/eliminar.png" ShowSelectButton="True" />--%>
+                                    <asp:ButtonField CommandName="Modificar" ImageUrl="images/editar.png" ButtonType="Image" />                                    
                                     <asp:ButtonField CommandName="Eliminar" ButtonType="Image" ImageUrl="images/eliminar.png"/>
+                                    <asp:BoundField DataField="nombreyapellido" HeaderText="Nombre" />
+                                    <asp:BoundField DataField="mail" HeaderText="Mail" />
+                                    <asp:BoundField DataField="rolString" HeaderText="Rol" />
+                                    <asp:BoundField DataField="preferencial" HeaderText="Preferencial" />
                                 </Columns>
                             </asp:GridView>
                         </asp:Panel>

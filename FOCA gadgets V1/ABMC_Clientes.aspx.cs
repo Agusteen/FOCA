@@ -55,11 +55,11 @@ namespace FOCA_gadgets_V1
                     
                         cli.nombre = txtNombre.Text;                        
                         cli.apellido = txtApellido.Text;                    
-                        cli.localidad = ddlLocalidades.SelectedIndex;
+                        cli.localidad = int.Parse(ddlLocalidades.SelectedValue);
                         cli.fechaNac = txtFechaNacimiento.Text;
                         cli.mail = txtMail.Text;
                         cli.password = txtPassword.Text;
-                        cli.rol = ddlRoles.SelectedIndex;
+                        cli.rol = int.Parse(ddlRoles.SelectedValue);
                         cli.preferencial = chboxPreferencial.Checked;
 
                     

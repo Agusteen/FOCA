@@ -13,11 +13,10 @@ namespace FOCA_Negocio
 {
     public class GestorClientes
     {
-        public static DataTable ObtenerTodos()
+        public static List<Cliente> ObtenerTodos()
         {
-            //List<Cliente> clientes = new List<Cliente>();
-            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
-            DataTable tablaClientes = new DataTable();
+            List<Cliente> clientes = new List<Cliente>();
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;            
             SqlConnection connection = new SqlConnection();
             try
             {
@@ -28,27 +27,20 @@ namespace FOCA_Negocio
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
-                tablaClientes.Load(comand.ExecuteReader());
-                //SqlDataReader dr = comand.ExecuteReader();
-                //while (dr.Read())
-                //{
-                //    clientes.Add(
-                //        new Cliente()
-                //        {
-                //            indexBD = (int)dr["id_cliente"], 
-                //            nombre = dr["nombre"].ToString(),
-                //             apellido = dr["apellido"].ToString(),
-                //             dni =(long)dr["dni"],
-                //             domicilio = dr["domicilio"].ToString(),
-                //             localidad = (int)dr["localidad"],
-                //             telefono = (long)dr["telefono"],
-                             
-                            
-                //            fechaNac = dr["fechaNacimiento"].ToString(),
-                //            //intPreferencial = 1
-
-                //        });
-                //}
+                SqlDataReader dr = comand.ExecuteReader();
+                
+                while (dr.Read())
+                {
+                    clientes.Add(
+                        new Cliente()
+                        {
+                            //indexBD = (int)dr["id_cliente"],                            
+                            nombreyapellido = dr["Nombre"].ToString(),
+                            mail = dr["Mail"].ToString(),
+                            rolString = dr["Rol"].ToString(),                            
+                            preferencial = Boolean.Parse(dr["preferencial"].ToString())
+                        });
+                }
             }
             catch (SqlException ex)
             {
@@ -60,7 +52,7 @@ namespace FOCA_Negocio
                 if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
-            return tablaClientes;
+            return clientes;
         }
         
         public static void Insertar(Cliente cliente)
