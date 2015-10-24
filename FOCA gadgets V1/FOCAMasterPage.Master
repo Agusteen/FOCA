@@ -71,7 +71,15 @@
 							<div class="clearfix"> </div>
 						</ul>
 					</div>
-					
+					<div class="cart-details">
+                    <div class="login-rigister">
+							<ul class="unstyled-list list-inline">
+								<li><a class="login" href="#">Login</a></li>
+								<li><a class="rigister" href="#">REGISTRO <span> </span></a></li>
+								<div class="clearfix"> </div>
+							</ul>
+						</div>
+                        </div>
 				</div>
 				<div class="clearfix"> 
                     <a href="index.html">
@@ -86,8 +94,9 @@
                         <li><a href="Inicio.aspx">INICIO </a><span> </span></li>
 						<li><a href="ABMC_Articulos.aspx">ARTICULOS </a><span> </span></li>
                         <li><a href="ABMC_Clientes.aspx">CLIENTES </a><span> </span></li>							
-						<li><a href="products.html">SERVICIOS</a><span> </span></li>						
-						<li><a href="products.html">SOBRE FOCA gadgets</a></li>
+						<li><a href="Inicio.aspx">VENTA</a><span> </span></li>						
+						<li><a href="Inicio.aspx">REPARACION</a><span> </span></li>		
+                        <li><a href="Inicio.aspx">INFORMES</a></li>
 						
 					</ul>
 					<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
