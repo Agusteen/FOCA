@@ -16,6 +16,7 @@ namespace FOCA_gadgets_V1
         {
             if (!IsPostBack)
             {
+                ViewState["esmodificacion"] = false;
                 cargarComboLocalidades();
                 cargarComboRoles();
                 cargarGrillaClientes();
@@ -99,7 +100,16 @@ namespace FOCA_gadgets_V1
 
                 if (commandName.Equals("MODIFICAR"))
                 {
-
+                    int indexBD = int.Parse(grdClientes.DataKeys[index]["indexBD"].ToString());
+                    //Cliente cli = GestorClientes
+                    Articulo art = GestorArticulos.obtenerArticulo(indexBD);
+                    txtDescripcion.Text = art.descripcion.ToString();
+                    txtDescripcion.ReadOnly = true;
+                    ViewState["esmodificacion"] = true;
+                    txtPrecio.Text = art.precio.ToString();
+                    txtStock.Text = art.stock.ToString();
+                    ckbDisponible.Checked = art.disponible;
+                    ddlTipoArticulo.SelectedValue = art.tipoArticulo.ToString();
                 }
 
                 if (commandName.Equals("ELIMINAR"))

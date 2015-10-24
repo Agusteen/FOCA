@@ -157,6 +157,15 @@ namespace FOCA_Negocio
             }
         }
 
+        public static Cliente obtenerClientePorID(int index)
+        {
+            Cliente cli = new Cliente();
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            SqlConnection connection = new SqlConnection();
+
+            return cli;
+        }
+
         public static void eliminarCliente(int indice)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
