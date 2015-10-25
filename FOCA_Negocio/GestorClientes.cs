@@ -13,7 +13,7 @@ namespace FOCA_Negocio
 {
     public class GestorClientes
     {
-        public static List<Cliente> ObtenerTodos()
+        public static List<Cliente> ObtenerTodos(string contiene, string orden)
         {
             List<Cliente> clientes = new List<Cliente>();
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;            
@@ -23,8 +23,9 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 //string sql = "SELECT id_cliente, nombre, apellido, localidad, fechaNacimiento, mail, password, rol, preferencial FROM CLIENTES order by apellido";
-                string sql = "SELECT (c.apellido + ' ' + c.nombre) AS 'Nombre', c.mail AS 'Mail', r.descripcion AS 'Rol', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN ROLES_USUARIO AS r ON (c.rol = r.id_rol)";
+                string sql = "SELECT c.id_cliente AS 'ID', (c.apellido + ' ' + c.nombre) AS 'Nombre', c.mail AS 'Mail', r.descripcion AS 'Rol', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN ROLES_USUARIO AS r ON (c.rol = r.id_rol)WHERE c.apellido LIKE @Contiene ORDER BY " + orden;
                 SqlCommand comand = new SqlCommand();
+                comand.Parameters.AddWithValue("@Contiene", contiene);
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 SqlDataReader dr = comand.ExecuteReader();
@@ -34,7 +35,7 @@ namespace FOCA_Negocio
                     clientes.Add(
                         new Cliente()
                         {
-                            //indexBD = (int)dr["id_cliente"],                            
+                            indexBD = int.Parse(dr["ID"].ToString()),                            
                             nombreyapellido = dr["Nombre"].ToString(),
                             mail = dr["Mail"].ToString(),
                             rolString = dr["Rol"].ToString(),                            
@@ -107,7 +108,7 @@ namespace FOCA_Negocio
             }
         }
 
-        public static void actualizarCliente(Cliente cliente)
+        public static void modificarCliente(Cliente cliente)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
@@ -116,30 +117,54 @@ namespace FOCA_Negocio
             {
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
-                transaction = connection.BeginTransaction();                
-                string sql = "UPDATE CLIENTES SET nombre=@Nombre, apellido=@Apellido, dni=@Dni, domicilio=@Domicilio, localidad=@Localidad, telefono=@Telefono, fechaNacimiento=@FechaNacimiento, preferencial=@Preferencial WHERE id_cliente=@indexBD; SELECT @@Identity as ID";
+                transaction = connection.BeginTransaction();
+
+                int? idCliente = null;
+
+                try
+                {
+                    string sqlsearchforcli = "SELECT id_cliente from CLIENTES where mail = @Mail";
+                    SqlCommand comand0 = new SqlCommand();
+                    comand0.CommandText = sqlsearchforcli;
+                    comand0.Connection = connection;
+                    comand0.Transaction = transaction;
+                    comand0.Parameters.AddWithValue("@Mail", cliente.mail);
+                    idCliente = Convert.ToInt32(comand0.ExecuteScalar());
+                    cliente.indexBD = (int)idCliente;
+
+                }
+                catch
+                {
+                    if (idCliente == null)
+                    {
+                        throw new ApplicationException("Error en la busqueda para actualizacion del cliente.");
+                    }
+
+
+                }
+
+                string sql = "UPDATE CLIENTES SET mail=@Mail, password=@Pass, rol=@Rol,nombre=@Nombre, apellido=@Apellido, localidad=@Localidad, fechaNacimiento=@FechaNac, preferencial=@Preferencial WHERE id_cliente = @indexBD";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
                 comand.Parameters.AddWithValue("@indexBD", cliente.indexBD);
+                comand.Parameters.AddWithValue("@Mail", cliente.mail);
+                comand.Parameters.AddWithValue("@Pass", cliente.password);
+                comand.Parameters.AddWithValue("@Rol", cliente.rol);
                 comand.Parameters.AddWithValue("@Nombre", cliente.nombre);
-                comand.Parameters.AddWithValue("@Apellido", cliente.apellido);
-                
-                
-                comand.Parameters.AddWithValue("@Localidad", cliente.localidad);
-                
-                comand.Parameters.AddWithValue("@FechaNacimiento", cliente.fechaNac);
+                comand.Parameters.AddWithValue("@Apellido", cliente.apellido);         
+                comand.Parameters.AddWithValue("@Localidad", cliente.localidad);                
+                comand.Parameters.AddWithValue("@FechaNac", cliente.fechaNac);
                 comand.Parameters.AddWithValue("@Preferencial", cliente.intPreferencial);
-                                
-                int idCliente = Convert.ToInt32(comand.ExecuteScalar());
+                comand.ExecuteNonQuery();            
 
                 sql = "Insert into AUDITORIA (fecha, descripcion) values (GETDATE(),@descripcion)";
                 SqlCommand comand2 = new SqlCommand();
                 comand2.CommandText = sql;
                 comand2.Connection = connection;
                 comand2.Transaction = transaction;
-                comand2.Parameters.AddWithValue("@descripcion", "Se actualizo el cliente ID:" + idCliente.ToString());
+                comand2.Parameters.AddWithValue("@descripcion", "Se modificó el cliente ID:" + cliente.indexBD.ToString());
                 comand2.ExecuteNonQuery();
 
                 transaction.Commit(); //confirmo los cambios                
@@ -148,7 +173,7 @@ namespace FOCA_Negocio
             {
                 if (connection.State == ConnectionState.Open)
                     transaction.Rollback(); //Vuelvo atras los cambios
-                throw new ApplicationException("Error al actualizar el cliente.");
+                throw new ApplicationException("Error al modificar el cliente.");
             }
             finally
             {
@@ -163,6 +188,45 @@ namespace FOCA_Negocio
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
 
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+
+                string sql = "SELECT c.id_cliente AS 'ID', c.apellido AS 'Apellido', c.nombre AS 'Nombre', c.mail AS 'Mail', c.rol AS 'Rol', c.password AS 'Pass', c.localidad AS 'Localidad', c.fechaNacimiento AS 'fechaNac', c.preferencial AS 'Preferencial' FROM CLIENTES AS c WHERE c.id_cliente = @indexBD";
+                SqlCommand comand = new SqlCommand();
+
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                comand.Parameters.AddWithValue("@indexBD", index);
+
+                SqlDataReader dr = comand.ExecuteReader();
+                while (dr.Read())
+                {
+                    cli.indexBD = int.Parse(dr["ID"].ToString());
+                    cli.apellido = dr["Apellido"].ToString();
+                    cli.nombre = dr["Nombre"].ToString();
+                    cli.mail = dr["Mail"].ToString();
+                    cli.password = dr["Pass"].ToString();
+                    cli.rol = int.Parse(dr["Rol"].ToString());
+                    cli.localidad = int.Parse(dr["Localidad"].ToString());
+                    DateTime date = DateTime.Parse(dr["fechaNac"].ToString());
+                    cli.fechaNac = date.ToString("dd/MM/yyyy"); 
+                    cli.preferencial = Boolean.Parse(dr["Preferencial"].ToString());                   
+
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al obtener el Cliente.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+
+            }
             return cli;
         }
 

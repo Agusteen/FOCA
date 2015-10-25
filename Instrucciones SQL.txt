@@ -1,2 +1,0 @@
-SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock', a.disponible as 'Esta Disponible',a.tipo as 'TipoID', ta.descripcion as 'Tipo' from ARTICULOS as a JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo)
-

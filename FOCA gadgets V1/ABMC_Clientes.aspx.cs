@@ -14,20 +14,42 @@ namespace FOCA_gadgets_V1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
                 ViewState["esmodificacion"] = false;
+                ViewState["ordenGvClientes"] = "Apellido";
                 cargarComboLocalidades();
                 cargarComboRoles();
                 cargarGrillaClientes();
+                
             }
-            
+            limpiarCampos();
         }
 
         private void cargarGrillaClientes()
         {
-            grdClientes.DataSource = GestorClientes.ObtenerTodos();
+            string contieneDescripcion = "%" + txtFiltroApellido.Text + "%";
+            string orden = "Apellido";
+            if (ViewState["ordenGvClientes"] != null)
+            {
+                orden = ViewState["ordenGvClientes"].ToString();
+            }
+            grdClientes.DataSource = GestorClientes.ObtenerTodos(contieneDescripcion, orden);
             grdClientes.DataBind();
+        }
+
+        private void limpiarCampos()
+        {
+            lblEstadoPage.Text = "";
+            txtMail.Attributes.Remove("disabled");
+            txtMail.Text = "";
+            txtPassword.Text = "";
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            txtFechaNacimiento.Text = "";
+            txtFiltroApellido.Text = "";
+            
+
         }
 
         private void cargarComboRoles()
@@ -50,34 +72,77 @@ namespace FOCA_gadgets_V1
         {
             if (Page.IsValid)
             {
-                try
+                if (ViewState["esmodificacion"] != null)
                 {
-                    Cliente cli = new Cliente();
-                    
-                        cli.nombre = txtNombre.Text;                        
-                        cli.apellido = txtApellido.Text;                    
-                        cli.localidad = int.Parse(ddlLocalidades.SelectedValue);
-                        cli.fechaNac = txtFechaNacimiento.Text;
-                        cli.mail = txtMail.Text;
-                        cli.password = txtPassword.Text;
-                        cli.rol = int.Parse(ddlRoles.SelectedValue);
-                        cli.preferencial = chboxPreferencial.Checked;
 
-                    
-                    GestorClientes.Insertar(cli);
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                    if (((Boolean)ViewState["esmodificacion"]) == false)
+                    {
+                        try
+                        {
+                            Cliente cli = new Cliente();
+
+                            cli.nombre = txtNombre.Text;
+                            cli.apellido = txtApellido.Text;
+                            cli.localidad = int.Parse(ddlLocalidades.SelectedValue);
+                            cli.fechaNac = txtFechaNacimiento.Text;
+                            cli.mail = txtMail.Text;
+                            cli.password = txtPassword.Text;
+                            cli.rol = int.Parse(ddlRoles.SelectedValue);
+                            cli.preferencial = chboxPreferencial.Checked;
+
+
+                            GestorClientes.Insertar(cli);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                        }
+                        catch
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                        }
+                        finally
+                        {
+                            cargarGrillaClientes();
+                        }
+
+                    }
+                    else
+                    {
+                        if (((Boolean)ViewState["esmodificacion"]) == true)
+                        {
+                            try
+                            {
+
+                                Cliente cli = new Cliente();
+
+                                cli.nombre = txtNombre.Text;
+                                cli.apellido = txtApellido.Text;
+                                cli.localidad = int.Parse(ddlLocalidades.SelectedValue);
+                                cli.fechaNac = txtFechaNacimiento.Text;
+                                cli.mail = txtMail.Text;
+                                cli.password = txtPassword.Text;
+                                cli.rol = int.Parse(ddlRoles.SelectedValue);
+                                cli.preferencial = chboxPreferencial.Checked;
+                                GestorClientes.modificarCliente(cli);
+
+
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+
+                            }
+                            catch
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+
+                            }
+                            finally
+                            {
+                                cargarGrillaClientes();
+                                limpiarCampos();
+                            }
+
+                        }
+                    }
                 }
-                catch
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
-                }
-                finally
-                {
-                    cargarGrillaClientes();
-                }
-                              
+
             }
-
         }
 
         protected void rangeValidator_Init(object sender, EventArgs e)
@@ -101,15 +166,19 @@ namespace FOCA_gadgets_V1
                 if (commandName.Equals("MODIFICAR"))
                 {
                     int indexBD = int.Parse(grdClientes.DataKeys[index]["indexBD"].ToString());
-                    //Cliente cli = GestorClientes
-                    Articulo art = GestorArticulos.obtenerArticulo(indexBD);
-                    //txtDescripcion.Text = art.descripcion.ToString();
-                    //txtDescripcion.ReadOnly = true;
-                    //ViewState["esmodificacion"] = true;
-                    //txtPrecio.Text = art.precio.ToString();
-                    //txtStock.Text = art.stock.ToString();
-                    //ckbDisponible.Checked = art.disponible;
-                    //ddlTipoArticulo.SelectedValue = art.tipoArticulo.ToString();
+                    Cliente cli = GestorClientes.obtenerClientePorID(indexBD);
+                    txtMail.Text = cli.mail.ToString();
+                    txtMail.Attributes.Add("disabled", "");
+                    
+                    txtPassword.Text = cli.password.ToString();
+                    ddlRoles.SelectedValue = cli.rol.ToString();
+                    txtNombre.Text = cli.nombre.ToString();
+                    txtApellido.Text = cli.apellido.ToString();
+                    ddlLocalidades.SelectedValue = cli.localidad.ToString();
+                    txtFechaNacimiento.Text = cli.fechaNac.ToString();
+                    chboxPreferencial.Checked = cli.preferencial;
+                    ViewState["esmodificacion"] = true;
+                    lblEstadoPage.Text = " (Modificacion)";
                 }
 
                 if (commandName.Equals("ELIMINAR"))
@@ -117,12 +186,9 @@ namespace FOCA_gadgets_V1
                     try
                     {
 
-                        GridViewRow row = grdClientes.Rows[index];
-                        int indexBD = int.Parse(row.Cells[2].Text);
-
+                        int indexBD = int.Parse(grdClientes.DataKeys[index]["indexBD"].ToString());
                         GestorClientes.eliminarCliente(indexBD);
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
-
                     }
                     catch
                     {
@@ -135,6 +201,23 @@ namespace FOCA_gadgets_V1
                     }
                 }
             }
+        }
+
+        protected void grdClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdClientes.PageIndex = e.NewPageIndex;
+            cargarGrillaClientes();
+        }
+
+        protected void grdClientes_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            ViewState["OrdenGvClientes"] = e.SortExpression;
+            cargarGrillaClientes();
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            cargarGrillaClientes();
         }       
 
         
