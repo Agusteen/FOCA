@@ -112,7 +112,7 @@
                                     <asp:BoundField DataField="nombreyapellido" HeaderText="Nombre" />
                                     <asp:BoundField DataField="mail" HeaderText="Mail" />
                                     <asp:BoundField DataField="rolString" HeaderText="Rol" />
-                                    <asp:BoundField DataField="preferencial" HeaderText="Preferencial" />
+                                    <asp:BoundField DataField="stringpreferencial" HeaderText="Preferencial" />
                                 </Columns>
                             </asp:GridView>
                         </asp:Panel>

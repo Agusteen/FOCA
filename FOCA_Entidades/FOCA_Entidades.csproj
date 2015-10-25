@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
+    <Compile Include="Estado.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Articulo.cs" />
+    <Compile Include="Problema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="TipoArticulo.cs" />

@@ -45,6 +45,7 @@
     <Compile Include="GestorClientes.cs" />
     <Compile Include="GestorListadoVenta.cs" />
     <Compile Include="GestorLocalidades.cs" />
+    <Compile Include="GestorReparaciones.cs" />
     <Compile Include="GestorRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
