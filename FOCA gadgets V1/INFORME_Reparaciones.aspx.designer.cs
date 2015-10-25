@@ -10,52 +10,34 @@
 namespace FOCA_gadgets_V1 {
     
     
-    public partial class ABMC_Articulos {
+    public partial class INFORME_Reparaciones {
         
         /// <summary>
-        /// Control txtDescripcion.
+        /// Control txtFiltroFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroFecha;
         
         /// <summary>
-        /// Control txtPrecio.
+        /// Control ddlCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecio;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
         
         /// <summary>
-        /// Control txtStock.
+        /// Control ddlEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStock;
-        
-        /// <summary>
-        /// Control ckbDisponible.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckbDisponible;
-        
-        /// <summary>
-        /// Control ddlTipoArticulo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoArticulo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
         
         /// <summary>
         /// Control btnFiltrar.
@@ -67,21 +49,12 @@ namespace FOCA_gadgets_V1 {
         protected global::System.Web.UI.WebControls.Button btnFiltrar;
         
         /// <summary>
-        /// Control txtFiltroDescripcion.
+        /// Control dgvListadoReparaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroDescripcion;
-        
-        /// <summary>
-        /// Control dgvArticulos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvArticulos;
+        protected global::System.Web.UI.WebControls.GridView dgvListadoReparaciones;
     }
 }

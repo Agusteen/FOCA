@@ -10,7 +10,7 @@ namespace FOCA_Entidades
         public string nombreyapellido {
             get
             {
-                return nombre + " " + apellido;
+                return apellido + " " + nombre;
             }
             set
             {

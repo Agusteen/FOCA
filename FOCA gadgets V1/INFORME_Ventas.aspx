@@ -11,6 +11,8 @@
                         <div>
                         <label for="filtro">Filtros </label>
                             </div>
+
+
                         <div>
                          <label for ="Monto">Monto</label>
                         <asp:TextBox class="form-control" ID="txtFiltroMonto" placeholder="Ingrese el monto maximo con el que desea filtrar" runat="server"></asp:TextBox>
@@ -37,8 +39,7 @@
                             OnPageIndexChanging="dgvVentas_PageIndexChanging" OnSorting="dgvVentass_Sorting" EmptyDataText="No hay registros">
 
                             <Columns>
-                                <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
-                                <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button" />
+                                
                                 <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
                                 <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
                                 <asp:BoundField DataField="monto" HeaderText="Monto" />

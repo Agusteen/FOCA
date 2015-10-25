@@ -52,9 +52,23 @@
                         <h3 class="panel-title">Tabla de Articulos</h3>
                     </div>
                     <div class="panel-body">
-                        <label for="filtro">Filtro descripcion</label>
+
+                        <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" OnClick="btnFiltrar_Click" runat="server" CausesValidation="False"></asp:Button>
+                                    </span>
+                                    <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripcion o parte de la descripcion" runat="server"></asp:TextBox>
+                                </div>
+
+
+
+
+
+
+
+<%--                        <label for="filtro">Filtro descripcion</label>
                         <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripcion o parte de la descripcion" runat="server"></asp:TextBox>
-                        <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
+                        <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>--%>
 
                         <div class="col-xs-12">
                         <asp:GridView  ID="dgvArticulos" PageSize="6" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center"
