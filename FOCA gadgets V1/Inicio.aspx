@@ -3,28 +3,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default" >
         <div class="panel-body">
-            <div class="col-xs-5">
-                <div class="form-group">
-                    <label for="ejemplo_email_1">Email</label>
-                    <input type="email" class="form-control" id="ejemplo_email_1"
-                        placeholder="Introduce tu email"/>
-                </div>
+    
+      <div class="text-center">
+    <h1>FOCA GADGETS</h1>
+    <p class="lead">Esta es la página de inicio de FOCA GADGETS.</p>
+  </div>
 
-                <div class="form-group">
-                    <label for="ejemplo_password_1">Contraseña</label>
-                    <input type="password" class="form-control" id="ejemplo_password_1"
-                        placeholder="Contraseña"/>
-                </div>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"/>
-                        Activa esta casilla
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-default">Enviar</button>
-            </div>
+   
+          
         </div>
 
     </div>
 </asp:Content>
+
+
+   

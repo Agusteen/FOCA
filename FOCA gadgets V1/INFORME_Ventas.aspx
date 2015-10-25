@@ -12,7 +12,6 @@
                         <label for="filtro">Filtros </label>
                             </div>
 
-
                         <div>
                          <label for ="Monto">Monto</label>
                         <asp:TextBox class="form-control" ID="txtFiltroMonto" placeholder="Ingrese el monto maximo con el que desea filtrar" runat="server"></asp:TextBox>
@@ -59,6 +58,7 @@
 
 
         </div>
+    </div>
 </asp:Content>
 
   
