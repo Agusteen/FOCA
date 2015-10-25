@@ -1,0 +1,8 @@
+---Lista de detalles para corregir---
+ABMC Clientes
+- Columna preferencial se muestra true/false.
+- Formato fecha no coincide con el de la BD.
+- Falta validador de formato fecha.
+- Ancho de campos. (SOLUCIONADO)
+- Mensajes de validadores estan cambiando la posicion de los textbox.
+
