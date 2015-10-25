@@ -33,6 +33,8 @@ namespace FOCA_gadgets_V1
             }
             dgvArticulos.DataSource = GestorArticulos.obtenerArticulos( contieneDescripcion, orden);
             dgvArticulos.DataBind();
+           
+            
 
         }
 
@@ -116,6 +118,7 @@ namespace FOCA_gadgets_V1
                             }
                             finally
                             {
+                                limpiarfiltro();
                                 CargarGrilla();
                                 limpiarcampos();
 
@@ -127,7 +130,12 @@ namespace FOCA_gadgets_V1
             }
 
         }
-       
+
+        private void limpiarfiltro()
+        {
+            txtFiltroDescripcion.Text = "";
+        }
+
         protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 

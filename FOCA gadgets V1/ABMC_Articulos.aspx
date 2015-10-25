@@ -56,12 +56,12 @@
                         <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripcion o parte de la descripcion" runat="server"></asp:TextBox>
                         <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
 
-
-                        <asp:GridView ID="dgvArticulos" PageSize="6" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center"
+                        <div class="col-xs-12">
+                        <asp:GridView  ID="dgvArticulos" PageSize="6" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center"
                             AllowPaging="true" AllowSorting="true"
                             class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
                             CellPadding="7" ForeColor="#333333" GridLines="None" OnRowCommand="dgvArticulos_RowCommand"
-                            OnPageIndexChanging="dgvArticulos_PageIndexChanging" OnSorting="dgvArticulos_Sorting">
+                            OnPageIndexChanging="dgvArticulos_PageIndexChanging" OnSorting="dgvArticulos_Sorting" EmptyDataText="No hay registros">
 
                             <Columns>
                                 <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
@@ -74,7 +74,9 @@
 
 
                             </Columns>
+                            
                         </asp:GridView>
+                            </div>
                     </div>
                 </div>
             </div>
