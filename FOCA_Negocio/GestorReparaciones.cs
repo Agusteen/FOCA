@@ -77,7 +77,7 @@ namespace FOCA_Negocio
                         {
                             idProblema = (int)dr["id_problema"],
                             descripcionProblema = dr["descripcion"].ToString(),
-                            //duracion = float.Parse(dr["duracionEstimada"].ToString())
+                            duracion = float.Parse(dr["duracionEstimada"].ToString())
                         });
                 }
 

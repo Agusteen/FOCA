@@ -7,6 +7,7 @@ using FOCA_Entidades;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using FOCA_Negocio;
 namespace FOCA_Negocio
 {
     public class GestorListadoReparacion

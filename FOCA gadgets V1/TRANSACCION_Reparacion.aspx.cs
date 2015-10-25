@@ -14,11 +14,11 @@ namespace FOCA_gadgets_V1
     public partial class TRANSACCION_Reparacion : System.Web.UI.Page
     {
         
-        //List<Problema> listaProblemas;
+        List<Problema> listaProblemas;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //listaProblemas = GestorReparaciones.ObtenerProblemas();
+            listaProblemas = GestorReparaciones.ObtenerProblemas();
             if (!Page.IsPostBack)
             {
                 txtFechaRepracion.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -26,6 +26,9 @@ namespace FOCA_gadgets_V1
                 cargarComboEstados();
                 FirstGridViewRow();
             }
+
+            //actualizarPreciosYSubtotales();
+            actualizarTotal();
         }
 
         private void FirstGridViewRow()
@@ -81,16 +84,16 @@ namespace FOCA_gadgets_V1
                 for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
                 {
                     DropDownList cboProblemas = (DropDownList)gvDetalleReparacion.Rows[rowIndex].Cells[0].FindControl("cboProblemas");
-                    Label lblDuracion = (Label)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("lblDuracion");
-                     
-                    
+                    TextBox txtPrecio = (TextBox)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("txtPrecio");
+                                   
                     drCurrentRow = dtCurrentTable.NewRow();
                     drCurrentRow["RowNumber"] = i + 1;
 
                     dtCurrentTable.Rows[i - 1]["Col1"] = cboProblemas.SelectedValue;
-                    dtCurrentTable.Rows[i - 1]["Col2"] = lblDuracion.Text;
-                    rowIndex++;
+                    dtCurrentTable.Rows[i - 1]["Col2"] = txtPrecio.Text;
+                    rowIndex++;                    
                 }
+                 
                 dtCurrentTable.Rows.Add(drCurrentRow);
                 ViewState["CurrentTable"] = dtCurrentTable;
                 gvDetalleReparacion.DataSource = dtCurrentTable;
@@ -110,12 +113,11 @@ namespace FOCA_gadgets_V1
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         DropDownList cboProblemas = (DropDownList)gvDetalleReparacion.Rows[rowIndex].Cells[0].FindControl("cboProblemas");
-                        TextBox lblDuracion = (TextBox)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("lblDuracion");
-
-
+                        TextBox txtPrecio = (TextBox)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("txtPrecio");
+                        
                         cboProblemas.SelectedValue = dt.Rows[i]["Col1"].ToString();
 
-                        lblDuracion.Text = dt.Rows[i]["Col2"].ToString();
+                        txtPrecio.Text = dt.Rows[i]["Col2"].ToString();
                         rowIndex++;
                     }
                 }
@@ -126,14 +128,92 @@ namespace FOCA_gadgets_V1
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-
                 DropDownList cboProblemas = (e.Row.FindControl("cboProblemas") as DropDownList);
-                cboProblemas.DataSource = GestorReparaciones.ObtenerProblemas();
-                //int count = listaProblemas.Count;
+                
+                cboProblemas.DataSource = listaProblemas;
+                int count = listaProblemas.Count;
                 cboProblemas.DataTextField = "descripcionProblema";
                 cboProblemas.DataValueField = "idProblema";
                 cboProblemas.DataBind();
+                TextBox text = (e.Row.FindControl("txtPrecio") as TextBox);
+                
+                
             }
         }
+
+        protected void gvDetalleReparacion_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            SetRowData();
+            if (ViewState["CurrentTable"] != null)
+            {
+                DataTable dt = (DataTable)ViewState["CurrentTable"];
+                DataRow drCurrentRow = null;
+                int rowIndex = Convert.ToInt32(e.RowIndex);
+                if (dt.Rows.Count > 1)
+                {
+                    dt.Rows.Remove(dt.Rows[rowIndex]);
+                    drCurrentRow = dt.NewRow();
+                    ViewState["CurrentTable"] = dt;
+                    gvDetalleReparacion.DataSource = dt;
+                    gvDetalleReparacion.DataBind();
+
+                    SetPreviousData();
+                    actualizarTotal();
+                }
+            }
+        }
+
+        private void SetRowData()
+        {
+            int rowIndex = 0;
+
+            if (null == ViewState["CurrentTable"])
+            {
+                return;
+            }
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            DataRow drCurrentRow = null;
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    DropDownList cboProblemas = (DropDownList)gvDetalleReparacion.Rows[rowIndex].Cells[0].FindControl("cboProblemas");
+                    TextBox txtPrecio = (TextBox)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("txtPrecio");
+                    
+                    drCurrentRow = dtCurrentTable.NewRow();
+                    drCurrentRow["RowNumber"] = i + 1;
+                    dtCurrentTable.Rows[i - 1]["Col1"] = cboProblemas.SelectedValue;
+                    dtCurrentTable.Rows[i - 1]["Col2"] = txtPrecio.Text;
+                    rowIndex++;
+                }
+
+                ViewState["CurrentTable"] = dtCurrentTable;          
+            }            
+        }
+
+        private void actualizarTotal()
+        {
+            int rowIndex = 0;
+            float total = 0;
+            if (null == ViewState["CurrentTable"])
+            {
+                return;
+            }
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    TextBox txtPrecio = (TextBox)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("txtPrecio");
+                    if (txtPrecio.Text == "") txtPrecio.Text = "0";
+                    total += float.Parse(txtPrecio.Text);
+                    rowIndex++;
+                }
+
+                lblTotal.Text = total.ToString();            
+            }
+        }
+
+
     }
 }

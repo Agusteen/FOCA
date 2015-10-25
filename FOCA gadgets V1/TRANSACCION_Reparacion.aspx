@@ -10,7 +10,7 @@
             $('.datepicker').datepicker();
         });
     </script>
-    
+
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-xs-6">
@@ -49,46 +49,55 @@
                     <asp:DropDownList ID="ddlEstados" class="form-control" runat="server" Font-Size="Large"></asp:DropDownList>
                 </div>
 
-                <div class="panel-heading text-center">
-                    <asp:Button class="btn btn-default btn-lg" Text="Guardar" runat="server"></asp:Button>
+                
                 </div>
+                <div class="col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Detalle Repración</h3>
+                        </div>
+                        <div class="panel-body">
 
-                <div class="form-group">
-                <label class="control-label col-sm-2" for="Ingredientes">Ingredientes:</label>
-                <asp:GridView CssClass="table table-striped table-bordered table-condensed col-sm-2"
-                    ID="gvDetalleReparacion" runat="server" EmptyDataText="fdafdsafdsfs" AllowPaging="False"
-                    AutoGenerateColumns="false" OnRowDataBound="gvDetalleReparacion_RowDataBound"> 
-                    <Columns>
-                        <asp:TemplateField runat="server" HeaderText="Problema">
-                            <ItemTemplate>
-                                <asp:DropDownList runat="server" ClientIDMode="Static" class="form-control" ID="cboProblemas" AutoPostBack="true">
-                                </asp:DropDownList>
-                            </ItemTemplate>
-                        </asp:TemplateField>                 
-                        
-                        <asp:TemplateField runat="server" HeaderText="Subtotal">
-                            <ItemTemplate>
-                                <asp:Label ID="lblDuracion" runat="server" class="form-control"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:CommandField ShowDeleteButton="True" />
-                    </Columns>
-                    <SelectedRowStyle CssClass="gvSelectedRowStyle" />
-                    <PagerStyle CssClass="gvPagerStyle" />
-                </asp:GridView>
-                <br />
-                <br />
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <asp:Button class="btn btn-primary" ID="cmdAgregarFila" runat="server" Text="Agregar otro problema" CausesValidation="false" OnClick="cmdAgregarFila_Click"/>
-                        <asp:Label ID="lblTextoTotal" runat="server" class="control-label" Text="Total: $"></asp:Label>
-                        <asp:Label ID="lblDuracion" runat="server" class="control-label" Text="0"></asp:Label>
+                            <div class="form-group">
+                                <asp:GridView CssClass="table table-striped table-bordered table-condensed col-sm-2"
+                                    ID="gvDetalleReparacion" runat="server" EmptyDataText="-"
+                                    AutoGenerateColumns="False" OnRowDataBound="gvDetalleReparacion_RowDataBound" OnRowDeleting="gvDetalleReparacion_RowDeleting">
+                                    <Columns>
+                                        <asp:TemplateField runat="server" HeaderText="Problema">
+                                            <ItemTemplate>
+                                                <asp:DropDownList runat="server" ClientIDMode="Static" class="form-control" ID="cboProblemas" AutoPostBack="true">
+                                                </asp:DropDownList>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField runat="server" HeaderText="Precio">
+                                            <ItemTemplate>
+                                                <asp:TextBox runat="server" ClientIDMode="Static" class="form-control" ID="txtPrecio" AutoPostBack="true" Text="0" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:CommandField ShowDeleteButton="True" ButtonType="Image" DeleteImageUrl="images/eliminar.png"/>
+                                    </Columns>
+                                    <SelectedRowStyle CssClass="gvSelectedRowStyle" />
+                                    <PagerStyle CssClass="gvPagerStyle" />
+                                </asp:GridView>
+                                <br />
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <asp:Button class="btn btn-default" ID="cmdAgregarFila" runat="server" Text="Agregar otro problema" CausesValidation="false" OnClick="cmdAgregarFila_Click" />
+                                        <asp:Label ID="lblTextoTotal" runat="server" class="control-label" Text="Total: $"></asp:Label>
+                                        <asp:Label ID="lblTotal" runat="server" class="control-label" Text="0"></asp:Label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-            </div>
 
-            </div>
+        </div>
+        <div class="panel-heading text-center">
+            <asp:Button class="btn btn-default btn-lg" Text="Guardar" runat="server"></asp:Button>
         </div>
     </div>
 
