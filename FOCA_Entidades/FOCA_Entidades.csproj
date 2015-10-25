@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
-    <Compile Include="ListadoReparaciones.cs" />
+    <Compile Include="ListadoReparacion.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Articulo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

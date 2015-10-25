@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FOCA_Entidades
 {
-    class ListadoReparaciones
+    public class ListadoReparacion
     {
         public int indexCliente { get; set; }
         public string nombre { get; set; }
@@ -43,4 +43,4 @@ namespace FOCA_Entidades
 
     }
 }
-}
+

@@ -9,7 +9,7 @@
 
 
         <div>
-            <label for="Fecha">Fecha</label>
+            <label for="Fecha">Fecha de reparación</label>
             <asp:TextBox class="form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
             <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server" runat="server" />
         </div>

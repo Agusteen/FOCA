@@ -20,25 +20,25 @@ namespace FOCA_gadgets_V1
 
         private void cargarComboClientes()
         {
-            ddlCliente.DataSource = GestorListadoVenta.ObtenerClientes();
+            ddlCliente.DataSource = GestorClientes.ObtenerClientesParaCombo();
             ddlCliente.DataTextField = "nombreyapellido";
             ddlCliente.DataValueField = "indexBD";
-            ddlCliente.Items.Insert(0, new ListItem("Seleccionar un cliente", "-1"));
             ddlCliente.DataBind();
+            ddlCliente.Items.Insert(0, new ListItem("Seleccionar un cliente", "-1"));
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            CargarGrilla();
+            cargarGrilla();
         }
 
-        private void CargarGrilla()
+        private void cargarGrilla()
         {
             //int? IdArticuloFamilia = (ddlFamilia.SelectedValue == "") ? (int?)null : int.Parse(ddlFamilia.SelectedValue);
             string contieneMonto = txtFiltroMonto.Text;
             string contieneFecha = txtFiltroFecha.Text;
             string contieneCliente = ddlCliente.SelectedValue;
-            if (contieneCliente == "-1") { contieneCliente = ""}
+            if (contieneCliente == "-1") { contieneCliente = ""; }
             
             //string orden = "Nombre, Apellido";
             //if (ViewState["ordenGvArticulos"] != null)
@@ -53,12 +53,12 @@ namespace FOCA_gadgets_V1
         protected void dgvVentas_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvVentas.PageIndex = e.NewPageIndex;
-            CargarGrilla();
+            cargarGrilla();
         }
 
         protected void dgvVentass_Sorting(object sender, GridViewSortEventArgs e)
         {
-            CargarGrilla();
+            cargarGrilla();
         }
     }
 }

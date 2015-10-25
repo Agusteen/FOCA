@@ -54,7 +54,7 @@ namespace FOCA_Negocio
                     connection.Close();
             }
             return clientes;
-        }
+        }//se puede borrar
 
         public static List<ListadoVenta> obtenerVentas(string contieneMonto, string contieneFecha, string contieneCliente)
         {

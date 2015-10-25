@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="GestorArticulos.cs" />
     <Compile Include="GestorClientes.cs" />
+    <Compile Include="GestorListadoReparacion.cs" />
     <Compile Include="GestorListadoVenta.cs" />
     <Compile Include="GestorLocalidades.cs" />
     <Compile Include="GestorRoles.cs" />
