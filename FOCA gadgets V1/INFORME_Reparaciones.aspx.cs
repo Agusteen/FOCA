@@ -11,7 +11,21 @@ namespace FOCA_gadgets_V1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                cargarComboClientes();
+                cargarComboEstados();
+            }
+        }
 
+        private void cargarComboEstados()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void cargarComboClientes()
+        {
+            throw new NotImplementedException();
         }
     }
 }
