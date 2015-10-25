@@ -297,5 +297,49 @@ namespace FOCA_Negocio
             }
         }
 
+        public static List<Cliente> ObtenerClientesParaCombo()
+        {
+            List<Cliente> clientes = new List<Cliente>();
+
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+
+            SqlConnection connection = new SqlConnection();
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                string sql = "SELECT id_cliente ,nombre, apellido FROM CLIENTES order by apellido";
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                SqlDataReader dr = comand.ExecuteReader();
+                while (dr.Read())
+                {
+                    clientes.Add(
+                        new Cliente()
+                        {
+                            indexBD = (int)dr["id_cliente"],
+                            nombre = (string)dr["nombre"],
+                            apellido = (string)dr["apellido"]
+
+
+                        });
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    throw new ApplicationException("Error al buscar los clientes.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+            return clientes;
+        }
+
     }
 }
