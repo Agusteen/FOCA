@@ -70,21 +70,32 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "select c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial' , v.fecha as 'Fecha', v.monto as 'Monto' FROM VENTAS as v JOIN CLIENTES as c on (v.cliente = c.id_cliente)
-                if (!("").Equals(contieneMonto) & !("").Equals(contieneFecha) & !("").Equals(contieneMonto))
-                {
-                    sql += " where";
-                    if (contieneMonto != "")
-                    {
-                        sql += "v.monto = @monto";
-                    }
-                        string meter = "where c.id_Cliente = @indexCliente, v.monto = @monto, fecha like @fecha";
-                        }
-                    
-
+                string sql = "select c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial' , v.fecha as 'Fecha', v.monto as 'Monto' FROM VENTAS as v JOIN CLIENTES as c on (v.cliente = c.id_cliente)";
                 SqlCommand comand = new SqlCommand();
+
+                string where = "";
+                if (contieneMonto != "")
+                {
+                    where += " and v.monto = @monto";
+                    comand.Parameters.AddWithValue("@monto", contieneMonto);
+                }
+                if (contieneFecha != null)
+                {
+                    where += " and v.fecha like @fecha";
+                    comand.Parameters.AddWithValue("@fecha", contieneFecha);
+                }
+                if (contieneCliente != null)
+                {
+                    where += " and c.id_Cliente = @indexCliente";
+                    comand.Parameters.AddWithValue("@indexCliente", contieneCliente);
+                }
+
+                if (where != "")
+                {
+                    where = " where " + where.Substring(5);
+                    sql += where;
+                }
                 //   comand.Parameters.AddWithValue("@Orden", orden); //why
-                //comand.Parameters.AddWithValue("@Contiene", contiene);
 
                 comand.CommandText = sql;
                 comand.Connection = connection;
@@ -95,15 +106,14 @@ namespace FOCA_Negocio
                 SqlDataReader dr = comand.ExecuteReader();
                 while (dr.Read())
                 {
-                    //Articulo art = new Articulo();
-                    //art.indexBD = int.Parse(dr["ID Articulo"].ToString());
-                    //art.descripcion = dr["Descripcion"].ToString();
-                    //if (dr["precio"] != DBNull.Value) art.precio = float.Parse(dr["Precio"].ToString());
-                    //if (dr["stock"] != DBNull.Value) art.stock = int.Parse(dr["Stock"].ToString());
-                    //art.disponible = Boolean.Parse(dr["Disponible"].ToString()); //interfaz selecciona una opcion por defecto
-                    //art.tipoArticulo = int.Parse(dr["TipoID"].ToString());  //al momento de la carga se selecciona por lo menos 1 por defecto
-                    //art.tipoArticuloString = dr["Familia"].ToString();
-                    //listaArticulos.Add(art);
+                    ListadoVenta lv = new ListadoVenta();
+                    lv.nombre = dr["Nombre"].ToString();
+                    lv.apellido = dr["Apellido"].ToString();
+                    lv.preferencial = Boolean.Parse(dr["Preferencial"].ToString());
+                    lv.fecha = DateTime.Parse(dr["Fecha"].ToString());
+                    lv.monto = Decimal.Parse(dr["Monto"].ToString());
+
+                    listadoVenta.Add(lv);
                 }
 
 
@@ -111,7 +121,7 @@ namespace FOCA_Negocio
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al cargar los Articulos.");
+                throw new ApplicationException("Error al obtener los registros listados ventas.");
             }
             finally
             {
@@ -121,7 +131,7 @@ namespace FOCA_Negocio
             }
             //Caso de manejar una lista de articulos
             return listadoVenta;
-            //return tablaarticulos;
+          
 
         }
     }

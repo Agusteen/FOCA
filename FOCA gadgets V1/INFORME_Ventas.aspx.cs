@@ -21,6 +21,9 @@ namespace FOCA_gadgets_V1
         private void cargarComboClientes()
         {
             ddlCliente.DataSource = GestorListadoVenta.ObtenerClientes();
+            ddlCliente.DataTextField = "nombreyapellido";
+            ddlCliente.DataValueField = "indexBD";
+            ddlCliente.DataBind();
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
@@ -30,6 +33,7 @@ namespace FOCA_gadgets_V1
 
         private void CargarGrilla()
         {
+            //int? IdArticuloFamilia = (ddlFamilia.SelectedValue == "") ? (int?)null : int.Parse(ddlFamilia.SelectedValue);
             string contieneMonto = txtFiltroMonto.Text;
             string contieneFecha = txtFiltroFecha.Text;
             string contieneCliente = ddlCliente.SelectedValue;
@@ -41,6 +45,17 @@ namespace FOCA_gadgets_V1
             dgvVentas.DataSource = GestorListadoVenta.obtenerVentas(contieneMonto, contieneFecha, contieneCliente);
             dgvVentas.DataBind();
           
+        }
+
+        protected void dgvVentas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvVentas.PageIndex = e.NewPageIndex;
+            CargarGrilla();
+        }
+
+        protected void dgvVentass_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            CargarGrilla();
         }
     }
 }

@@ -8,10 +8,12 @@ namespace FOCA_Entidades
 {
     public class ListadoVenta
     {
-        int indexCliente { get; set; }
-        String nombreCliente { get; set; }
-        Boolean preferencial { get; set; }
-        int intPreferencial
+        public int indexCliente { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
+        public String nombreCliente { get { return nombre + " " + apellido; } }
+        public Boolean preferencial { get; set; }
+        public int intPreferencial
         {
             get
             {
@@ -25,7 +27,7 @@ namespace FOCA_Entidades
                 else preferencial = false;
             }
         }
-        String stringPreferencial
+        public String stringPreferencial
         {
             get
             {
@@ -33,8 +35,8 @@ namespace FOCA_Entidades
                 else return "No";
             }
         }
-        DateTime fecha { get; set; }
-        Decimal monto { get; set; }
+        public DateTime fecha { get; set; }
+        public Decimal monto { get; set; }
 
     }
 }

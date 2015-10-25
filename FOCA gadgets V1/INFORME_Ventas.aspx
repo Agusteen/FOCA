@@ -8,25 +8,37 @@
                        <h3 class="panel-title">Listado de ventas</h3>
                     </div>
                     <div class="panel-body">
+                        <div>
                         <label for="filtro">Filtros </label>
+                            </div>
+                        <div>
                          <label for ="Monto">Monto</label>
                         <asp:TextBox class="form-control" ID="txtFiltroMonto" placeholder="Ingrese el monto maximo con el que desea filtrar" runat="server"></asp:TextBox>
+                         <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtFiltroMonto" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Double" Operator="GreaterThanEqual" runat="server" ></asp:CompareValidator>
+                   </div>
+                        <div>
                         <label for="Fecha">Fecha</label>
                         <asp:TextBox class="form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la venta buscada" runat="server"></asp:TextBox>
-                        <label for="Cliente">Cliente</label>
-                         <asp:DropDownList ID="ddlCliente" class="form-control" runat="server"></asp:DropDownList>    
-                        <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
+                    <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"  Type="Date" Operator="DataTypeCheck" runat="server" runat="server" />
+                     </div>
 
-                        <div class="col-xs-12">
-                        <asp:GridView  ID="dgvVentas" PageSize="20" DataKeyNames="indexBD" Style="margin-left: 0px" HorizontalAlign="Center"
+                        <div>
+                            <label for="Cliente">Cliente</label>
+                        <asp:DropDownList ID="ddlCliente" class="form-control" runat="server"></asp:DropDownList>    
+                       </div>
+                        <div>
+                             <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
+                        </div>
+                        <div class="col-xs-11">
+                        <asp:GridView  ID="dgvVentas" PageSize="20" Style="margin-left: 0px" HorizontalAlign="Center"
                             AllowPaging="true" AllowSorting="true"
                             class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
-                            CellPadding="7" ForeColor="#333333" GridLines="None" OnRowCommand="dgvVentas_RowCommand"
+                            CellPadding="7" ForeColor="#333333" GridLines="None" 
                             OnPageIndexChanging="dgvVentas_PageIndexChanging" OnSorting="dgvVentass_Sorting" EmptyDataText="No hay registros">
 
                             <Columns>
-                               <%-- <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
-                                <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button" />--%>
+                                <asp:ButtonField CommandName="Modificar" HeaderText="" Text="Modificar" ButtonType="Button" />
+                                <asp:ButtonField CommandName="Eliminar" HeaderText="" Text="Eliminar" ButtonType="Button" />
                                 <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
                                 <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
                                 <asp:BoundField DataField="monto" HeaderText="Monto" />

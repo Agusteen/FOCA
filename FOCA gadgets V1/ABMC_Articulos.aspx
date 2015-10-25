@@ -14,7 +14,7 @@
                     <label for="precio">Precio unitario</label>
                     <asp:TextBox class="form-control" id="txtPrecio" placeholder="Ingrese el precio del articulo" runat="server"></asp:TextBox>
                       <asp:RequiredFieldValidator ControlToValidate="txtPrecio" Display="Dynamic" runat="server" ErrorMessage=" * No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>   
-                       <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtPrecio" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Integer" Operator="GreaterThanEqual" runat="server" ></asp:CompareValidator>
+                       <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtPrecio" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Double" Operator="GreaterThanEqual" runat="server" ></asp:CompareValidator>
                    </div>
 
                 <div class="form-group">
