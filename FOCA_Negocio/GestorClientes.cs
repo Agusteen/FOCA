@@ -39,7 +39,8 @@ namespace FOCA_Negocio
                             nombreyapellido = dr["Nombre"].ToString(),
                             mail = dr["Mail"].ToString(),
                             rolString = dr["Rol"].ToString(),                            
-                            preferencial = Boolean.Parse(dr["preferencial"].ToString())
+                            preferencial = Boolean.Parse(dr["preferencial"].ToString()),
+                            
                         });
                 }
             }

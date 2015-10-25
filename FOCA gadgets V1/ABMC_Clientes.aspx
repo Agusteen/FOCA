@@ -73,9 +73,11 @@
 
                         <asp:CheckBox type="checkbox-info" ID="chboxPreferencial" Text=" Preferencial" runat="server"></asp:CheckBox>
 
-                        <div class="form-group" >
-                            <asp:Button class="btn btn-default"  Text="Guardar" runat="server" OnClick="enviar" ></asp:Button>
-                        </div>
+                        
+                        
+                        <div class="panel-heading text-center" >
+                            <asp:Button class="btn btn-default btn-lg"  Text="Guardar" runat="server" OnClick="enviar" ></asp:Button>
+                        </div>                        
                     </div>
                 
                     </div>
@@ -117,6 +119,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         </div>
         

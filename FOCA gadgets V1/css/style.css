@@ -147,7 +147,7 @@ a.rigister span{
 }
 
 /*---CheckBox----*/
-.form-group input[type="checkbox"] {
+/*.form-group input[type="checkbox"] {
     display: none;
 }
 
@@ -167,7 +167,7 @@ a.rigister span{
 }
 .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
     display: none;      
-}
+}*/
 
 /*----navbar-nav----*/
 
