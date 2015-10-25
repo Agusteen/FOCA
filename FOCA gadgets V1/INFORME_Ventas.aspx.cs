@@ -23,6 +23,7 @@ namespace FOCA_gadgets_V1
             ddlCliente.DataSource = GestorListadoVenta.ObtenerClientes();
             ddlCliente.DataTextField = "nombreyapellido";
             ddlCliente.DataValueField = "indexBD";
+            ddlCliente.Items.Insert(0, new ListItem("Seleccionar un cliente", "-1"));
             ddlCliente.DataBind();
         }
 
@@ -37,6 +38,8 @@ namespace FOCA_gadgets_V1
             string contieneMonto = txtFiltroMonto.Text;
             string contieneFecha = txtFiltroFecha.Text;
             string contieneCliente = ddlCliente.SelectedValue;
+            if (contieneCliente == "-1") { contieneCliente = ""}
+            
             //string orden = "Nombre, Apellido";
             //if (ViewState["ordenGvArticulos"] != null)
             //{
