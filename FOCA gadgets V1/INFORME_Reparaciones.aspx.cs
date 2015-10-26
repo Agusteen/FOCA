@@ -20,16 +20,20 @@ namespace FOCA_gadgets_V1
 
         private void cargarComboEstados()
         {
-            
+            ddlEstados.DataSource = GestorReparaciones.ObtenerEstados();
+            ddlEstados.DataTextField = "descripcionEstado";
+            ddlEstados.DataValueField = "idEstado";
+            ddlEstados.DataBind();
+            ddlEstados.Items.Insert(0, new ListItem("Seleccionar un estado", "-1"));
         }
 
         private void cargarComboClientes()
         {
-            ddlCliente.DataSource = GestorClientes.ObtenerClientesParaCombo();
-            ddlCliente.DataTextField = "nombreyapellido";
-            ddlCliente.DataValueField = "indexBD";
-            ddlCliente.DataBind();
-            ddlCliente.Items.Insert(0, new ListItem("Seleccionar un cliente", "-1"));
+            ddlClientes.DataSource = GestorClientes.ObtenerClientesParaCombo();
+            ddlClientes.DataTextField = "nombreyapellido";
+            ddlClientes.DataValueField = "indexBD";
+            ddlClientes.DataBind();
+            ddlClientes.Items.Insert(0, new ListItem("Seleccionar un cliente", "-1"));
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
@@ -39,13 +43,18 @@ namespace FOCA_gadgets_V1
 
         private void cargarGrilla()
         {
-            string contieneCliente = ddlCliente.SelectedValue;
+            string contieneCliente = ddlClientes.SelectedValue;
             if (contieneCliente == "-1") { contieneCliente = ""; }
-            string contieneFecha = txtFiltroFecha.Text;
-            string contieneEstado = ddlEstado.SelectedValue;
+            string contieneFecha = "";
+            if (txtFiltroFecha.Text != "")
+            {
+                DateTime fecha = DateTime.Parse(txtFiltroFecha.Text);
+                contieneFecha = fecha.ToString("yyyy-MM-dd");
+            }
+            string contieneEstado = ddlEstados.SelectedValue;
             if (contieneEstado == "-1") { contieneEstado = ""; }
 
-            dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFecha, contieneCliente, contieneFecha);
+            dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFecha, contieneCliente, contieneEstado);
             dgvListadoReparaciones.DataBind();
 
         }

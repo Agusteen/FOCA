@@ -31,7 +31,7 @@ namespace FOCA_Negocio
                 string where = "";
                 if (contieneEstado != "")
                 {
-                    where += " and e.descripcion = @estado";
+                    where += " and e.id_estado = @estado";
                     comand.Parameters.AddWithValue("@estado", contieneEstado);
                 }
                 if (contieneFecha != "")
