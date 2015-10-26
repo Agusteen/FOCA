@@ -95,5 +95,54 @@ namespace FOCA_Negocio
             }
             return problemas;
         }
+
+        public static void Insertar(Reparacion reparacion)
+        {
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            SqlConnection connection = new SqlConnection();
+            SqlTransaction transaction = null;
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                transaction = connection.BeginTransaction();
+                string sql = "INSERT INTO REPARACIONES (fechaReparacion, fechaDevolucion, descripcion, equipoAReparar, estado, cliente, total)  VALUES (@FechaRep, @FechaDev, @Desc, @Equipo, @Estado, @Cliente, @Total); SELECT @@Identity as ID";
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                comand.Transaction = transaction;
+                comand.Parameters.AddWithValue("@FechaRep", reparacion.fechaReparacion);
+                comand.Parameters.AddWithValue("@FechaDev", reparacion.fechaDevolucion);
+                comand.Parameters.AddWithValue("@Desc", reparacion.descripcionReparacion);
+                comand.Parameters.AddWithValue("@Equipo", reparacion.equipo);
+                comand.Parameters.AddWithValue("@Estado", reparacion.estado);
+                comand.Parameters.AddWithValue("@Cliente", reparacion.cliente);
+                comand.Parameters.AddWithValue("@Total", reparacion.total);
+
+                //cmd.ExecuteNonQuery();
+                int idRepracion = Convert.ToInt32(comand.ExecuteScalar());
+
+                sql = "Insert into AUDITORIA (fecha, descripcion) values (GETDATE(),@descripcion)";
+                SqlCommand comand2 = new SqlCommand();
+                comand2.CommandText = sql;
+                comand2.Connection = connection;
+                comand2.Transaction = transaction;
+                comand2.Parameters.AddWithValue("@descripcion", "Se grabó la reparacion con ID:" + idRepracion.ToString());
+                comand2.ExecuteNonQuery();
+
+                transaction.Commit(); //confirmo los cambios                
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    transaction.Rollback(); //Vuelvo atras los cambios
+                throw new ApplicationException("Error al guardar la reparacion.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
     }
 }

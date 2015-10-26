@@ -35,7 +35,7 @@ namespace FOCA_Negocio
                     clientes.Add(
                         new Cliente()
                         {
-                            indexBD = int.Parse(dr["ID"].ToString()),                            
+                            indexBD = int.Parse(dr["ID"].ToString()),
                             nombreyapellido = dr["Nombre"].ToString(),
                             mail = dr["Mail"].ToString(),
                             rolString = dr["Rol"].ToString(),                            

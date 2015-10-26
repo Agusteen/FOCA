@@ -7,6 +7,7 @@ namespace FOCA_Entidades
         public int? indexBD { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
+        
         public string nombreyapellido {
             get
             {

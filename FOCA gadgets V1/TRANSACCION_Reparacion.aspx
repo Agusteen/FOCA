@@ -8,6 +8,7 @@
     <script>
         $(function () {
             $('.datepicker').datepicker();
+            $('#datepicker').datepicker('option', { dateFormat: 'mm/dd/yy' });
         });
     </script>
 
@@ -97,7 +98,7 @@
 
         </div>
         <div class="panel-heading text-center">
-            <asp:Button class="btn btn-default btn-lg" Text="Guardar" runat="server"></asp:Button>
+            <asp:Button class="btn btn-default btn-lg" Text="Guardar" runat="server" OnClick="Unnamed5_Click"></asp:Button>
         </div>
     </div>
 
