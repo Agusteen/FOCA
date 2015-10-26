@@ -23,7 +23,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 //string sql = "SELECT id_cliente, nombre, apellido, localidad, fechaNacimiento, mail, password, rol, preferencial FROM CLIENTES order by apellido";
-                string sql = "SELECT c.id_cliente AS 'ID', (c.apellido + ' ' + c.nombre) AS 'Nombre', c.mail AS 'Mail', r.descripcion AS 'Rol', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN ROLES_USUARIO AS r ON (c.rol = r.id_rol)WHERE c.apellido LIKE @Contiene ORDER BY " + orden;
+                string sql = "SELECT c.id_cliente AS 'ID', c.nombre AS 'Nombre', c.apellido as 'Apellido', c.mail AS 'Mail', r.descripcion AS 'Rol', c.preferencial AS 'Preferencial' FROM CLIENTES AS c JOIN ROLES_USUARIO AS r ON (c.rol = r.id_rol)WHERE c.apellido LIKE @Contiene ORDER BY " + orden;
                 SqlCommand comand = new SqlCommand();
                 comand.Parameters.AddWithValue("@Contiene", contiene);
                 comand.CommandText = sql;
@@ -36,7 +36,8 @@ namespace FOCA_Negocio
                         new Cliente()
                         {
                             indexBD = int.Parse(dr["ID"].ToString()),
-                            nombreyapellido = dr["Nombre"].ToString(),
+                            nombre = dr["Nombre"].ToString(),
+                            apellido = dr["Apellido"].ToString(),
                             mail = dr["Mail"].ToString(),
                             rolString = dr["Rol"].ToString(),                            
                             preferencial = Boolean.Parse(dr["preferencial"].ToString()),

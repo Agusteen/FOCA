@@ -34,14 +34,14 @@
 
         <div>
             <label for="Cliente">Cliente</label>
-            <asp:DropDownList ID="ddlCliente" class="form-control" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ddlClientes" class="form-control" runat="server"></asp:DropDownList>
         </div>
                             </div>
                         <br />
 <div class="col-xs-6">
         <div>
             <label for="Estado">Estado</label>
-            <asp:DropDownList ID="ddlEstado" class="form-control" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ddlEstados" class="form-control" runat="server"></asp:DropDownList>
         </div>
     <br />
 

@@ -20,6 +20,7 @@ namespace FOCA_gadgets_V1
             if (GestorSesiones.EstaAutenticado(login.UserName, login.Password))
             {
                 e.Authenticated = true;  // genera cookie de seguridad con datos del usuario 
+                Response.Redirect("Inicio.aspx");
             }
             else
             {
