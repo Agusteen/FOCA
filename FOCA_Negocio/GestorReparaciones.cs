@@ -96,7 +96,7 @@ namespace FOCA_Negocio
             return problemas;
         }
 
-        public static void Insertar(Reparacion reparacion)
+        public static void InsertarMaestro(Reparacion reparacion)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();

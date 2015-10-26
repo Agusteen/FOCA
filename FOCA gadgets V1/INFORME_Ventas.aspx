@@ -2,12 +2,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
 
-         <div class="col-xs-12">
-                <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Seleccione informe</h3>
+        </div>
+        <div class="panel-body">
+            <asp:DropDownList ID="ddlInforme" class="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlInforme_SelectedIndexChanged">
+                <asp:ListItem Text="Informe de ventas"></asp:ListItem>
+                <asp:ListItem Text="Informe de reparaciones"></asp:ListItem>
+            </asp:DropDownList>
+        </div>
+    </div>
+
+    <div class="panel panel-default">     
+                
+                    
                     <div class="panel-heading">
                        <h3 class="panel-title">Listado de ventas</h3>
                     </div>
                     <div class="panel-body">
+                        <div class="col-xs-6">
                         <div>
                         <label for="filtro">Filtros </label>
                             </div>
@@ -22,15 +36,19 @@
                         <asp:TextBox class="form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la venta buscada" runat="server"></asp:TextBox>
                     <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"  Type="Date" Operator="DataTypeCheck" runat="server" runat="server" />
                      </div>
-
+</div>
+                        <div class="col-xs-6">
+                            <br />
                         <div>
                             <label for="Cliente">Cliente</label>
                         <asp:DropDownList ID="ddlCliente" class="form-control" runat="server"></asp:DropDownList>    
                        </div>
-                        <div>
-                             <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
+                            <br />
+                        <div class="panel-heading text-right">
+                             <asp:Button class="btn btn-default text-left" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
                         </div>
-                        <div class="col-xs-11">
+                            </div>
+                        <div class="col-xs-12">
                         <asp:GridView  ID="dgvVentas" PageSize="20" Style="margin-left: 0px" HorizontalAlign="Center"
                             AllowPaging="true" AllowSorting="true"
                             class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
@@ -52,13 +70,13 @@
                             </div>
                     </div>
                 </div>
-            </div>
+           
 
 
-
-
-        </div>
     </div>
+
+        
+    
 </asp:Content>
 
   

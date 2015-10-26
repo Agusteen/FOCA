@@ -2,11 +2,29 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Seleccione informe</h3>
+        </div>
+        <div class="panel-body">
+            <asp:DropDownList ID="ddlInforme" class="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlInforme_SelectedIndexChanged">
+                <asp:ListItem Value="v">Informe de ventas</asp:ListItem>
+                <asp:ListItem Value="r">Informe de reparaciones</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+    </div>
+    
+    
+    <div class="panel panel-default">     
+                
+                    
+                    <div class="panel-heading">
+                       <h3 class="panel-title">Listado de Reparaciones</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-6">
         <div>
             <label for="filtro">Filtros </label>
         </div>
-
-
 
         <div>
             <label for="Fecha">Fecha de reparación</label>
@@ -18,18 +36,20 @@
             <label for="Cliente">Cliente</label>
             <asp:DropDownList ID="ddlCliente" class="form-control" runat="server"></asp:DropDownList>
         </div>
-
+                            </div>
+                        <br />
+<div class="col-xs-6">
         <div>
             <label for="Estado">Estado</label>
             <asp:DropDownList ID="ddlEstado" class="form-control" runat="server"></asp:DropDownList>
         </div>
+    <br />
 
-
-        <div>
+        <div class="panel-heading text-right">
             <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
         </div>
-
-        <div class="col-xs-11">
+    </div>
+        <div class="col-xs-12">
             <asp:GridView ID="dgvListadoReparaciones" PageSize="20" Style="margin-left: 0px" HorizontalAlign="Center"
                 AllowPaging="true" AllowSorting="true"
                 class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
@@ -56,9 +76,9 @@
 
 
 
-    </div>
-
-
+    
+</div>
+        </div>
 
 
 </asp:Content>

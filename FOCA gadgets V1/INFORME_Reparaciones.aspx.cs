@@ -13,9 +13,13 @@ namespace FOCA_gadgets_V1
         {
             if (!Page.IsPostBack)
             {
+                
                 cargarComboClientes();
                 cargarComboEstados();
+                ddlInforme.SelectedIndex = 1;
             }
+            
+            
         }
 
         private void cargarComboEstados()
@@ -48,6 +52,18 @@ namespace FOCA_gadgets_V1
             dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFecha, contieneCliente, contieneFecha);
             dgvListadoReparaciones.DataBind();
 
+        }
+
+        protected void ddlInforme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlInforme.SelectedItem.Text == "Informe de ventas")
+            {
+                Response.Redirect("INFORME_Ventas.aspx");
+            }
+            else
+            {
+                Response.Redirect("INFORME_Reparaciones.aspx");
+            }
         }
     }
 }

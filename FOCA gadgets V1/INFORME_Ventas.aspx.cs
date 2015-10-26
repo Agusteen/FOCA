@@ -16,6 +16,7 @@ namespace FOCA_gadgets_V1
                 cargarComboClientes();
                 
             }
+            
         }
 
         private void cargarComboClientes()
@@ -59,6 +60,19 @@ namespace FOCA_gadgets_V1
         protected void dgvVentass_Sorting(object sender, GridViewSortEventArgs e)
         {
             cargarGrilla();
+        }
+
+        protected void ddlInforme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlInforme.SelectedItem.Value == "Informe de ventas")
+            {
+                Response.Redirect("INFORME_Ventas.aspx");
+            }
+            else
+            {
+                Response.Redirect("INFORME_Reparaciones.aspx");
+            }
+                
         }
     }
 }

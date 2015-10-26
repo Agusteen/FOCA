@@ -230,7 +230,7 @@ namespace FOCA_gadgets_V1
                     rep.cliente = int.Parse(ddlClientes.SelectedValue);
                     rep.total = float.Parse(lblTotal.Text);
 
-                    GestorReparaciones.Insertar(rep);
+                    GestorReparaciones.InsertarMaestro(rep);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('La reparación se registró correctamente')", true);
                     limpiarCampos();
                 }
