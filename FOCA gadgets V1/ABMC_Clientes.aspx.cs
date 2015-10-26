@@ -21,9 +21,10 @@ namespace FOCA_gadgets_V1
                 cargarComboLocalidades();
                 cargarComboRoles();
                 cargarGrillaClientes();
+                divMensaje.Visible = false;
                 
             }
-            limpiarCampos();
+            //limpiarCampos();
         }
 
         private void cargarGrillaClientes()
@@ -92,11 +93,13 @@ namespace FOCA_gadgets_V1
 
 
                             GestorClientes.Insertar(cli);
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                            lblMensaje.Text = "El cliente se registró correctamente";
+                            divMensaje.Visible = true;
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El cliente se registró correctamente')", true);
                         }
                         catch
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El cliente no se pudo registrar')", true);
                         }
                         finally
                         {
@@ -124,12 +127,12 @@ namespace FOCA_gadgets_V1
                                 GestorClientes.modificarCliente(cli);
 
 
-                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El cliente se modificó correctamente')", true);
 
                             }
                             catch
                             {
-                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El cliente no se pudo modificar')", true);
 
                             }
                             finally
@@ -188,11 +191,11 @@ namespace FOCA_gadgets_V1
 
                         int indexBD = int.Parse(grdClientes.DataKeys[index]["indexBD"].ToString());
                         GestorClientes.eliminarCliente(indexBD);
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El cliente se eliminó correctamente')", true);
                     }
                     catch
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('No se pudo eliminar el cliente')", true);
 
                     }
                     finally

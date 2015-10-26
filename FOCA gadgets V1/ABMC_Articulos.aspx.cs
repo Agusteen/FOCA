@@ -74,12 +74,12 @@ namespace FOCA_gadgets_V1
                             GestorArticulos.insertarArticulo(art);
                             CargarGrilla();
 
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El articulo se registró correctamente')", true);
 
                         }
                         catch
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('No se pudo registrar el articulo')", true);
 
                         }
                         finally
@@ -108,12 +108,12 @@ namespace FOCA_gadgets_V1
                                 GestorArticulos.modificarArticulo(art);
                                 CargarGrilla();
 
-                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El articulo se modificó correctamente')", true);
 
                             }
                             catch
                             {
-                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('No se pudo modificar el articulo')", true);
 
                             }
                             finally
@@ -168,12 +168,12 @@ namespace FOCA_gadgets_V1
 
 
                         GestorArticulos.eliminarArticulo(indexBD);
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('EXITO')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El articulo se eliminó correctamente')", true);
                    
                         }
                         catch
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR')", true);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('No se pudo eliminar el articulo')", true);
 
                         }
                         finally
