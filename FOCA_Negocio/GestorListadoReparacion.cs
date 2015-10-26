@@ -34,12 +34,12 @@ namespace FOCA_Negocio
                     where += " and e.descripcion = @estado";
                     comand.Parameters.AddWithValue("@estado", contieneEstado);
                 }
-                if (contieneFecha != null)
+                if (contieneFecha != "")
                 {
                     where += " and r.fechaReparacion like @fecha";
                     comand.Parameters.AddWithValue("@fecha", contieneFecha);
                 }
-                if (contieneCliente != null)
+                if (contieneCliente != "")
                 {
                     where += " and c.id_Cliente = @indexCliente";
                     comand.Parameters.AddWithValue("@indexCliente", contieneCliente);

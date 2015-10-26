@@ -60,7 +60,7 @@
 
                     <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
                     <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
-                    <asp:BoundField DataField="monto" HeaderText="Monto" />
+                    <%--<asp:BoundField DataField="monto" HeaderText="Monto" />--%>
                     <asp:BoundField DataField="fechareparacion" HeaderText="Fecha de registracion" />
                     <asp:BoundField DataField="fechadevolucion" HeaderText="Fecha de devolucion" />
                     <asp:BoundField DataField="estado" HeaderText="Estado" />
