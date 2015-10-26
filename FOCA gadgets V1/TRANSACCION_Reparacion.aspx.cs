@@ -21,13 +21,14 @@ namespace FOCA_gadgets_V1
             listaProblemas = GestorReparaciones.ObtenerProblemas();
             if (!Page.IsPostBack)
             {
-                txtFechaRepracion.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                txtFechaRepracion.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 cargarComboClientes();
                 cargarComboEstados();
                 FirstGridViewRow();
             }
 
             //actualizarPreciosYSubtotales();
+            txtFechaRepracion.Text = DateTime.Now.ToString("MM/dd/yyyy");
             actualizarTotal();
         }
 
@@ -212,6 +213,40 @@ namespace FOCA_gadgets_V1
 
                 lblTotal.Text = total.ToString();            
             }
+        }
+
+        protected void Unnamed5_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    Reparacion rep = new Reparacion();
+                    rep.fechaReparacion = txtFechaRepracion.Text;
+                    rep.fechaDevolucion = txtFechaDevolucion.Text;
+                    rep.descripcionReparacion = txtDescripcion.Text;
+                    rep.equipo = txtEquipo.Text;
+                    rep.estado = int.Parse(ddlEstados.SelectedValue);
+                    rep.cliente = int.Parse(ddlClientes.SelectedValue);
+                    rep.total = float.Parse(lblTotal.Text);
+
+                    GestorReparaciones.Insertar(rep);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('La reparación se registró correctamente')", true);
+                    limpiarCampos();
+                }
+                catch(Exception ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('La reparación no se puedo registrar')", true);
+                }
+
+            }
+        }
+
+        private void limpiarCampos()
+        {
+            txtFechaDevolucion.Text = "";
+            txtDescripcion.Text = "";
+            txtEquipo.Text = "";            
         }
 
 
