@@ -1,8 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FOCAMasterPage.Master" AutoEventWireup="true" CodeBehind="INFORME_Ventas.aspx.cs" Inherits="FOCA_gadgets_V1.INFORME_Ventas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>    
+    <script>
+        $(function () {
+            $('.datepicker').datepicker();
+            $('#datepicker').datepicker('option', { dateFormat: 'mm/dd/yy' });
+        });
+    </script>
+
     <div class="panel panel-default">
-
-
         <div class="panel-heading">
             <h3 class="panel-title">Seleccione informe</h3>
         </div>
@@ -33,7 +40,7 @@
                    </div>
                         <div>
                         <label for="Fecha">Fecha</label>
-                        <asp:TextBox class="form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la venta buscada" runat="server"></asp:TextBox>
+                        <asp:TextBox class="datepicker form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la venta buscada" runat="server"></asp:TextBox>
                     <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"  Type="Date" Operator="DataTypeCheck" runat="server" runat="server" />
                      </div>
 </div>

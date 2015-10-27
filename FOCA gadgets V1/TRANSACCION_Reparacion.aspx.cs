@@ -21,14 +21,14 @@ namespace FOCA_gadgets_V1
             listaProblemas = GestorReparaciones.ObtenerProblemas();
             if (!Page.IsPostBack)
             {
-                txtFechaRepracion.Text = DateTime.Now.ToString("MM/dd/yyyy");
+                txtFechaRepracion.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 cargarComboClientes();
                 cargarComboEstados();
                 FirstGridViewRow();
             }
 
             //actualizarPreciosYSubtotales();
-            txtFechaRepracion.Text = DateTime.Now.ToString("MM/dd/yyyy");
+            txtFechaRepracion.Text = DateTime.Now.ToString("dd/MM/yyyy");
             actualizarTotal();
         }
 
@@ -222,8 +222,13 @@ namespace FOCA_gadgets_V1
                 try
                 {
                     Reparacion rep = new Reparacion();
-                    rep.fechaReparacion = txtFechaRepracion.Text;
-                    rep.fechaDevolucion = txtFechaDevolucion.Text;
+
+                    
+                    string contieneEstado = ddlEstados.SelectedValue;
+                    DateTime fecha = DateTime.Parse(txtFechaRepracion.Text);
+                    rep.fechaReparacion = fecha.ToString("yyyy-MM-dd");
+                    fecha = DateTime.Parse(txtFechaRepracion.Text);
+                    rep.fechaDevolucion = fecha.ToString("yyyy-MM-dd");
                     rep.descripcionReparacion = txtDescripcion.Text;
                     rep.equipo = txtEquipo.Text;
                     rep.estado = int.Parse(ddlEstados.SelectedValue);

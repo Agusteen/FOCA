@@ -23,8 +23,9 @@ namespace FOCA_gadgets_V1
                 cargarGrillaClientes();
                 divMensaje.Visible = false;
                 
+                
             }
-            //limpiarCampos();
+            
         }
 
         private void cargarGrillaClientes()
@@ -85,7 +86,8 @@ namespace FOCA_gadgets_V1
                             cli.nombre = txtNombre.Text;
                             cli.apellido = txtApellido.Text;
                             cli.localidad = int.Parse(ddlLocalidades.SelectedValue);
-                            cli.fechaNac = txtFechaNacimiento.Text;
+                            DateTime fecha = DateTime.Parse(txtFechaNacimiento.Text);
+                            cli.fechaNac =  fecha.ToString("yyyy-MM-dd");
                             cli.mail = txtMail.Text;
                             cli.password = txtPassword.Text;
                             cli.rol = int.Parse(ddlRoles.SelectedValue);
@@ -104,6 +106,7 @@ namespace FOCA_gadgets_V1
                         finally
                         {
                             cargarGrillaClientes();
+                            limpiarCampos();
                         }
 
                     }
@@ -119,14 +122,15 @@ namespace FOCA_gadgets_V1
                                 cli.nombre = txtNombre.Text;
                                 cli.apellido = txtApellido.Text;
                                 cli.localidad = int.Parse(ddlLocalidades.SelectedValue);
-                                cli.fechaNac = txtFechaNacimiento.Text;
+                                DateTime fecha = DateTime.Parse(txtFechaNacimiento.Text);
+                                cli.fechaNac = fecha.ToString("yyyy-MM-dd");
                                 cli.mail = txtMail.Text;
                                 cli.password = txtPassword.Text;
                                 cli.rol = int.Parse(ddlRoles.SelectedValue);
                                 cli.preferencial = chboxPreferencial.Checked;
                                 GestorClientes.modificarCliente(cli);
 
-
+                                
                                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('El cliente se modificó correctamente')", true);
 
                             }
