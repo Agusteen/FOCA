@@ -221,9 +221,9 @@ namespace FOCA_gadgets_V1
             {
                 try
                 {
-                    Reparacion rep = new Reparacion();
-
-                    
+                    //MAESTRO
+                    Reparacion rep = new Reparacion();                 
+                                        
                     string contieneEstado = ddlEstados.SelectedValue;
                     DateTime fecha = DateTime.Parse(txtFechaRepracion.Text);
                     rep.fechaReparacion = fecha.ToString("yyyy-MM-dd");
@@ -235,7 +235,27 @@ namespace FOCA_gadgets_V1
                     rep.cliente = int.Parse(ddlClientes.SelectedValue);
                     rep.total = float.Parse(lblTotal.Text);
 
-                    GestorReparaciones.InsertarMaestro(rep);
+                    //DETALLE
+                    List<DetalleReparacion> listaDetalles = new List<DetalleReparacion>();
+                    int rowIndex = 0;
+
+                    DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+                    if (dtCurrentTable.Rows.Count > 0)
+                    {
+                        for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                        {
+                            DropDownList cboProblemas = (DropDownList)gvDetalleReparacion.Rows[rowIndex].Cells[0].FindControl("cboProblemas");
+                            TextBox txtPrecio = (TextBox)gvDetalleReparacion.Rows[rowIndex].Cells[1].FindControl("txtPrecio");
+                            DetalleReparacion detalle = new DetalleReparacion();
+                            detalle.problema = int.Parse(cboProblemas.SelectedValue);
+                            detalle.subTotal = float.Parse(txtPrecio.Text);
+
+                            listaDetalles.Add(detalle);
+                            rowIndex++;
+                        }
+                    }
+
+                    GestorReparaciones.InsertarReparacion(rep, listaDetalles);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('La reparación se registró correctamente')", true);
                     limpiarCampos();
                 }
