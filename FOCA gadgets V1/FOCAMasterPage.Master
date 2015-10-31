@@ -61,7 +61,7 @@
 			<!----top-header---->
 			<div class="top-header">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="Inicio.aspx">
                         &nbsp;</a></div>
 				<div class="top-header-info">
 					<div class="top-contact-info">
@@ -71,18 +71,18 @@
 							<div class="clearfix"> </div>
 						</ul>
 					</div>
-					<div class="cart-details">
+					
                     <div class="login-rigister">
-							<ul class="unstyled-list list-inline">
-								<li><a class="login" href="Login.aspx">Login</a></li>
-								<li><a class="rigister" href="ABMC_Clientes.aspx">REGISTRO <span> </span></a></li>
-								<div class="clearfix"> </div>
-							</ul>
+							<ul class="unstyled-list list-inline">								
+								<li><a class="rigister" href="Login.aspx" runat="server" id="btnLogin">LOGIN <span> </span></a></li>                                
+                                <li><h4><asp:Label ID="lblUser" runat="server" Text="User"></asp:Label></h4><h6><asp:LinkButton ID="btnCerrar" runat="server" Text="Cerrar sesion"  OnClick="btnCerrar_Click"></asp:LinkButton> </h6></li>
+								
+							</ul>                       
 						</div>
-                        </div>
+                        
 				</div>
 				<div class="clearfix"> 
-                    <a href="index.html">
+                    <a href="Inicio.aspx">
                         <img src="\images\logo.png" class="img-responsive" title="FOCAlogo" /></a></div>
 			</div>
 			<!----//top-header---->
@@ -92,11 +92,11 @@
 			 <nav class="top-nav main-menu">
 					<ul class="top-nav">
                         <li><a href="Inicio.aspx">INICIO </a><span> </span></li>
-						<li><a href="ABMC_Articulos.aspx">ARTICULOS </a><span> </span></li>
-                        <li><a href="ABMC_Clientes.aspx">CLIENTES </a><span> </span></li>							
+						<li runat="server" id="mnuArticulos"><a href="ABMC_Articulos.aspx">ARTICULOS </a><span> </span></li>
+                        <li runat="server" id="mnuClientes"><a href="ABMC_Clientes.aspx">CLIENTES </a><span> </span></li>							
 						<li><a href="Inicio.aspx">VENTA</a><span> </span></li>						
-						<li><a href="TRANSACCION_Reparacion.aspx">REPARACION</a><span> </span></li>		
-                        <li><a href="INFORME_Ventas.aspx">INFORMES</a></li>
+						<li runat="server" id="mnuReparacion"><a href="TRANSACCION_Reparacion.aspx">REPARACION</a><span> </span></li>		
+                        <li runat="server" id="mnuInformes"><a href="INFORME_Ventas.aspx">INFORMES</a></li>
 						
 					</ul>
 					<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
@@ -141,8 +141,17 @@
 
 			     });
 			  </script>	
-	        </div>
+                      <div class="container">
+            <div class="row">
+                <p class="text-center"><strong>FOCA gadgets - Muñoz Campos, Agustín - Ramírez, Nicolás - PAV II 2015 - UTN frc</strong></p>
             </div>
-	    </form>
+            </div>
+	        </div>
+      
+            </div>
+            
+	    </form>  
+        
+              
 	</body>
 </html>
