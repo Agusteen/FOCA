@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="DetalleReparacion.cs" />
+    <Compile Include="DetalleVenta.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="ListadoReparacion.cs" />
     <Compile Include="Localidad.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Rol.cs" />
     <Compile Include="TipoArticulo.cs" />
     <Compile Include="ListadoVenta.cs" />
+    <Compile Include="Venta.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

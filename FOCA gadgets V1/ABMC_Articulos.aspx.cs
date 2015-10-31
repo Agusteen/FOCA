@@ -25,13 +25,15 @@ namespace FOCA_gadgets_V1
         }
         private void CargarGrilla()
         {
+            string contieneFamilia = "";
             string contieneDescripcion = "%" + txtFiltroDescripcion.Text + "%";
                 string orden = "Descripcion";
             if (ViewState["ordenGvArticulos"] != null)
             {
                 orden = ViewState["ordenGvArticulos"].ToString();
             }
-            dgvArticulos.DataSource = GestorArticulos.obtenerArticulos( contieneDescripcion, orden);
+            string disponible = "";
+            dgvArticulos.DataSource = GestorArticulos.obtenerArticulos(contieneDescripcion, contieneFamilia, orden, disponible);
             dgvArticulos.DataBind();
            
             
@@ -179,6 +181,7 @@ namespace FOCA_gadgets_V1
                         finally
                         {
                             CargarGrilla();
+                            limpiarcampos();
                         }
                     }
                 }

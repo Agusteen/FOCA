@@ -775,6 +775,8 @@ pre code {
 }
 .col-xs-12 {
   width: 100%;
+    top: -108px;
+    left: 0px;
 }
 .col-xs-11 {
   width: 91.66666667%;

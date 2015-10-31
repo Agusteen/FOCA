@@ -31,6 +31,7 @@ namespace FOCA_gadgets_V1
             mnuArticulos.Visible = Page.User.IsInRole("Administrador") || Page.User.IsInRole("Vendedor");
             mnuClientes.Visible = Page.User.IsInRole("Administrador") || Page.User.IsInRole("Vendedor");
             mnuReparacion.Visible = Page.User.IsInRole("Administrador") || Page.User.IsInRole("Técnico");
+            mnuVenta.Visible = Page.User.IsInRole("Administrador") || Page.User.IsInRole("Vendedor");
             mnuInformes.Visible = Page.User.IsInRole("Administrador") || Page.User.IsInRole("Vendedor") || Page.User.IsInRole("Tecnico");
             
                 

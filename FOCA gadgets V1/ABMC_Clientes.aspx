@@ -14,6 +14,10 @@
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus()
         })
+    </script>    
+    <script type="text/javascript">
+        $(function () { $("#age").tooltip(); });
+
     </script>
     <div class="panel panel-default">
         <div class="panel-body">
@@ -32,16 +36,16 @@
                     <div class="panel-body">
                         
                         <div class="form-group">
-                            <label for="E-Mail">E-Mail</label>
+                            <label for="txtMail">E-Mail</label>
                             <asp:TextBox ID="txtMail" class="form-control" placeholder="ejemplo@mail.com" runat="server" ></asp:TextBox>
-                            <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtMail" runat="server" Font-Size="X-Small" ForeColor="Red" />
-                            <asp:RegularExpressionValidator ID="valEmailAddress" ControlToValidate="txtMail"	ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="X-Small" ForeColor="Red" ErrorMessage="Formato de mail no es correcto" Display="None" Runat="server"/>
+                            <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtMail" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" />
+                            <asp:RegularExpressionValidator ID="valEmailAddress" ControlToValidate="txtMail"	ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="X-Small" ForeColor="Red" ErrorMessage="* Formato de mail no es correcto" Runat="server" Display="Dynamic"/>
                         </div>
 
                         <div class="form-group">
-                            <label for="nombre">Password</label>
-                            <asp:TextBox ID="txtPassword" TextMode="Password" class="form-control" placeholder="Ingrese aquí una contraseña" runat="server" ></asp:TextBox>
-                            <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtPassword" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                            <label for="pass" title="Se recomienda una contraseña de al menos 8 caracteres alfanumericos." id="age">Password</label>
+                            <asp:TextBox ID="txtPassword" TextMode="Password" class="form-control" placeholder="Ingrese aquí una contraseña" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtPassword" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
                         </div>
 
                         <div class="form-group">
@@ -52,15 +56,14 @@
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <asp:TextBox ID="txtNombre" class="form-control" placeholder="Ingrese aquí su nombre" runat="server" ></asp:TextBox>
-                            <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtNombre" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                            <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtNombre" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>                            
                         </div>
 
                         
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
                             <asp:TextBox class="form-control" ID="txtApellido" placeholder="Ingrese aquí su apellido" runat="server" ></asp:TextBox>
-                            <asp:RequiredFieldValidator ErrorMessage="*Este campo es requerido" ControlToValidate="txtApellido" runat="server" Font-Size="X-Small" ForeColor="Red" />
-
+                            <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtApellido" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
                         </div>             
 
                         <div class="form-group">
@@ -72,13 +75,11 @@
                         <div class="form-group">
                             <label for="fechaNacimiento">Fecha de nacimiento</label>
                             <asp:TextBox ID="txtFechaNacimiento" class="datepicker form-control" placeholder="Fecha de Nacimiento" runat="server"></asp:TextBox>
-                            <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" />
-                            <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                            <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" Display="Dynamic" />
+                            <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" />
                         </div>
 
                         <asp:CheckBox type="checkbox-info" ID="chboxPreferencial" Text=" Preferencial" runat="server"></asp:CheckBox>
-
-
 
                         <div class="panel-heading text-center">
                             <asp:Button class="btn btn-default btn-lg" Text="Guardar" runat="server" OnClick="enviar" ></asp:Button>
@@ -87,10 +88,8 @@
                         <div class="alert alert-info alert-dismissable" id="divMensaje" runat="server">
                             <button type="button" class="close" data-dismiss="alert" >&times;</button>                            
                             <asp:Label id="lblMensaje" runat="server" Text="Mensaje de prueba"/>
-                        </div>                        
-
+                        </div>                     
                     </div>
-
                 </div>
             </div>
             
@@ -118,7 +117,7 @@
                             <asp:GridView ID="grdClientes" Style="margin-left: 0px" HorizontalAlign="Center" DataKeyNames="indexBD" class="form-control" 
                                 CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="false" CellPadding="7" ForeColor="#333333" 
                                 GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged" OnRowCommand="grdClientes_RowCommand" 
-                                OnPageIndexChanging="grdClientes_PageIndexChanging" PageSize="13" AllowPaging="true" PagerStyle-HorizontalAlign="Center" 
+                                OnPageIndexChanging="grdClientes_PageIndexChanging" PageSize="11" AllowPaging="true" PagerStyle-HorizontalAlign="Center" 
                                 OnSorting="grdClientes_Sorting" >
 
                                 <Columns>

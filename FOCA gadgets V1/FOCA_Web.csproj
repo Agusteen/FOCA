@@ -228,6 +228,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="TRANSACCION_Reparacion.aspx" />
+    <Content Include="TRANSACCION_Venta.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -296,6 +297,13 @@
     </Compile>
     <Compile Include="TRANSACCION_Reparacion.aspx.designer.cs">
       <DependentUpon>TRANSACCION_Reparacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSACCION_Venta.aspx.cs">
+      <DependentUpon>TRANSACCION_Venta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TRANSACCION_Venta.aspx.designer.cs">
+      <DependentUpon>TRANSACCION_Venta.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

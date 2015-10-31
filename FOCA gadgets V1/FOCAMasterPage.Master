@@ -94,7 +94,7 @@
                         <li><a href="Inicio.aspx">INICIO </a><span> </span></li>
 						<li runat="server" id="mnuArticulos"><a href="ABMC_Articulos.aspx">ARTICULOS </a><span> </span></li>
                         <li runat="server" id="mnuClientes"><a href="ABMC_Clientes.aspx">CLIENTES </a><span> </span></li>							
-						<li><a href="Inicio.aspx">VENTA</a><span> </span></li>						
+						<li runat="server" id="mnuVenta"><a href="TRANSACCION_Venta.aspx">VENTA</a><span> </span></li>						
 						<li runat="server" id="mnuReparacion"><a href="TRANSACCION_Reparacion.aspx">REPARACION</a><span> </span></li>		
                         <li runat="server" id="mnuInformes"><a href="INFORME_Ventas.aspx">INFORMES</a></li>
 						

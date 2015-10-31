@@ -12,7 +12,7 @@ namespace FOCA_Negocio
 {
     public class GestorListadoReparacion
     {
-        public static List<ListadoReparacion> obtenerReparaciones(string contieneFecha, string contieneCliente, string contieneEstado)
+        public static List<ListadoReparacion> obtenerReparaciones(string contieneFechaDesde, string contieneFechaHasta, string contieneCliente, string contieneEstado)
         {
             List<ListadoReparacion> listadoReparaciones = new List<ListadoReparacion>();
 
@@ -34,10 +34,11 @@ namespace FOCA_Negocio
                     where += " and e.id_estado = @estado";
                     comand.Parameters.AddWithValue("@estado", contieneEstado);
                 }
-                if (contieneFecha != "")
+                if (contieneFechaDesde != "" & contieneFechaHasta != "")
                 {
-                    where += " and r.fechaReparacion like @fecha";
-                    comand.Parameters.AddWithValue("@fecha", contieneFecha);
+                    where += " and r.fechaReparacion BETWEEN @fechaDesde AND @fechaHasta";
+                    comand.Parameters.AddWithValue("@fechaDesde", contieneFechaDesde);
+                    comand.Parameters.AddWithValue("@fechaHasta", contieneFechaHasta);
                 }
                 if (contieneCliente != "")
                 {

@@ -54,7 +54,7 @@ namespace FOCA_Negocio
             return tiposArticulos;
         }
 
-        public static List<Articulo> obtenerArticulos(string contiene, string orden)
+        public static List<Articulo> obtenerArticulos(string contieneDescripcion,string  contieneFamilia,string orden, string disponible)
         {
             List<Articulo> listaArticulos = new List<Articulo>();
            
@@ -69,10 +69,39 @@ namespace FOCA_Negocio
 
                 string sql = "SELECT a.id_articulo as 'ID Articulo', a.descripcion as 'Descripcion', a.precio as 'Precio', a.stock as 'Stock',";
                 sql += " a.disponible as 'Disponible',a.tipo as 'TipoID', ta.descripcion as 'Familia' from ARTICULOS as a";
-                sql += " JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo) WHERE a.descripcion like @Contiene ORDER BY " + orden;
+                sql += " JOIN TIPOS_ARTICULO as ta ON (a.tipo = ta.id_tipoArticulo) ";
                 SqlCommand comand = new SqlCommand();
-             //   comand.Parameters.AddWithValue("@Orden", orden); //why
-              comand.Parameters.AddWithValue("@Contiene", contiene);
+                //comand.Parameters.AddWithValue("@Orden", orden); //why
+                string where = "";
+                if (contieneDescripcion != "")
+                {
+                    where += " and a.descripcion like @ContieneDescripcion";
+                    comand.Parameters.AddWithValue("@ContieneDescripcion", contieneDescripcion);
+                }
+                
+                if (contieneFamilia != "")
+                {
+                    where += " and ta.id_tipoArticulo like @ContieneFamilia";
+                    comand.Parameters.AddWithValue("@ContieneFamilia", contieneFamilia);
+                }
+
+                if (disponible == "1")
+                {
+                    where += " and a.disponible = 1";
+                }
+
+                if (where != "")
+                {
+                    where = " where " + where.Substring(5);
+                    sql += where;
+                }
+
+                if (orden != "")
+                {
+                    sql += " ORDER BY " + orden;
+                }
+               
+                
 
                 comand.CommandText = sql;
                 comand.Connection = connection;

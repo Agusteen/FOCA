@@ -15,22 +15,21 @@
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server" EnableTheming="True"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtDescripcion" Display="Dynamic" runat="server" ErrorMessage="No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtDescripcion" Display="Dynamic" runat="server" ErrorMessage="* Este campo no puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="precio">Precio unitario</label>
                                     <asp:TextBox class="form-control" ID="txtPrecio" placeholder="Ingrese el precio del articulo" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtPrecio" Display="Dynamic" runat="server" ErrorMessage=" * No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtPrecio" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Double" Operator="GreaterThanEqual" runat="server"></asp:CompareValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtPrecio" Display="Dynamic" runat="server" ErrorMessage="* Este campo no puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:CompareValidator ErrorMessage="* Debe ser un valor numérico" ControlToValidate="txtPrecio" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Double" Operator="GreaterThanEqual" runat="server"></asp:CompareValidator>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="stock">Stock</label>
                                     <asp:TextBox class="form-control" ID="txtStock" placeholder="Ingrese la cantidad de unidades a cargar" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtStock" Display="Dynamic" runat="server" ErrorMessage=" * No puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtStock" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Integer" Operator="GreaterThanEqual" runat="server"></asp:CompareValidator>
-                                    <%--<asp:RangeValidator ErrorMessage=" * Ingrese un valor mayor que 0 o menor que 1000" MinimumValue="0" MaximumValue="1000" ControlToValidate="txtStock" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" runat="server"></asp:RangeValidator>--%>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtStock" Display="Dynamic" runat="server" ErrorMessage="* Este campo no puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:CompareValidator ErrorMessage="* Debe ser un valor numérico" ControlToValidate="txtStock" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Integer" Operator="GreaterThanEqual" runat="server"></asp:CompareValidator>                                    
                                 </div>
 
                                 
@@ -73,7 +72,7 @@
                         <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripcion o parte de la descripcion" runat="server"></asp:TextBox>
                         <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>--%>
 
-                        <div class="col-xs-12">
+                        
                         <asp:GridView  ID="dgvArticulos" PageSize="6" DataKeyNames="indexBD" HorizontalAlign="Center"
                             AllowPaging="true" AllowSorting="true"
                             class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
@@ -94,7 +93,7 @@
                             
                         </asp:GridView>
                             </div>
-                    </div>
+                    
                 </div>
             </div>
 
