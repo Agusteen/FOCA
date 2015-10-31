@@ -17,5 +17,14 @@ namespace FOCA_gadgets_V1
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.User != null)
+            {
+                var id = HttpContext.Current.User.Identity;
+                //HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(id, GestorUsuarios.ObtenerRoles(id.Name));
+            }
+        }
     }
 }

@@ -35,9 +35,15 @@
         </div>
 
         <div>
-            <label for="Fecha">Fecha de reparación</label>
-            <asp:TextBox class="datepicker form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
-            <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server" runat="server" />
+            <label for="Fecha">Fecha de reparación desde</label>
+            <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaDesde" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
+            <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaDesde" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server" ControlToCompare="txtFiltroFechaHasta"/>
+        </div>
+
+        <div>
+             <label for="Fecha">Fecha de reparación hasta</label>
+             <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaHasta" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
+             <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server" ValueToCompare="<%# DateTime.Today.ToShortDateString() %>" />
         </div>
 
         <div>
@@ -54,7 +60,7 @@
     <br />
 
         <div class="panel-heading text-right">
-            <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
+            <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="true"></asp:Button>
         </div>
     </div>
         <div class="col-xs-12">
