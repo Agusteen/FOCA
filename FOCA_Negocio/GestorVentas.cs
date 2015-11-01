@@ -43,9 +43,10 @@ namespace FOCA_Negocio
                     string sqlVerStock = "select stock from ARTICULOS where id_Articulo = @idArticulo and disponible = 1";
                     SqlCommand comand4 = new SqlCommand();
                     comand4.CommandText = sqlVerStock;
+                    comand4.Connection = connection;
                     comand4.Transaction = transaction;
                     comand4.Parameters.AddWithValue("@idArticulo", item.articulo);
-                    int stockActual = Convert.ToInt32(comand.ExecuteScalar());
+                    int stockActual = Convert.ToInt32(comand4.ExecuteScalar());
                     int restante = stockActual - item.cantidad;
                     if (restante < 0) throw new Exception();
 
@@ -54,7 +55,8 @@ namespace FOCA_Negocio
                     comand3.CommandText = sqlDetalle;
                     comand3.Connection = connection;
                     comand3.Transaction = transaction;
-                    comand3.Parameters.AddWithValue("@NroFactura", item.nroFactura);
+                    //comand3.Parameters.AddWithValue("@NroFactura", item.nroFactura);
+                    comand3.Parameters.AddWithValue("@NroFactura", idVenta);
                     comand3.Parameters.AddWithValue("@Articulo", item.articulo);
                     comand3.Parameters.AddWithValue("@Cantidad", item.cantidad);
                     comand3.Parameters.AddWithValue("@SubTotal", item.subTotal);
