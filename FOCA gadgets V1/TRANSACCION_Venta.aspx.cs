@@ -119,7 +119,7 @@ namespace FOCA_gadgets_V1
             }
             if (encontro == false)
             {
-                dv.nroFactura = txtFactura.Text;
+                dv.nroFactura = int.Parse(txtFactura.Text);
                 dv.cantidad = 1;
                 dv.articulo = a.indexBD;
                 dv.precioArticulo = a.precio;
@@ -248,9 +248,16 @@ namespace FOCA_gadgets_V1
             ddlClientes.Visible = true;
             lblCliente.Visible = true;
             txtFactura.Text = "";
+            txtFactura.ReadOnly = false;
+            Session["MiCarrito"] = null;
+            ddlTipoArticulo.SelectedIndex = -1;
+            dgvArticulos.DataSource = new List<Articulo>();
+            dgvArticulos.DataBind();
+            dgvCarrito.DataSource = new List<DetalleVenta>();
+            dgvCarrito.DataBind();
 
 
-             
+
 
         }
 
@@ -305,7 +312,7 @@ namespace FOCA_gadgets_V1
             ddlClientes.Visible = true;
             lblCliente.Visible = true;
             txtFechaVenta.Text = DateTime.Today.ToShortDateString();
-            Session["MiCarrito"] = null;
+            
         }
     }
 }

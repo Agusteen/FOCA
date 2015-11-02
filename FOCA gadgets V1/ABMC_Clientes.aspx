@@ -118,7 +118,7 @@
                                 CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="false" CellPadding="7" ForeColor="#333333" 
                                 GridLines="None" OnSelectedIndexChanged="grdClientes_SelectedIndexChanged" OnRowCommand="grdClientes_RowCommand" 
                                 OnPageIndexChanging="grdClientes_PageIndexChanging" PageSize="11" AllowPaging="true" PagerStyle-HorizontalAlign="Center" 
-                                OnSorting="grdClientes_Sorting" >
+                                OnSorting="grdClientes_Sorting" EmptyDataText="No hay registros.">
 
                                 <Columns>
                                     <asp:ButtonField CommandName="Modificar" ImageUrl="images/editar.png" ButtonType="Image" />                                    
