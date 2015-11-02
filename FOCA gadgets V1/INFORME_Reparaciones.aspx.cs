@@ -13,7 +13,8 @@ namespace FOCA_gadgets_V1
         {
             if (!Page.IsPostBack)
             {
-                
+                compareValidatorFechaDesde.ValueToCompare = DateTime.Now.ToShortDateString();
+                CompareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
                 cargarComboClientes();
                 cargarComboEstados();
                 ddlInforme.SelectedIndex = 1;
@@ -42,23 +43,45 @@ namespace FOCA_gadgets_V1
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            { 
             cargarGrilla();
+            }
         }
 
         private void cargarGrilla()
         {
             string contieneCliente = ddlClientes.SelectedValue;
             if (contieneCliente == "-1") { contieneCliente = ""; }
-            string contieneFecha = "";
-            if (txtFiltroFecha.Text != "")
+            string contieneFechaDesde = "";
+            string contieneFechaHasta = "";
+            if (txtFiltroFechaDesde.Text != "")
             {
-                DateTime fecha = DateTime.Parse(txtFiltroFecha.Text);
-                contieneFecha = fecha.ToString("yyyy-MM-dd");
+                DateTime fecha = DateTime.Parse(txtFiltroFechaDesde.Text);
+                contieneFechaDesde = fecha.ToString("yyyy-MM-dd");
             }
+            if (txtFiltroFechaHasta.Text != "")
+            {
+                DateTime fecha = DateTime.Parse(txtFiltroFechaHasta.Text);
+                contieneFechaHasta = fecha.ToString("yyyy-MM-dd");
+            }
+
+            if (txtFiltroFechaDesde.Text != "" & txtFiltroFechaHasta.Text == "")
+            {
+                contieneFechaHasta = DateTime.Now.ToString("yyyy-MM-dd"); ;
+            }
+
+            if (txtFiltroFechaDesde.Text == "" & txtFiltroFechaHasta.Text != "")
+            {
+                contieneFechaDesde = "2015-01-01";
+            }
+
+    
+
             string contieneEstado = ddlEstados.SelectedValue;
             if (contieneEstado == "-1") { contieneEstado = ""; }
 
-            dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFecha, contieneCliente, contieneEstado);
+            dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFechaDesde, contieneFechaHasta, contieneCliente, contieneEstado);
             dgvListadoReparaciones.DataBind();
 
         }
@@ -73,6 +96,12 @@ namespace FOCA_gadgets_V1
             {
                 Response.Redirect("INFORME_Reparaciones.aspx");
             }
+        }
+
+        protected void dgvListadoReparaciones_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvListadoReparaciones.PageIndex = e.NewPageIndex;
+            cargarGrilla();            
         }
     }
 }

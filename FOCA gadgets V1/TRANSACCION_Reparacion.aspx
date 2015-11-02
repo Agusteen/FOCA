@@ -18,14 +18,15 @@
 
                 <div class="form-group">
                     <label for="fechaReparacion">Fecha de reparación</label>
-                    <asp:TextBox ID="txtFechaRepracion" class="form-control"  runat="server" disabled></asp:TextBox>
-                    <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtFechaRepracion" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                    <asp:TextBox ID="txtFechaRepracion" class="form-control"  runat="server" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtFechaRepracion" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
                 </div>
 
                 <div class="form-group">
                     <label for="fechaDevolucion">Fecha de devolución</label>
                     <asp:TextBox ID="txtFechaDevolucion" class="datepicker form-control" placeholder="Click para desplegar el calendario" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtFechaDevolucion" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                    <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtFechaDevolucion" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
+                     <asp:CompareValidator ID="compareValidatorFechaDesde"  ErrorMessage="* Debe ser una fecha mayor a la fecha actual" ControlToValidate="txtFechaDevolucion" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="GreaterThan" runat="server" />
                 </div>
 
                 <div class="form-group">
@@ -36,13 +37,13 @@
                 <div class="form-group">
                     <label for="equipo">Equipo a reparar</label>
                     <asp:TextBox ID="txtEquipo" class="form-control" placeholder="Ingrese aquí una descripción del equipo" runat="server" ></asp:TextBox>
-                    <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtEquipo" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                    <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtEquipo" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
                 </div>
 
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
                     <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese aquí una descripción de la reparación" runat="server" ></asp:TextBox>
-                    <asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtDescripcion" runat="server" Font-Size="X-Small" ForeColor="Red" />
+                    <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtDescripcion" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
                 </div>
 
                 <div class="form-group">

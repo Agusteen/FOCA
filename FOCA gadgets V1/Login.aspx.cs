@@ -17,10 +17,10 @@ namespace FOCA_gadgets_V1
 
         protected void Login_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            if (GestorSesiones.EstaAutenticado(login.UserName, login.Password))
+            if (GestorSesiones.estaAutenticado(login.UserName, login.Password))
             {
                 e.Authenticated = true;  // genera cookie de seguridad con datos del usuario 
-                Response.Redirect("Inicio.aspx");
+                //Response.Redirect("Inicio.aspx");
             }
             else
             {

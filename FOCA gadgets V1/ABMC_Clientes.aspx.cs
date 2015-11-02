@@ -43,7 +43,7 @@ namespace FOCA_gadgets_V1
         private void limpiarCampos()
         {
             lblEstadoPage.Text = "";
-            txtMail.Attributes.Remove("disabled");
+            txtMail.ReadOnly = false;
             txtMail.Text = "";
             txtPassword.Text = "";
             txtNombre.Text = "";
@@ -175,7 +175,7 @@ namespace FOCA_gadgets_V1
                     int indexBD = int.Parse(grdClientes.DataKeys[index]["indexBD"].ToString());
                     Cliente cli = GestorClientes.obtenerClientePorID(indexBD);
                     txtMail.Text = cli.mail.ToString();
-                    txtMail.Attributes.Add("disabled", "");
+                    txtMail.ReadOnly = true;
                     
                     txtPassword.Text = cli.password.ToString();
                     ddlRoles.SelectedValue = cli.rol.ToString();
@@ -205,6 +205,7 @@ namespace FOCA_gadgets_V1
                     finally
                     {
                         cargarGrillaClientes();
+                        limpiarCampos();
                     }
                 }
             }

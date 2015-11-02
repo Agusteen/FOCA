@@ -21,6 +21,7 @@ body a{
 .container{
 	width:70%;
 }
+
 /*----top-header---*/
 .top-header{
 	padding:2em 0;
@@ -1599,4 +1600,6 @@ a.rigister span{
 	.product-details-row1-head p {
 		font-size: 1.1em;
 	}
+
+
 }

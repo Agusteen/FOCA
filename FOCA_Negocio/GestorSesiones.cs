@@ -11,7 +11,7 @@ namespace FOCA_Negocio
 {
     public class GestorSesiones
     {
-        public static bool EstaAutenticado(string mail, string password)
+        public static bool estaAutenticado(string mail, string password)
         {
             if (mail == "admin" & password =="admin") return true;
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
@@ -46,24 +46,36 @@ namespace FOCA_Negocio
             }
             return false;
         }
-
-
-        public static string[] obtenerRoles(string usuario)
+        
+        public static string[] obtenerRoles(string mailUsuario)
         {
-            return null;
-
-            //string[] pepe = new string[] { "valor1", "valor2" };
-            //switch (usuario.ToLower())
-            //{
-            //    case "administrador":
-            //        return new string[] { "administrador" };
-            //    case "cliente":
-            //        return new string[] { "cliente" };
-            //    case "a":
-            //        return new string[] { "a" };
-            //    default:
-            //        return new string[] { "Visita" };
-            //}
+            string rol = "";
+            
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+            SqlConnection connection = new SqlConnection();
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                string sql = "SELECT r.descripcion FROM CLIENTES AS c JOIN ROLES_USUARIO AS r ON (c.rol = r.id_rol) WHERE mail = @Mail";
+                SqlCommand comand = new SqlCommand();
+                comand.Parameters.AddWithValue("@Mail", mailUsuario);                
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                
+                rol = comand.ExecuteScalar().ToString();
+                
+            }
+            catch (SqlException ex)
+            {
+                
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+            return new string[] { rol };
         }
     }
 }

@@ -96,7 +96,7 @@ namespace FOCA_Negocio
             return problemas;
         }
 
-        public static void InsertarMaestro(Reparacion reparacion)
+        public static void InsertarReparacion(Reparacion reparacion, List<DetalleReparacion> listaDetalles)
         {
             string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
             SqlConnection connection = new SqlConnection();
@@ -106,7 +106,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
-                string sql = "INSERT INTO REPARACIONES (fechaReparacion, fechaDevolucion, descripcion, equipoAReparar, estado, cliente, total)  VALUES (@FechaRep, @FechaDev, @Desc, @Equipo, @Estado, @Cliente, @Total); SELECT @@Identity as ID";
+                string sql = "INSERT INTO REPARACIONES (fechaReparacion, fechaDevolucion, descripcion, equipoAReparar, estado, cliente, total)  VALUES (@FechaRep, @FechaDev, @Desc, @Equipo, @Estado, @Cliente, @Total); SELECT @@Identity as ID;";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
@@ -119,8 +119,26 @@ namespace FOCA_Negocio
                 comand.Parameters.AddWithValue("@Cliente", reparacion.cliente);
                 comand.Parameters.AddWithValue("@Total", reparacion.total);
 
-                //cmd.ExecuteNonQuery();
                 int idRepracion = Convert.ToInt32(comand.ExecuteScalar());
+
+                //DETALLES INICIO                                                
+                
+                
+                foreach (DetalleReparacion detallei in listaDetalles)
+                {
+                    string sqlDetalle = "INSERT INTO DETALLE_REPARACION VALUES (@IDMaestro, @Problema, @SubTotal)";
+                    SqlCommand comand3 = new SqlCommand();
+                    comand3.CommandText = sqlDetalle;
+                    comand3.Connection = connection;
+                    comand3.Transaction = transaction;
+                    comand3.Parameters.AddWithValue("@IDMaestro", idRepracion);
+                    comand3.Parameters.AddWithValue("@Problema", detallei.problema);
+                    comand3.Parameters.AddWithValue("@SubTotal", detallei.subTotal);
+                    comand3.ExecuteNonQuery();
+                }
+                
+                //DETALLES FIN       
+                
 
                 sql = "Insert into AUDITORIA (fecha, descripcion) values (GETDATE(),@descripcion)";
                 SqlCommand comand2 = new SqlCommand();
@@ -143,6 +161,8 @@ namespace FOCA_Negocio
                 if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
-        }
+        }      
+
+
     }
 }

@@ -14,7 +14,8 @@ namespace FOCA_gadgets_V1
             if(!IsPostBack)
             {
                 cargarComboClientes();
-                
+                compareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
+                compareValidatorFechaDesde.ValueToCompare = DateTime.Now.ToShortDateString();
             }
             
         }
@@ -36,8 +37,31 @@ namespace FOCA_gadgets_V1
         private void cargarGrilla()
         {
             //int? IdArticuloFamilia = (ddlFamilia.SelectedValue == "") ? (int?)null : int.Parse(ddlFamilia.SelectedValue);
-            string contieneMonto = txtFiltroMonto.Text;
-            string contieneFecha = txtFiltroFecha.Text;
+            string contieneMonto = txtFiltroMonto.Text;            
+
+            string contieneFechaDesde = "";
+            string contieneFechaHasta = "";
+            if (txtFiltroFecha.Text != "")
+            {
+                DateTime fecha = DateTime.Parse(txtFiltroFecha.Text);
+                contieneFechaDesde = fecha.ToString("yyyy-MM-dd");
+            }
+            if (txtFechaHasta.Text != "")
+            {
+                DateTime fecha = DateTime.Parse(txtFechaHasta.Text);
+                contieneFechaHasta = fecha.ToString("yyyy-MM-dd");
+            }
+
+            if (txtFiltroFecha.Text != "" & txtFechaHasta.Text == "")
+            {
+                contieneFechaHasta = DateTime.Now.ToString("yyyy-MM-dd"); ;
+            }
+
+            if (txtFiltroFecha.Text =="" & txtFechaHasta.Text != "")
+            {
+                contieneFechaDesde = "2015-01-01";
+            }
+
             string contieneCliente = ddlCliente.SelectedValue;
             if (contieneCliente == "-1") { contieneCliente = ""; }
             
@@ -46,7 +70,7 @@ namespace FOCA_gadgets_V1
             //{
             //    orden = ViewState["ordenGvArticulos"].ToString();
             //}
-            dgvVentas.DataSource = GestorListadoVenta.obtenerVentas(contieneMonto, contieneFecha, contieneCliente);
+            dgvVentas.DataSource = GestorListadoVenta.obtenerVentas(contieneMonto, contieneFechaDesde, contieneFechaHasta, contieneCliente);
             dgvVentas.DataBind();
           
         }

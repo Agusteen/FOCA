@@ -22,13 +22,40 @@ namespace FOCA_gadgets_V1 {
         protected global::System.Web.UI.WebControls.DropDownList ddlInforme;
         
         /// <summary>
-        /// Control txtFiltroFecha.
+        /// Control txtFiltroFechaDesde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroFecha;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroFechaDesde;
+        
+        /// <summary>
+        /// Control compareValidatorFechaDesde.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator compareValidatorFechaDesde;
+        
+        /// <summary>
+        /// Control txtFiltroFechaHasta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroFechaHasta;
+        
+        /// <summary>
+        /// Control CompareValidatorFechaHasta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidatorFechaHasta;
         
         /// <summary>
         /// Control ddlClientes.
