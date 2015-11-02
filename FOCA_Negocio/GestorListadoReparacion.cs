@@ -25,7 +25,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "select  c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial', r.fechaReparacion as 'Reparacion', r.fechaDevolucion as 'Devolucion', e.descripcion as 'Estado' from REPARACIONES as r JOIN CLIENTES as c ON(r.cliente = c.id_cliente) JOIN ESTADOS as e ON(r.estado = e.id_estado) ORDER BY c.nombre";
+                string sql = "select  c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial', r.fechaReparacion as 'Reparacion', r.fechaDevolucion as 'Devolucion', e.descripcion as 'Estado' from REPARACIONES as r JOIN CLIENTES as c ON(r.cliente = c.id_cliente) JOIN ESTADOS as e ON(r.estado = e.id_estado) ";
                 SqlCommand comand = new SqlCommand();
 
                 string where = "";
@@ -53,6 +53,7 @@ namespace FOCA_Negocio
                 }
                 //   comand.Parameters.AddWithValue("@Orden", orden); //why
 
+                sql += " ORDER BY c.nombre";
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 //Llenando un datatable con el resultado de la consulta

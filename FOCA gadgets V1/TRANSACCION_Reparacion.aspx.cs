@@ -21,7 +21,11 @@ namespace FOCA_gadgets_V1
             listaProblemas = GestorReparaciones.ObtenerProblemas();
             if (!Page.IsPostBack)
             {
+                compareValidatorFechaDesde.ValueToCompare = DateTime.Now.ToShortDateString();
                 txtFechaRepracion.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                //agregado hoy
+                txtFechaRepracion.ReadOnly = true;
+                //
                 cargarComboClientes();
                 cargarComboEstados();
                 FirstGridViewRow();

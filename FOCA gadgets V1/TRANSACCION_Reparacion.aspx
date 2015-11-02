@@ -18,7 +18,7 @@
 
                 <div class="form-group">
                     <label for="fechaReparacion">Fecha de reparación</label>
-                    <asp:TextBox ID="txtFechaRepracion" class="form-control"  runat="server" disabled></asp:TextBox>
+                    <asp:TextBox ID="txtFechaRepracion" class="form-control"  runat="server" ></asp:TextBox>
                     <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtFechaRepracion" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
                 </div>
 
@@ -26,7 +26,7 @@
                     <label for="fechaDevolucion">Fecha de devolución</label>
                     <asp:TextBox ID="txtFechaDevolucion" class="datepicker form-control" placeholder="Click para desplegar el calendario" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtFechaDevolucion" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic"/>
-                    
+                     <asp:CompareValidator ID="compareValidatorFechaDesde"  ErrorMessage="* Debe ser una fecha mayor a la fecha actual" ControlToValidate="txtFechaDevolucion" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="GreaterThan" runat="server" />
                 </div>
 
                 <div class="form-group">

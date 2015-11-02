@@ -42,6 +42,10 @@
                                 <label for="FechaDesde">Fecha desde</label>
                                 <asp:TextBox class="datepicker form-control" ID="txtFiltroFecha" placeholder="Ingrese la fecha de la venta buscada" runat="server"></asp:TextBox>
                                 <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server"/>
+                                <asp:CompareValidator   ErrorMessage="* Debe ser una menor o igual a la fecha hasta" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server" ControlToCompare="txtFechaHasta"/>
+                                <asp:CompareValidator  ID="compareValidatorFechaDesde" ErrorMessage="* Debe ser una menor o igual a la fecha actual" ControlToValidate="txtFiltroFecha" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server"/>
+                               
+
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -51,6 +55,7 @@
                                 <label for="FechaHasta">Fecha hasta</label>
                                 <asp:TextBox class="datepicker form-control" ID="txtFechaHasta" placeholder="Ingrese la fecha limite de la venta buscada" runat="server"></asp:TextBox>
                                 <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server"/>
+                                <asp:CompareValidator ID ="compareValidatorFechaHasta" ErrorMessage="* Debe ser una fecha menor igual a la fecha actual" ControlToValidate="txtFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server"/>
                             </div>
 
                             <div>
@@ -59,7 +64,7 @@
                        </div>
                             <br />
                         <div class="panel-heading text-right">
-                             <asp:Button class="btn btn-default text-left" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="False"></asp:Button>
+                             <asp:Button class="btn btn-default text-left" ID="btnFiltrar" Text="Filtrar" runat="server" OnClick="btnFiltrar_Click" CausesValidation="true"></asp:Button>
                         </div>
                             </div>
                         

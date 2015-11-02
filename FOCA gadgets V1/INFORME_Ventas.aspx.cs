@@ -14,7 +14,8 @@ namespace FOCA_gadgets_V1
             if(!IsPostBack)
             {
                 cargarComboClientes();
-                
+                compareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
+                compareValidatorFechaDesde.ValueToCompare = DateTime.Now.ToShortDateString();
             }
             
         }
@@ -49,6 +50,16 @@ namespace FOCA_gadgets_V1
             {
                 DateTime fecha = DateTime.Parse(txtFechaHasta.Text);
                 contieneFechaHasta = fecha.ToString("yyyy-MM-dd");
+            }
+
+            if (txtFiltroFecha.Text != "" & txtFechaHasta.Text == "")
+            {
+                contieneFechaHasta = DateTime.Now.ToString("yyyy-MM-dd"); ;
+            }
+
+            if (txtFiltroFecha.Text =="" & txtFechaHasta.Text != "")
+            {
+                contieneFechaDesde = "2015-01-01";
             }
 
             string contieneCliente = ddlCliente.SelectedValue;

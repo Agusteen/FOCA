@@ -13,6 +13,7 @@ namespace FOCA_gadgets_V1
         {
             if (!Page.IsPostBack)
             {
+                compareValidatorFechaDesde.ValueToCompare = DateTime.Now.ToShortDateString();
                 CompareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
                 cargarComboClientes();
                 cargarComboEstados();
@@ -64,6 +65,18 @@ namespace FOCA_gadgets_V1
                 DateTime fecha = DateTime.Parse(txtFiltroFechaHasta.Text);
                 contieneFechaHasta = fecha.ToString("yyyy-MM-dd");
             }
+
+            if (txtFiltroFechaDesde.Text != "" & txtFiltroFechaHasta.Text == "")
+            {
+                contieneFechaHasta = DateTime.Now.ToString("yyyy-MM-dd"); ;
+            }
+
+            if (txtFiltroFechaDesde.Text == "" & txtFiltroFechaHasta.Text != "")
+            {
+                contieneFechaDesde = "2015-01-01";
+            }
+
+    
 
             string contieneEstado = ddlEstados.SelectedValue;
             if (contieneEstado == "-1") { contieneEstado = ""; }

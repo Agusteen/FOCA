@@ -38,17 +38,19 @@
         <div>
             <label for="Fecha">Fecha de registración de reparación desde</label>
             <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaDesde" placeholder="Ingrese la fecha de la reparación buscada" runat="server"></asp:TextBox>
-            <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaDesde" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server" ControlToCompare="txtFiltroFechaHasta"/>
+            <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaDesde" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server"/>
+            <asp:CompareValidator  ErrorMessage="* Debe ser una fecha menor igual que la fecha hasta" ControlToValidate="txtFiltroFechaDesde" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server" ControlToCompare="txtFiltroFechaHasta"/>
+            <asp:CompareValidator  ID="compareValidatorFechaDesde" ErrorMessage="* Debe ser una menor o igual a la fecha actual" ControlToValidate="txtFiltroFechaDesde" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server"/>
+                               
         </div>
 
         <div>
              <label for="Fecha">Fecha de registración de reparación hasta</label>
              <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaHasta" placeholder="Ingrese la fecha de la reparación buscada" runat="server"></asp:TextBox>
-             <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server" ValueToCompare="<%# DateTime.Today.ToShortDateString() %>"/>
-<asp:CompareValidator ID="CompareValidatorFechaHasta" runat="server" 
-                        ControlToValidate="txtFiltroFechaHasta" ErrorMessage="La fecha no debería ser mayor a la fecha de hoy" 
-                        Operator="LessThanEqual" Type="Date">
-</asp:CompareValidator>        
+             <asp:CompareValidator ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server"/>          
+             <asp:CompareValidator ID="CompareValidatorFechaHasta"  ErrorMessage="* Debe ser una menor o igual a la fecha actual" ControlToValidate="txtFiltroFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server"/>
+             
+     
         </div>
 
         
