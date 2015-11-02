@@ -45,6 +45,10 @@
              <label for="Fecha">Fecha de reparación hasta</label>
              <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaHasta" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
              <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server" ValueToCompare="<%# DateTime.Today.ToShortDateString() %>"/>
+<asp:CompareValidator ID="CompareValidatorFechaHasta" runat="server" 
+                        ControlToValidate="txtFiltroFechaHasta" ErrorMessage="La fecha no debería ser mayor a la fecha de hoy" 
+                        Operator="LessThanEqual" Type="Date">
+</asp:CompareValidator>        
         </div>
 
         

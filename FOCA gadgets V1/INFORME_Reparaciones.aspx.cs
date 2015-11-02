@@ -13,7 +13,7 @@ namespace FOCA_gadgets_V1
         {
             if (!Page.IsPostBack)
             {
-                
+                CompareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
                 cargarComboClientes();
                 cargarComboEstados();
                 ddlInforme.SelectedIndex = 1;
