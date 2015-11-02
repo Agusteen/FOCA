@@ -56,7 +56,7 @@ namespace FOCA_Negocio
             return clientes;
         }//se puede borrar
 
-        public static List<ListadoVenta> obtenerVentas(string contieneMonto, string contieneFecha, string contieneCliente)
+        public static List<ListadoVenta> obtenerVentas(string contieneMonto, string contieneFechaDesde, string contieneFechaHasta, string contieneCliente)
         {
 
             List<ListadoVenta> listadoVenta = new List<ListadoVenta>();
@@ -79,10 +79,11 @@ namespace FOCA_Negocio
                     where += " and v.monto = @monto";
                     comand.Parameters.AddWithValue("@monto", contieneMonto);
                 }
-                if (contieneFecha != null)
+                if (contieneFechaDesde != "" & contieneFechaHasta != "")
                 {
-                    where += " and v.fecha like @fecha";
-                    comand.Parameters.AddWithValue("@fecha", contieneFecha);
+                    where += " and r.fechaReparacion BETWEEN @fechaDesde AND @fechaHasta";
+                    comand.Parameters.AddWithValue("@fechaDesde", contieneFechaDesde);
+                    comand.Parameters.AddWithValue("@fechaHasta", contieneFechaHasta);
                 }
                 if (contieneCliente != null)
                 {

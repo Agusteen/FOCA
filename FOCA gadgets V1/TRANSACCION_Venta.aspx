@@ -33,10 +33,10 @@
                 </div>
 
                 <div>
-                    <asp:Button ID="btnCargarArticulos" class="btn btn-default btn-lg" ValidationGroup="transaccion" Text="Cargar articulos" runat="server" OnClick="cargarArticulos_Click" CausesValidation="true"></asp:Button>
+                    <asp:Button ID="btnCargarArticulos" class="btn btn-default " ValidationGroup="transaccion" Text="Cargar articulos" runat="server" OnClick="cargarArticulos_Click" CausesValidation="true"></asp:Button>
                 </div>
                 <div>
-                    <asp:Button class="btn btn-default btn-lg" Text="Modificar datos" runat="server" OnClick="ModificarDatos_Click" CausesValidation="true"></asp:Button>
+                    <asp:Button class="btn btn-default" Text="Modificar datos" runat="server" OnClick="ModificarDatos_Click" CausesValidation="true"></asp:Button>
                 </div>
             </div>
 
