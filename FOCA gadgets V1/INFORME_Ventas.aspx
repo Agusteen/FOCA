@@ -35,7 +35,7 @@
 
                         <div>
                          <label for ="Monto">Monto</label>
-                        <asp:TextBox class="form-control" ID="txtFiltroMonto" placeholder="Ingrese el monto maximo con el que desea filtrar" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="txtFiltroMonto"  placeholder="Ingrese el monto maximo con el que desea filtrar" runat="server"></asp:TextBox>
                          <asp:CompareValidator ErrorMessage=" * Debe ser un valor numérico" ControlToValidate="txtFiltroMonto" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" ValueToCompare="0" Type="Double" Operator="GreaterThanEqual" runat="server" ></asp:CompareValidator>
                         </div>
                             <div>
@@ -69,23 +69,43 @@
                             </div>
                         
                         <asp:GridView  ID="dgvVentas" PageSize="12" Style="margin-left: 0px" HorizontalAlign="Center"
-                            AllowPaging="true" AllowSorting="true"
+                            AllowPaging="true" AllowSorting="true" DataKeyNames="idVenta"
                             class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
                             CellPadding="7" ForeColor="#333333" GridLines="None" 
-                            OnPageIndexChanging="dgvVentas_PageIndexChanging" OnSorting="dgvVentass_Sorting" EmptyDataText="No hay registros" PagerStyle-HorizontalAlign="Center">
+                            OnPageIndexChanging="dgvVentas_PageIndexChanging" OnSorting="dgvVentass_Sorting" EmptyDataText="No hay registros" PagerStyle-HorizontalAlign="Center" OnSelectedIndexChanged="dgvVentas_SelectedIndexChanged">
 
                             <Columns>
-                                
-                                <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
+                                <asp:CommandField SelectText="Agregar al carrito" ShowSelectButton="True" HeaderText="Seleccionar" />
+                                <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " SortExpression ="Apellido"/>
                                 <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
-                                <asp:BoundField DataField="monto" HeaderText="Monto" />
-                                <asp:BoundField DataField="fecha" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha" />                       
+                                <asp:BoundField DataField="monto" DataFormatString="{0:F2}" HeaderText="Monto" SortExpression ="Monto"/>
+                                <asp:BoundField DataField="fecha" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha" SortExpression ="Fecha"/>                       
 
                             </Columns>
                             
                         </asp:GridView>
                            
                     </div>
+
+
+         <div id="DetalleVentas" class="panel panel-default">    
+         <asp:GridView ID="dgvDetalleVentas" runat="server" CellPadding="4" ForeColor="#333333" 
+                        GridLines="None" 
+                        EmptyDataText="No hay detalles de ventas..." >
+                        <AlternatingRowStyle BackColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                        <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                        <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                    </asp:GridView>
+
+           </div> 
                 </div>
            
 

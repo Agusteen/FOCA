@@ -14,6 +14,7 @@ namespace FOCA_gadgets_V1
             if(!IsPostBack)
             {
                 cargarComboClientes();
+                ViewState["OrdenGvVentas"] = "Apellido";
                 compareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
                 compareValidatorFechaDesde.ValueToCompare = DateTime.Now.ToShortDateString();
             }
@@ -36,6 +37,13 @@ namespace FOCA_gadgets_V1
 
         private void cargarGrilla()
         {
+            string orden = "Apellido";
+            if (ViewState["OrdenGvVentas"] != null)
+            {
+                orden = ViewState["OrdenGvVentas"].ToString();
+            }
+
+
             //int? IdArticuloFamilia = (ddlFamilia.SelectedValue == "") ? (int?)null : int.Parse(ddlFamilia.SelectedValue);
             string contieneMonto = txtFiltroMonto.Text;            
 
@@ -70,7 +78,7 @@ namespace FOCA_gadgets_V1
             //{
             //    orden = ViewState["ordenGvArticulos"].ToString();
             //}
-            dgvVentas.DataSource = GestorListadoVenta.obtenerVentas(contieneMonto, contieneFechaDesde, contieneFechaHasta, contieneCliente);
+            dgvVentas.DataSource = GestorListadoVenta.obtenerVentas(contieneMonto, contieneFechaDesde, contieneFechaHasta, contieneCliente, orden);
             dgvVentas.DataBind();
           
         }
@@ -83,6 +91,7 @@ namespace FOCA_gadgets_V1
 
         protected void dgvVentass_Sorting(object sender, GridViewSortEventArgs e)
         {
+            ViewState["OrdenGvVentas"] = e.SortExpression;
             cargarGrilla();
         }
 
@@ -97,6 +106,13 @@ namespace FOCA_gadgets_V1
                 Response.Redirect("INFORME_Reparaciones.aspx");
             }
                 
+        }
+
+        protected void dgvVentas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idVentas = (int)dgvVentas.SelectedDataKey.Value;
+            dgvDetalleVentas.DataSource = GestorListadoVenta.obtenerDetalles(idVentas);
+            dgvDetalleVentas.DataBind();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FOCA_Negocio
 {
     public class GestorListadoReparacion
     {
-        public static List<ListadoReparacion> obtenerReparaciones(string contieneFechaDesde, string contieneFechaHasta, string contieneCliente, string contieneEstado)
+        public static List<ListadoReparacion> obtenerReparaciones(string contieneFechaDesde, string contieneFechaHasta, string contieneCliente, string contieneEstado, string orden)
         {
             List<ListadoReparacion> listadoReparaciones = new List<ListadoReparacion>();
 
@@ -25,7 +25,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "select  c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial', r.fechaReparacion as 'Reparacion', r.fechaDevolucion as 'Devolucion', e.descripcion as 'Estado' from REPARACIONES as r JOIN CLIENTES as c ON(r.cliente = c.id_cliente) JOIN ESTADOS as e ON(r.estado = e.id_estado) ";
+                string sql = "select r.id_Reparacion as 'idRep', c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial', r.fechaReparacion as 'Reparacion', r.fechaDevolucion as 'Devolucion', e.descripcion as 'Estado' from REPARACIONES as r JOIN CLIENTES as c ON(r.cliente = c.id_cliente) JOIN ESTADOS as e ON(r.estado = e.id_estado) ";
                 SqlCommand comand = new SqlCommand();
 
                 string where = "";
@@ -53,7 +53,7 @@ namespace FOCA_Negocio
                 }
                 //   comand.Parameters.AddWithValue("@Orden", orden); //why
 
-                sql += " ORDER BY c.nombre";
+                sql += " ORDER BY "+orden;
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 //Llenando un datatable con el resultado de la consulta
@@ -64,6 +64,7 @@ namespace FOCA_Negocio
                 while (dr.Read())
                 {
                     ListadoReparacion lr = new ListadoReparacion();
+                    lr.idReparacion = int.Parse(dr["idRep"].ToString());
                     lr.apellido = dr["Apellido"].ToString();
                     lr.nombre = dr["Nombre"].ToString();
                     lr.preferencial = Boolean.Parse(dr["Preferencial"].ToString());
@@ -91,6 +92,38 @@ namespace FOCA_Negocio
             //Caso de manejar una lista de articulos
             return listadoReparaciones;
 
+        }
+
+        public static DataTable obtenerDetalles(int idReparacion)
+        {
+           string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+
+            SqlConnection connection = new SqlConnection();
+            DataTable dt = new DataTable();
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                string sql = "select * from Reparaciones as r JOIN Detalle_Reparacion as d on (r.id_reparacion = d.idReparacion)where r.id_reparacion =" + idReparacion;
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                dt.Load(comand.ExecuteReader());
+               
+
+
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    throw new ApplicationException("Error al buscar detalles.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+            return dt;
         }
     }
 }

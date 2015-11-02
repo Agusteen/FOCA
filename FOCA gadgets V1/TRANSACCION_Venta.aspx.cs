@@ -119,7 +119,9 @@ namespace FOCA_gadgets_V1
             }
             if (encontro == false)
             {
-                dv.nroFactura = int.Parse(txtFactura.Text);
+                //dv.nroFactura = int.Parse(txtFactura.Text);
+                //el numero de factura se carga al guardar en la base
+                dv.nroFactura = -1;
                 dv.cantidad = 1;
                 dv.articulo = a.indexBD;
                 dv.precioArticulo = a.precio;
@@ -210,7 +212,9 @@ namespace FOCA_gadgets_V1
                 v.cliente = int.Parse(ddlClientes.SelectedValue);
                 v.fecha = DateTime.Parse(txtFechaVenta.Text);
                 v.monto = float.Parse(txtMonto.Text);
-                v.nroFactura = int.Parse(txtFactura.Text);
+                //v.nroFactura = int.Parse(txtFactura.Text);
+                //la factura se busca en el momento de la transaccion
+                v.nroFactura = -1;
 
                 GestorVentas.guardarVenta(v, listadetallesventa);
 
@@ -248,7 +252,7 @@ namespace FOCA_gadgets_V1
             ddlClientes.Visible = true;
             lblCliente.Visible = true;
             txtFactura.Text = "";
-            txtFactura.ReadOnly = false;
+            txtFactura.ReadOnly = true;
             Session["MiCarrito"] = null;
             ddlTipoArticulo.SelectedIndex = -1;
             dgvArticulos.DataSource = new List<Articulo>();
@@ -308,7 +312,7 @@ namespace FOCA_gadgets_V1
             panelArticulos.Visible = false;
             panelCarrito.Visible = false;
             btnCargarArticulos.Visible = true;
-            txtFactura.ReadOnly = false;
+            txtFactura.ReadOnly = true;
             ddlClientes.Visible = true;
             lblCliente.Visible = true;
             txtFechaVenta.Text = DateTime.Today.ToShortDateString();

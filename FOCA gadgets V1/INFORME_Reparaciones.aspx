@@ -77,26 +77,54 @@
             
             
             <asp:GridView ID="dgvListadoReparaciones" PageSize="12" Style="margin-left: 0px" HorizontalAlign="Center"
-                AllowPaging="true" AllowSorting="true"
+                
                 class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
-                CellPadding="7" ForeColor="#333333" GridLines="None"
-                EmptyDataText="No hay registros" OnPageIndexChanging="dgvListadoReparaciones_PageIndexChanging" PagerStyle-HorizontalAlign="Center">
+                CellPadding="7" ForeColor="#333333" GridLines="None" DataKeyNames="idReparacion"
+                EmptyDataText="No hay registros" OnPageIndexChanging="dgvListadoReparaciones_PageIndexChanging" PagerStyle-HorizontalAlign="Center" OnSorting="dgvListadoReparaciones_Sorting" OnSelectedIndexChanged="dgvListadoReparaciones_SelectedIndexChanged" >
 
                 <Columns>
 
-                    <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
+                    <asp:CommandField SelectText="Agregar al carrito" ShowSelectButton="True" HeaderText="Seleccionar" />
+                    <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " SortExpression ="Apellido"/>
                     <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
                     <%--<asp:BoundField DataField="monto" HeaderText="Monto" />--%>
-                    <asp:BoundField DataField="fechareparacion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de registración" />
-                    <asp:BoundField DataField="fechadevolucion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de devolución" />
-                    <asp:BoundField DataField="estado" HeaderText="Estado" />
+                    <asp:BoundField DataField="fechareparacion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de registración" SortExpression ="Reparacion"/>
+                    <asp:BoundField DataField="fechadevolucion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de devolución" SortExpression ="Devolucion" />
+                    <asp:BoundField DataField="estado" HeaderText="Estado" SortExpression ="Estado"/>
 
                 </Columns>
+
+<PagerStyle HorizontalAlign="Center"></PagerStyle>
 
             </asp:GridView>
                 
            
-</div>      
+</div>  
+        
+        <div id="DetalleReparaciones" class="panel panel-default">    
+         <asp:GridView ID="dgvDetalleReparaciones" runat="server" CellPadding="4" ForeColor="#333333" 
+                        GridLines="None" 
+                        EmptyDataText="No hay detalles de reparaciones..." >
+                        <AlternatingRowStyle BackColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                        <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                        <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                    </asp:GridView>
+
+           </div> 
+
+</div>
+
+
+        
+     
 
 
 </asp:Content>

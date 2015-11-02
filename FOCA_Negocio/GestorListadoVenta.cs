@@ -56,7 +56,7 @@ namespace FOCA_Negocio
             return clientes;
         }//se puede borrar
 
-        public static List<ListadoVenta> obtenerVentas(string contieneMonto, string contieneFechaDesde, string contieneFechaHasta, string contieneCliente)
+        public static List<ListadoVenta> obtenerVentas(string contieneMonto, string contieneFechaDesde, string contieneFechaHasta, string contieneCliente, string orden)
         {
 
             List<ListadoVenta> listadoVenta = new List<ListadoVenta>();
@@ -70,7 +70,7 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "select c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial' , v.fecha as 'Fecha', v.monto as 'Monto' FROM VENTAS as v JOIN CLIENTES as c on (v.cliente = c.id_cliente) ";
+                string sql = "select v.id_Venta as 'idVenta', c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial' , v.fecha as 'Fecha', v.monto as 'Monto' FROM VENTAS as v JOIN CLIENTES as c on (v.cliente = c.id_cliente) ";
                 SqlCommand comand = new SqlCommand();
 
                 string where = "";
@@ -98,7 +98,7 @@ namespace FOCA_Negocio
                 }
                 //   comand.Parameters.AddWithValue("@Orden", orden); //why
 
-                sql += " ORDER BY c.nombre";
+                sql += " ORDER BY "+ orden;
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 //Llenando un datatable con el resultado de la consulta
@@ -109,6 +109,7 @@ namespace FOCA_Negocio
                 while (dr.Read())
                 {
                     ListadoVenta lv = new ListadoVenta();
+                    lv.idVenta= int.Parse(dr["idVenta"].ToString());
                     lv.nombre = dr["Nombre"].ToString();
                     lv.apellido = dr["Apellido"].ToString();
                     lv.preferencial = Boolean.Parse(dr["Preferencial"].ToString());
@@ -135,6 +136,38 @@ namespace FOCA_Negocio
             return listadoVenta;
           
 
+        }
+
+        public static DataTable obtenerDetalles(int idVentas)
+        {
+            string conexionCadena = ConfigurationManager.ConnectionStrings["FOCAdbstring"].ConnectionString;
+
+            SqlConnection connection = new SqlConnection();
+            DataTable dt = new DataTable();
+            try
+            {
+                connection.ConnectionString = conexionCadena;
+                connection.Open();
+                string sql = "select * from ventas as v join detalle_venta as d ON (v.id_venta = d.nroFactura) ";
+                SqlCommand comand = new SqlCommand();
+                comand.CommandText = sql;
+                comand.Connection = connection;
+                dt.Load(comand.ExecuteReader());
+
+
+
+            }
+            catch (SqlException ex)
+            {
+                if (connection.State == ConnectionState.Open)
+                    throw new ApplicationException("Error al buscar detalles.");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+            return dt;
         }
     }
 }

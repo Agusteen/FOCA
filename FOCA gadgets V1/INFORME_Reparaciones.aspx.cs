@@ -17,6 +17,7 @@ namespace FOCA_gadgets_V1
                 CompareValidatorFechaHasta.ValueToCompare = DateTime.Now.ToShortDateString();
                 cargarComboClientes();
                 cargarComboEstados();
+                ViewState["OrdenGvReparaciones"] = "Apellido";
                 ddlInforme.SelectedIndex = 1;
             }
             
@@ -51,6 +52,11 @@ namespace FOCA_gadgets_V1
 
         private void cargarGrilla()
         {
+            string orden = "Apellido";
+            if (ViewState["OrdenGvReparaciones"] != null)
+            {
+                orden = ViewState["OrdenGvReparaciones"].ToString();
+            }
             string contieneCliente = ddlClientes.SelectedValue;
             if (contieneCliente == "-1") { contieneCliente = ""; }
             string contieneFechaDesde = "";
@@ -81,7 +87,7 @@ namespace FOCA_gadgets_V1
             string contieneEstado = ddlEstados.SelectedValue;
             if (contieneEstado == "-1") { contieneEstado = ""; }
 
-            dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFechaDesde, contieneFechaHasta, contieneCliente, contieneEstado);
+            dgvListadoReparaciones.DataSource = GestorListadoReparacion.obtenerReparaciones(contieneFechaDesde, contieneFechaHasta, contieneCliente, contieneEstado, orden);
             dgvListadoReparaciones.DataBind();
 
         }
@@ -102,6 +108,19 @@ namespace FOCA_gadgets_V1
         {
             dgvListadoReparaciones.PageIndex = e.NewPageIndex;
             cargarGrilla();            
+        }
+
+        protected void dgvListadoReparaciones_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            ViewState["OrdenGvReparaciones"] = e.SortExpression;
+            cargarGrilla();
+        }
+   
+        protected void dgvListadoReparaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idReparacion = (int)dgvListadoReparaciones.SelectedDataKey.Value;
+            dgvDetalleReparaciones.DataSource = GestorListadoReparacion.obtenerDetalles(idReparacion);
+            dgvDetalleReparaciones.DataBind();
         }
     }
 }

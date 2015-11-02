@@ -12,7 +12,7 @@
                 <div class="form-group">
                     
                     <label for="factura">Número de Factura</label>
-                    <asp:TextBox ID="txtFactura" class="form-control" placeholder="Ingrese aquí el número de factura" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFactura" class="form-control" placeholder="El número de factura se define al guardarse" readonly ="true" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ValidationGroup="transaccion" ErrorMessage="* Este campo es requerido" ControlToValidate="txtFactura" runat="server" Display="Dynamic" Font-Size="X-Small" ForeColor="Red" />
                     <%--                    <asp:RegularExpressionValidator validationgroup="transaccion" ValidationExpression="\d{5}" ErrorMessage="* La factura debe tener 5 digitos" ControlToValidate="txtFactura" runat="server" Display="Dynamic" Font-Size="X-Small" ForeColor="Red" />--%>
                     <asp:CompareValidator ValidationGroup="transaccion" ErrorMessage="* Debe ser valor numérico" ControlToValidate="txtFactura" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Integer" Operator="DataTypeCheck" runat="server" />
