@@ -2,6 +2,9 @@
 Transaccion reparacion
 - Validar que fecha sea mayor a la actual
 
+Transaccion venta
+- Se clava cuando pones un numero de factura que ya existe
+
 
 
 

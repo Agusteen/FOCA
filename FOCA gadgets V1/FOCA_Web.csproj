@@ -152,6 +152,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\bootstrap.css" />
+    <Content Include="css\ConfirmacionStyle.css" />
     <Content Include="css\datepicker.css" />
     <Content Include="css\etalage.css" />
     <Content Include="css\style.css" />

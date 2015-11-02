@@ -1,8 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FOCAMasterPage.Master" AutoEventWireup="true" CodeBehind="ABMC_Articulos.aspx.cs" Inherits="FOCA_gadgets_V1.ABMC_Articulos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-
+    <link href="css/ConfirmacionStyle.css" rel="stylesheet" />
+  
+    <script src="js/Confirmacion.js"></script>
+  
+  <script>
+      $(function () {
+          $("#dialog-confirm").dialog({
+              resizable: false,
+              height: 150,
+              modal: true,
+              buttons: {
+                  "OK": function () {
+                      $(this).dialog("close");
+                  }
+                  
+              }
+          });
+      });
+  </script>
 
     <div class="panel panel-default">
         <div class="panel-body">
@@ -15,11 +32,11 @@
                     </div>
                     <div class="panel-body">
 
-                        <div>
-                                <asp:Button ID="btnPrueba" CssClass="btn btn-default" Text="Guardar" runat="server"  OnClick="btnPrueba_Click" CausesValidation="false"></asp:Button>
-                            </div>
-                     
-                                <div class="form-group">
+                        <%--<div id="dialog-confirm" title="Aviso">
+                            <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Ingrese los datos del articulo</p>
+                        </div>--%>
+
+                        <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server" EnableTheming="True"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="txtDescripcion" Display="Dynamic" runat="server" ErrorMessage="* Este campo no puede quedar vacío" Font-Size="X-Small" ForeColor="Red"></asp:RequiredFieldValidator>
