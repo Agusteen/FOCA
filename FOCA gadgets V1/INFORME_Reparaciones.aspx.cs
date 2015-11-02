@@ -84,5 +84,11 @@ namespace FOCA_gadgets_V1
                 Response.Redirect("INFORME_Reparaciones.aspx");
             }
         }
+
+        protected void dgvListadoReparaciones_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvListadoReparaciones.PageIndex = e.NewPageIndex;
+            cargarGrilla();            
+        }
     }
 }

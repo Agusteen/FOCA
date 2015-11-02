@@ -63,18 +63,18 @@
                         </div>
                             </div>
                         
-                        <asp:GridView  ID="dgvVentas" PageSize="20" Style="margin-left: 0px" HorizontalAlign="Center"
+                        <asp:GridView  ID="dgvVentas" PageSize="12" Style="margin-left: 0px" HorizontalAlign="Center"
                             AllowPaging="true" AllowSorting="true"
                             class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
                             CellPadding="7" ForeColor="#333333" GridLines="None" 
-                            OnPageIndexChanging="dgvVentas_PageIndexChanging" OnSorting="dgvVentass_Sorting" EmptyDataText="No hay registros">
+                            OnPageIndexChanging="dgvVentas_PageIndexChanging" OnSorting="dgvVentass_Sorting" EmptyDataText="No hay registros" PagerStyle-HorizontalAlign="Center">
 
                             <Columns>
                                 
                                 <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
                                 <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
                                 <asp:BoundField DataField="monto" HeaderText="Monto" />
-                                <asp:BoundField DataField="fecha" HeaderText="Fecha" />                       
+                                <asp:BoundField DataField="fecha" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha" />                       
 
                             </Columns>
                             

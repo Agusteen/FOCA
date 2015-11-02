@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FOCAMasterPage.Master" AutoEventWireup="true" CodeBehind="ABMC_Articulos.aspx.cs" Inherits="FOCA_gadgets_V1.ABMC_Articulos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+
 
     <div class="panel panel-default">
         <div class="panel-body">
@@ -11,7 +13,12 @@
                             <asp:Label ID="lblEstadoPage" runat="server" Visible="true"></asp:Label>
                         </h3>
                     </div>
-                    <div class="panel-body">                        
+                    <div class="panel-body">
+
+                        <div>
+                                <asp:Button ID="btnPrueba" CssClass="btn btn-default" Text="Guardar" runat="server"  OnClick="btnPrueba_Click" CausesValidation="false"></asp:Button>
+                            </div>
+                     
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <asp:TextBox ID="txtDescripcion" class="form-control" placeholder="Ingrese una descripción" runat="server" EnableTheming="True"></asp:TextBox>

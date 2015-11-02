@@ -70,22 +70,22 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
 
-                string sql = "select c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial' , v.fecha as 'Fecha', v.monto as 'Monto' FROM VENTAS as v JOIN CLIENTES as c on (v.cliente = c.id_cliente)";
+                string sql = "select c.nombre as 'Nombre', c.apellido as 'Apellido', c.preferencial as 'Preferencial' , v.fecha as 'Fecha', v.monto as 'Monto' FROM VENTAS as v JOIN CLIENTES as c on (v.cliente = c.id_cliente) ORDER BY c.nombre";
                 SqlCommand comand = new SqlCommand();
 
                 string where = "";
                 if (contieneMonto != "")
                 {
-                    where += " and v.monto = @monto";
+                    where += " and v.monto <= @monto";
                     comand.Parameters.AddWithValue("@monto", contieneMonto);
                 }
                 if (contieneFechaDesde != "" & contieneFechaHasta != "")
                 {
-                    where += " and r.fechaReparacion BETWEEN @fechaDesde AND @fechaHasta";
+                    where += " and v.fecha BETWEEN @fechaDesde AND @fechaHasta";
                     comand.Parameters.AddWithValue("@fechaDesde", contieneFechaDesde);
                     comand.Parameters.AddWithValue("@fechaHasta", contieneFechaHasta);
                 }
-                if (contieneCliente != null)
+                if (contieneCliente != "")
                 {
                     where += " and c.id_Cliente = @indexCliente";
                     comand.Parameters.AddWithValue("@indexCliente", contieneCliente);

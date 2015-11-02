@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label for="fechaNacimiento">Fecha de nacimiento</label>
                             <asp:TextBox ID="txtFechaNacimiento" class="datepicker form-control" placeholder="Fecha de Nacimiento" runat="server"></asp:TextBox>
-                            <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" Display="Dynamic" />
+                            <asp:RangeValidator ErrorMessage="* Debe ser mayor de 18 años o fecha no válida" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" OnInit="rangeValidator_Init" Type="Date" Display="Dynamic" />
                             <asp:RequiredFieldValidator ErrorMessage="* Este campo no puede quedar vacío" ControlToValidate="txtFechaNacimiento" runat="server" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" />
                         </div>
 

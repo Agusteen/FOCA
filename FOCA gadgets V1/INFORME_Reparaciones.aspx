@@ -36,14 +36,14 @@
         </div>
 
         <div>
-            <label for="Fecha">Fecha de reparación desde</label>
-            <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaDesde" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
+            <label for="Fecha">Fecha de registración de reparación desde</label>
+            <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaDesde" placeholder="Ingrese la fecha de la reparación buscada" runat="server"></asp:TextBox>
             <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaDesde" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="LessThanEqual" runat="server" ControlToCompare="txtFiltroFechaHasta"/>
         </div>
 
         <div>
-             <label for="Fecha">Fecha de reparación hasta</label>
-             <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaHasta" placeholder="Ingrese la fecha de la reparacion buscada" runat="server"></asp:TextBox>
+             <label for="Fecha">Fecha de registración de reparación hasta</label>
+             <asp:TextBox class="datepicker form-control" ID="txtFiltroFechaHasta" placeholder="Ingrese la fecha de la reparación buscada" runat="server"></asp:TextBox>
              <asp:CompareValidator  ErrorMessage="* Debe ser una fecha valida" ControlToValidate="txtFiltroFechaHasta" Font-Size="X-Small" ForeColor="Red" Display="Dynamic" Type="Date" Operator="DataTypeCheck" runat="server" ValueToCompare="<%# DateTime.Today.ToShortDateString() %>"/>
 <asp:CompareValidator ID="CompareValidatorFechaHasta" runat="server" 
                         ControlToValidate="txtFiltroFechaHasta" ErrorMessage="La fecha no debería ser mayor a la fecha de hoy" 
@@ -74,19 +74,19 @@
         
             
             
-            <asp:GridView ID="dgvListadoReparaciones" PageSize="20" Style="margin-left: 0px" HorizontalAlign="Center"
+            <asp:GridView ID="dgvListadoReparaciones" PageSize="12" Style="margin-left: 0px" HorizontalAlign="Center"
                 AllowPaging="true" AllowSorting="true"
                 class="form-control" CssClass=" table table-hover table-striped" runat="server" AutoGenerateColumns="False"
                 CellPadding="7" ForeColor="#333333" GridLines="None"
-                EmptyDataText="No hay registros">
+                EmptyDataText="No hay registros" OnPageIndexChanging="dgvListadoReparaciones_PageIndexChanging" PagerStyle-HorizontalAlign="Center">
 
                 <Columns>
 
                     <asp:BoundField DataField="nombreCliente" HeaderText="Nombre y Apellido " />
                     <asp:BoundField DataField="stringPreferencial" HeaderText="Preferencial" />
                     <%--<asp:BoundField DataField="monto" HeaderText="Monto" />--%>
-                    <asp:BoundField DataField="fechareparacion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de registracion" />
-                    <asp:BoundField DataField="fechadevolucion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de devolucion" />
+                    <asp:BoundField DataField="fechareparacion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de registración" />
+                    <asp:BoundField DataField="fechadevolucion" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de devolución" />
                     <asp:BoundField DataField="estado" HeaderText="Estado" />
 
                 </Columns>

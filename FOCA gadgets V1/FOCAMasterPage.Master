@@ -75,7 +75,7 @@
                     <div class="login-rigister">
 							<ul class="unstyled-list list-inline">								
 								<li><a class="rigister" href="Login.aspx" runat="server" id="btnLogin">LOGIN <span> </span></a></li>                                
-                                <li><h4><asp:Label ID="lblUser" runat="server" Text="User"></asp:Label></h4><h6><asp:LinkButton ID="btnCerrar" runat="server" Text="Cerrar sesion"  OnClick="btnCerrar_Click"></asp:LinkButton> </h6></li>
+                                <li><h4><asp:Label ID="lblUser" runat="server" Text="User"></asp:Label></h4><h6><asp:LinkButton ID="btnCerrar" runat="server" CausesValidation="False" Text="Cerrar sesion"  OnClick="btnCerrar_Click"></asp:LinkButton> </h6></li>
 								
 							</ul>                       
 						</div>

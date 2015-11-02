@@ -6,7 +6,11 @@
         <div class="panel-body">
 
             <div class="col-xs-5">
+                <br />
+                    <br />
+                
                 <div class="form-group">
+                    
                     <label for="factura">Número de Factura</label>
                     <asp:TextBox ID="txtFactura" class="form-control" placeholder="Ingrese aquí el número de factura" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ValidationGroup="transaccion" ErrorMessage="* Este campo es requerido" ControlToValidate="txtFactura" runat="server" Display="Dynamic" Font-Size="X-Small" ForeColor="Red" />
@@ -32,45 +36,46 @@
                     <%--<asp:RequiredFieldValidator ErrorMessage="* Este campo es requerido" ControlToValidate="txtMonto" runat="server" Font-Size="X-Small" ForeColor="Red" />--%>
                 </div>
 
-                <div>
+                <div class="row panel-heading text-center">
+                
                     <asp:Button ID="btnCargarArticulos" class="btn btn-default " ValidationGroup="transaccion" Text="Cargar articulos" runat="server" OnClick="cargarArticulos_Click" CausesValidation="true"></asp:Button>
-                </div>
-                <div>
+                
                     <asp:Button class="btn btn-default" Text="Modificar datos" runat="server" OnClick="ModificarDatos_Click" CausesValidation="true"></asp:Button>
-                </div>
+                
+            </div>
+                    
             </div>
 
             <asp:Panel class="panel" ID="panelArticulos" runat="server" Visible="false">
                 <div class="col-xs-7">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Tabla de Articulos</h3>
+                            <h3 class="panel-title">Carrito de compras</h3>
                         </div>
                         <div class="panel-body">
-                            <td class="style3">MI CARRITO<br />
-                                SubTotal:
-                    <asp:Label ID="lblTotalPesos" runat="server" Text="0,00"></asp:Label>
-                                <br />
-                                Unidades:
-                    <asp:Label ID="lblTotalUnidades" runat="server" Text="0"></asp:Label>
-                                <br />
-                                <br />
-                                <asp:Button ID="btnVerDetalle" Text="Ver Detalle de compra" runat="server" OnClick="btnVerDetalle_Click" class="btn btn-default"></asp:Button>
-                                <br />
-                                <br />
+                            <div class="text-right">
+                            <td class="style3">
+                                <h3>SubTotal:
+                    <asp:Label ID="lblTotalPesos" runat="server" Text="0,00"></asp:Label></h3>                                
+                                <h4>Unidades:
+                    <asp:Label ID="lblTotalUnidades" runat="server" Text="0"></asp:Label></h4>
+                               
+                                
+                                <asp:Button ID="btnVerDetalle" Text="Ver detalle de compra" runat="server" OnClick="btnVerDetalle_Click" class="btn btn-default"></asp:Button>
+                                
                             </td>
-
+</div>
 
                             <div class="form-group">
                                 <label for="tipo">Tipo de articulo</label>
                                 <asp:DropDownList ID="ddlTipoArticulo" class="form-control" runat="server"></asp:DropDownList>
                             </div>
-                            <label for="descripcion">Descripción</label>
+                            <label for="descripcion">Descripción de articulo</label>
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <asp:Button class="btn btn-default" ID="btnFiltrar" Text="Filtrar" OnClick="btnFiltrar_Click" runat="server" CausesValidation="false"></asp:Button>
                                 </span>
-                                <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripcion o parte de la descripcion" runat="server"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="txtFiltroDescripcion" placeholder="Ingrese la descripción o parte de la descripción" runat="server"></asp:TextBox>
                             </div>                            
                             <br />
                                 <asp:GridView ID="dgvArticulos" PageSize="6" DataKeyNames="indexBD" HorizontalAlign="Center"
@@ -103,32 +108,31 @@
 
             <asp:Panel class="panel panel-default" ID="panelCarrito" runat="server" Visible="false">
                 
-                    <div class="panel panel-default">
+                    
                         <div class="panel-heading">
-                            <h3 class="panel-title">Mi carrito</h3>
+                            <h3 class="panel-title text-left">Mi carrito</h3>
                         </div>
                         <div class="panel-body">
-                            <td class="style3">MI CARRITO<br />
-                                SubTotal:
+                            <div class="text-right">
+                            <td class="style3">
+                                <h3>SubTotal:
                     <asp:Label ID="lbltotalPesosCarrito" runat="server" Text="0,00"></asp:Label>
                                 <br />
-                                Unidades:
+                                    </h3>
+                                <h4>Unidades:
                     <asp:Label ID="lbltotalUnidadesCarrito" runat="server" Text="0"></asp:Label>
-                                <br />
-                                <br />
-                                <asp:Button ID="btnFinalizarVenta" Text="Finalizar venta" runat="server" OnClick="btnFinalizarVenta_Click"></asp:Button>
-                                <br />
-                                <div>
-                                    <asp:Button ID="btnVolverAlCarrito" Text="Volver al carrito" runat="server" OnClick="btnVolverAlCarrito_Click"></asp:Button>
-                                </div>
-                                <br />
+                                    </h4>
+                                <div class="row panel-heading text-right">
+                                    <asp:Button ID="btnVolverAlCarrito" class="btn btn-default" Text="Volver al carrito" runat="server" OnClick="btnVolverAlCarrito_Click"></asp:Button>
+                                <asp:Button ID="btnFinalizarVenta" class="btn btn-success" Text="Finalizar venta" runat="server" OnClick="btnFinalizarVenta_Click"></asp:Button>                           
+                                    </div>                       
                             </td>
 
+                            </div>
 
                             <div class="form-group">
-                                <label for="tipo">Detalle de venta</label>
-                            </div>
-                            <br />
+                                <h4><label for="tipo">Detalle de venta</label></h4>
+                            </div>                           
 
                             
                                 <asp:GridView ID="dgvCarrito" PageSize="6" DataKeyNames="articulo" HorizontalAlign="Center"
@@ -151,7 +155,7 @@
                                 </asp:GridView>
                             
                         </div>
-                    </div>
+                    
                 
             </asp:Panel>
         </div>
