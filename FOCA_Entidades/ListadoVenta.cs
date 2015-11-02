@@ -8,6 +8,7 @@ namespace FOCA_Entidades
 {
     public class ListadoVenta
     {
+        public int idVenta { get; set; }
         public int indexCliente { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }

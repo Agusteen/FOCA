@@ -22,12 +22,26 @@ namespace FOCA_Negocio
                 connection.ConnectionString = conexionCadena;
                 connection.Open();
                 transaction = connection.BeginTransaction();
+
+                string sqlnroFactura = "Select MAX(nroFactura) from VENTAS";
+                SqlCommand comandnrofactura = new SqlCommand();
+                comandnrofactura.CommandText = sqlnroFactura;
+                comandnrofactura.Connection = connection;
+                comandnrofactura.Transaction = transaction;
+                int nroFactura = Convert.ToInt32(comandnrofactura.ExecuteScalar());
+                nroFactura++;
+
+
+
+
+
                 string sql = "INSERT INTO VENTAS (nroFactura, fecha, cliente, monto)  VALUES (@NroFactura, @Fecha, @Cliente, @monto); SELECT @@Identity as ID;";
                 SqlCommand comand = new SqlCommand();
                 comand.CommandText = sql;
                 comand.Connection = connection;
                 comand.Transaction = transaction;
-                comand.Parameters.AddWithValue("@NroFactura", venta.nroFactura);
+                //comand.Parameters.AddWithValue("@NroFactura", venta.nroFactura);
+                comand.Parameters.AddWithValue("@NroFactura", nroFactura);
                 comand.Parameters.AddWithValue("@Fecha", venta.fecha);
                 comand.Parameters.AddWithValue("@Cliente", venta.cliente);
                 comand.Parameters.AddWithValue("@monto", venta.monto);
