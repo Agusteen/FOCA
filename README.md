@@ -1,6 +1,6 @@
 # FOCA gadgets - Proyecto final materia Programación de aplicaciones visuales 2, año 2015.
 
-Sistema web ecommerce para la compra, venta, gestion de stock y reparacion de moviles.
+Sistema web ecommerce para la compra, venta, gestion de stock de accesorios para telefonos moviles.
 
 ## Built With
 
